@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package PlayerStats;
+import java.util.ArrayList;
 
 /**
  *
@@ -104,10 +105,15 @@ public abstract class BaseStats {
     protected HealthLevel lethal = HealthLevel.NODAMAGE;
     protected HealthLevel aggrevated = HealthLevel.NODAMAGE;
     // List of gifts
+    ArrayList<Gift> giftList = new ArrayList<>();
     
-    protected int rage = BasePower;
-    protected int gnosis = BasePower;
-    protected int willpower = BasePower;
+    protected int permRage = BasePower;
+    protected int permGnosis = BasePower;
+    protected int permWillpower = BasePower;
+    
+    protected int tempRage = BasePower;
+    protected int tempGnosis = BasePower;
+    protected int tempWillpower = BasePower;
     // Constructors
     public BaseStats(){
         playerName = null;
@@ -208,9 +214,13 @@ public abstract class BaseStats {
     public HealthLevel LethalDmg() {return lethal;}
     public HealthLevel AggDmg() {return aggrevated;}
     
-    public int Rage(){return rage;}
-    public int Gnosis(){return gnosis;}
-    public int Willpower(){return willpower;}
+    public int PermRage(){return permRage;}
+    public int PermGnosis(){return permGnosis;}
+    public int PermWillpower(){return permWillpower;}
+    
+    public int TempRage(){return tempRage;}
+    public int TempGnosis(){return tempGnosis;}
+    public int TempWillpower(){return tempWillpower;}
     
     public void setPName(String Name){playerName = Name;}
     public void setCName(String Name){characterName = Name;}
@@ -293,7 +303,36 @@ public abstract class BaseStats {
     public void LethalDmg(HealthLevel value) {lethal = value;}
     public void AggDmg(HealthLevel value) {aggrevated = value;}
     
-    public void Rage(int value){rage = value;}
-    public void Gnosis(int value){gnosis = value;}
-    public void Willpower(int value){willpower = value;}
+    public void PermRage(int value){permRage = value;}
+    public void PermGnosis(int value){permGnosis = value;}
+    public void PermWillpower(int value){permWillpower = value;}
+    
+    public void TempRage(int value){tempRage = value;}
+    public void TempGnosis(int value){tempGnosis = value;}
+    public void TempWillpower(int value){tempWillpower = value;}
+    
+    public boolean SubtractCost(Gift.Power power, int amount){
+        switch(power){
+            case RAGE:
+                if(tempRage > amount){
+                    tempRage =- amount;
+                    return true;
+                }
+                else{return false;}
+            case GNOSIS:
+                if(tempGnosis > amount){
+                    tempGnosis =- amount;
+                    return true;
+                }
+                else{return false;}
+            case WILLPOWER:
+                if(tempWillpower > amount){
+                    tempWillpower =- amount;
+                    return true;
+                }
+                else{return false;}
+            default:
+                return false;
+        }
+    }
 }
