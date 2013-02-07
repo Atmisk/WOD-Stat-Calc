@@ -11,14 +11,14 @@ package PlayerStats;
 public class Gift {
     final int defaultDiff = 6;
     
-    public enum usedStat{
+    public enum Power{
         RAGE, GNOSIS, WILLPOWER
     }
-    public enum attribute{
+    public enum Attribute{
         STRENGTH, DEXTERITY, STAMINA, CHARISMA, MANIPULATION, APPEARANCE,
         PERCEPTION, INTELLIGENCE, WITS
     }
-    public enum talent{
+    public enum Talent{
         ALERTNESS, ATHLETICS, BRAWL, DODGE, EMPATHY, EXPRESSION, INTIMIDATION,
         PRIMALURGE, STREETWISE, SUBTERFUGE, SEARCH, ANIMALKEN, CRAFTS, DRIVE,
         ETIQUETTE, FIREARMS, LEADERSHIP, MELEE, PERFORMANCE, STEALTH, SURVIVAL,
@@ -28,60 +28,97 @@ public class Gift {
         SCIENCE, POISONS, DEMOLITIONS, PILOT, COSMOLOGY, AREAKNOW, HERBALSIM,
         WYRMLORE
     }
-    private static int giftNum = 0;
+    public class Cost{
+        private Power power;
+        private int amount;
+        private boolean adjustable;
+        
+        public Cost(){
+            power = Power.GNOSIS;
+            amount = 1;
+            adjustable = false;
+        }
+        public Cost(Power power, int amount, boolean adjustable){
+            this.power = power;
+            this.amount = amount;
+            this.adjustable = adjustable;
+        }
+        public Power getPower(){return power;}
+        public int getAmount(){return amount;}
+        public boolean isAdjustable(){return adjustable;}
+        
+        public void setPower(Power power){this.power = power;}
+        public void setAmount(int amount){this.amount = amount;}
+        public void setAdjust(boolean adjust){adjustable = adjust;}
+    }
+    public class AttributeRoll{
+        private Attribute attr;
+        private Talent talent;
+        private int difficulty;
+        
+        public AttributeRoll(){
+            attr = null;
+            talent = null;
+            difficulty = 6;
+        }
+        public AttributeRoll(Attribute attr, Talent talent, int difficulty){
+            this.attr = attr;
+            this.talent = talent;
+            this.difficulty = difficulty;
+        }
+        public Attribute getAttr(){return attr;}
+        public Talent getTalent(){return talent;}
+        public int getDiffic(){return difficulty;}
+        
+        public void setAttr(Attribute attr){this.attr = attr;}
+        public void setTalent(Talent talent){this.talent = talent;}
+        public void setDiffic(int difficulty){this.difficulty = difficulty;}
+    }
+    public class PowerRoll{
+        private Power power;
+        private int difficulty;
+        
+        public PowerRoll(){
+            power = null;
+            difficulty = 6;
+        }
+        public PowerRoll(Power power, int difficulty){
+            this.power = power;
+            this.difficulty = difficulty;
+        }
+        public Power getAttr(){return power;}
+        public int getDiffic(){return difficulty;}
+        
+        public void setAttr(Power power){this.power = power;}
+        public void setDiffic(int difficulty){this.difficulty = difficulty;}
+    }
+    public class Effect{
+        
+    }
     private String name;
-    private boolean roll;
-    private boolean spend;
-    private usedStat rollStat;
-    private usedStat spentStat;
-    private int spentAmt;
-    private int difficulty;
-    private attribute rollAtt;
-    private talent rollTalent;
-    private boolean chooseable;
+    private String description;
+    private Cost cost;
+    private AttributeRoll attrRoll;
+    private PowerRoll powerRoll;
     
     public Gift(){
-        giftNum++;
-        name = "Gift" + String.valueOf(giftNum);
-        roll = false;
-        spend = false;
-        rollStat = null;
-        spentStat = null;
-        spentAmt = 0;
-        difficulty = defaultDiff;
-        rollAtt = null;
-        rollTalent = null;
-        chooseable = false;
+        name = "Gift";
+        description = "";
+        cost = null;
+        attrRoll = null;
+        powerRoll = null;
     }
-    // check if spend
-    //      if so, what is cost type? 
-    //      is cost amount choosable?
-    //      if not, what is cost amount?
-    // check if roll
-    //      if so, what roll? 1 or 2?
-    //          what stat(s)?
-    // if neither then it just activates
-    public int GiftNum(){return giftNum;}
-    public String Name(){return name;}
-    public boolean Roll(){return roll;}
-    public boolean Spend(){return spend;}
-    public usedStat RollStat(){return rollStat;}
-    public usedStat SpentStat(){return spentStat;}
-    public int SpentAmt(){return spentAmt;}
-    public int Difficulty(){return difficulty;}
-    public attribute RollAtt(){return rollAtt;}
-    public talent RollTalent(){return rollTalent;}
-    public boolean Chooseable(){return chooseable;}
+    public String getName(){return name;}
+    public String getDescription(){return description;}
+    public Cost getCost(){return cost;}
+    public AttributeRoll getAttrRoll(){return attrRoll;}
+    public PowerRoll getPwrRoll(){return powerRoll;}
     
-    public void GiftNum(int value){giftNum = value;}
-    public void Name(String value){name = value;}
-    public void Roll(boolean value){roll = value;}
-    public void Spend(boolean value){spend = value;}
-    public void RollStat(usedStat value){rollStat = value;}
-    public void SpentStat(usedStat value){spentStat = value;}
-    public void SpentAmt(int value){spentAmt = value;}
-    public void Difficulty(int value){difficulty = value;}
-    public void RollAtt(attribute value){rollAtt = value;}
-    public void RollTalent(talent value){rollTalent = value;}
-    public void Chooseable(boolean value){chooseable = value;}
+    public void setName(String value){name = value;}
+    public void setDescription(String value){description = value;}
+    public void setCost(Cost cost){this.cost = cost;}
+    public void setAttrRoll(AttributeRoll attrRoll){this.attrRoll = attrRoll;}
+    public void setPwrRoll(PowerRoll powerRoll){this.powerRoll = powerRoll;}
+    
+    // hasCost, hasActRoll, hasPwrRoll
 }
