@@ -42,14 +42,17 @@ public class Gift {
         SCIENCE, POISONS, DEMOLITIONS, PILOT, COSMOLOGY, AREAKNOW, HERBALSIM,
         WYRMLORE
     }
-    public static class Cost{
+    public enum BoostType{
+        ATTRIBUTE, ABILITY
+    }
+    private class Cost{
         private Power power;
         private int amount;
         private boolean adjustable;
         
         public Cost(){
-            power = Power.GNOSIS;
-            amount = 1;
+            power = null;
+            amount = 0;
             adjustable = false;
         }
         public Cost(Power power, int amount, boolean adjustable){
@@ -66,12 +69,14 @@ public class Gift {
         public void setAdjust(boolean adjust){adjustable = adjust;}
         
         public void copyCost(Cost cost){
-            this.power = cost.power;
-            this.amount = cost.amount;
-            this.adjustable = cost.adjustable;
+            if(cost != null){
+                this.power = cost.power;
+                this.amount = cost.amount;
+                this.adjustable = cost.adjustable;
+            }
         }
     }
-    public static class AttributeRoll{
+    private class AttributeRoll{
         private Attribute attr;
         private Talent talent;
         private int difficulty;
@@ -95,18 +100,20 @@ public class Gift {
         public void setDiffic(int difficulty){this.difficulty = difficulty;}
         
         public void copyAttrRoll(AttributeRoll attrRoll){
-            attr = attrRoll.attr;
-            talent = attrRoll.talent;
-            difficulty = attrRoll.difficulty;
+            if(attrRoll != null){
+                attr = attrRoll.attr;
+                talent = attrRoll.talent;
+                difficulty = attrRoll.difficulty;
+            }
         }
     }
-    public static class PowerRoll{
+    private class PowerRoll{
         private Power power;
         private int difficulty;
         
         public PowerRoll(){
             power = null;
-            difficulty = 6;
+            difficulty = 0;
         }
         public PowerRoll(Power power, int difficulty){
             this.power = power;
@@ -119,18 +126,56 @@ public class Gift {
         public void setDiffic(int difficulty){this.difficulty = difficulty;}
         
         public void copyPwrRoll(PowerRoll powerRoll){
-            power = powerRoll.power;
-            difficulty = powerRoll.difficulty;
+            if(powerRoll != null){
+                power = powerRoll.power;
+                difficulty = powerRoll.difficulty;
+            }
         }
     }
-    //public static class Effect{
+    private class Effect{
+        private String description;
+        private int boostAmt;
+        private BoostType boostT;
         
-    //}
+        public Effect(){
+            description = "";
+            boostAmt = 0;
+            boostT = null;
+        }
+        public Effect(String description, int boostAmt, BoostType boostT){
+            this.description = description;
+            this.boostAmt = boostAmt;
+            this.boostT = boostT;
+        }
+        
+        public String getDesc(){return description;}
+        public int getBoostAmt(){return boostAmt;}
+        public BoostType getbBoostType(){return boostT;}
+        
+        public void setDesc(String description){
+            this.description = description;
+        }
+        public void setBoostAmt(int boostAmt){
+            this.boostAmt = boostAmt;
+        }
+        public void setBoostT(BoostType boostT){
+            this.boostT = boostT;
+        }
+        
+        public void copyEffect(Effect effect){
+            if(effect != null){
+                this.description = effect.description;
+                this.boostAmt = effect.boostAmt;
+                this.boostT = effect.boostT;
+            }
+        }
+    }
     private String name;
     private String description;
     private Cost cost;
     private AttributeRoll attrRoll;
     private PowerRoll powerRoll;
+    private Effect effect;
     
     public Gift(){
         name = "Gift";
@@ -138,30 +183,108 @@ public class Gift {
         cost = null;
         attrRoll = null;
         powerRoll = null;
+        effect = null;
     }
     public Gift(String name,
-                String description,
-                Cost cost,
-                AttributeRoll attrRoll,
-                PowerRoll powerRoll){
+                String giftDescr,
+                Power cPower,
+                int amount,
+                boolean adjustable,
+                Attribute attr,
+                Talent talent,
+                int attrDiff,
+                Power pPower,
+                int pwrDiff,
+                String effectDescr,
+                int boostAmt,
+                BoostType boostT){
         this.name = name;
-        this.description = description;
-        this.cost = new Cost();
-        this.cost.copyCost(cost);
-        this.attrRoll = new AttributeRoll();
-        this.attrRoll.copyAttrRoll(attrRoll);
-        this.powerRoll = new PowerRoll();
-        this.powerRoll.copyPwrRoll(powerRoll);
+        this.description = giftDescr;
+        this.cost = new Cost(cPower, amount, adjustable);
+        this.attrRoll = new AttributeRoll(attr, talent, attrDiff);
+        this.powerRoll = new PowerRoll(pPower, pwrDiff);
+        this.effect = new Effect(effectDescr, boostAmt, boostT);
     }
     public String getName(){return name;}
     public String getDescription(){return description;}
-    public Cost getCost(){return cost;}
-    public AttributeRoll getAttrRoll(){return attrRoll;}
-    public PowerRoll getPwrRoll(){return powerRoll;}
+    //public Cost getCost(){return cost;}
+    //public AttributeRoll getAttrRoll(){return attrRoll;}
+    //public PowerRoll getPwrRoll(){return powerRoll;}
+    //public Effect getEffect(){return effect;}
+    
+    public Power getCostPwr(){
+        if(this.hasCost()){
+            return cost.power;
+        }
+        else{return null;}
+    }
+    public int getCostAmt(){
+        if(this.hasCost()){
+            return cost.amount;
+        }
+        else{return 0;}
+    }
+    public boolean getCostAdj(){
+        if(this.hasCost()){
+            return cost.adjustable;
+        }
+        else{return false;}
+    }
+    
+    public Attribute getAttRollAttr(){
+        if(this.hasAttRoll()){
+            return attrRoll.attr;
+        }
+        else{return null;}
+    }
+    public Talent getAttRollTal(){
+        if(this.hasAttRoll()){
+            return attrRoll.talent;
+        }
+        else{return null;}
+    }
+    public int getAttRollDiff(){
+        if(this.hasAttRoll()){
+            return attrRoll.difficulty;
+        }
+        else{return 0;}
+    }
+    
+    public Power getPwrRollPwr(){
+        if(this.hasPwrRoll()){
+            return powerRoll.power;
+        }
+        else{return null;}
+    }
+    public int getPwrRollDiff(){
+        if(this.hasPwrRoll()){
+            return powerRoll.difficulty;
+        }
+        else{return 0;}
+    }
+    
+    public String getEffectDesc(){
+        if(this.hasEffect()){
+            return effect.description;
+        }
+        else{return null;}
+    }
+    public int getEffectBstAmt(){
+        if(this.hasEffect()){
+            return effect.boostAmt;
+        }
+        else{return 0;}
+    }
+    public BoostType getEffectBstT(){
+        if(this.hasEffect()){
+            return effect.boostT;
+        }
+        else{return null;}
+    }
     
     public void setName(String value){name = value;}
     public void setDescription(String value){description = value;}
-    public void setCost(Cost cost){
+    /*public void setCost(Cost cost){
         this.cost.power = cost.power;
         this.cost.amount = cost.amount;
         this.cost.adjustable = cost.adjustable;
@@ -174,6 +297,48 @@ public class Gift {
     public void setPwrRoll(PowerRoll powerRoll){
         this.powerRoll.power = powerRoll.power;
         this.powerRoll.difficulty = powerRoll.difficulty;
+    }
+    public void setEffect(Effect effect){
+        this.effect.description = effect.description;
+        this.effect.boostAmt = effect.boostAmt;
+        this.effect.boostT = effect.boostT;
+    }*/
+    
+    public void setCostPwr(Power power){
+        cost.power = power;
+    }
+    public void setCostAmt(int amount){
+        cost.amount = amount;
+    }
+    public void setCostAdj(boolean adjustable){
+        cost.adjustable = adjustable;
+    }
+    
+    public void setAttRollAttr(Attribute attr){
+        attrRoll.attr = attr;
+    }
+    public void setAttRollTal(Talent talent){
+        attrRoll.talent = talent;
+    }
+    public void setAttRollDiff(int difficulty){
+        attrRoll.difficulty = difficulty;
+    }
+    
+    public void setPwrRollPwr(Power power){
+        powerRoll.power = power;
+    }
+    public void setPwrRollDiff(int difficulty){
+        powerRoll.difficulty = difficulty;
+    }
+    
+    public void setEffectDesc(String description){
+        effect.description = description;
+    }
+    public void setEffectBstAmt(int boostAmt){
+        effect.boostAmt = boostAmt;
+    }
+    public void setEffectBstT(BoostType boostT){
+        effect.boostT = boostT;
     }
     
     // hasCost, hasActRoll, hasPwrRoll, copyGift
@@ -192,6 +357,10 @@ public class Gift {
             this.powerRoll = new PowerRoll();
         }
         this.powerRoll.copyPwrRoll(gift.powerRoll);
+        if(this.effect == null){
+            this.effect = new Effect();
+        }
+        this.effect.copyEffect(gift.effect);
     }
     public boolean hasCost(){
         if(cost == null){
@@ -206,6 +375,12 @@ public class Gift {
     public boolean hasPwrRoll(){
         if(powerRoll == null){
             return false;}
+        else{return true;}
+    }
+    public boolean hasEffect(){
+        if(effect == null){
+            return false;
+        }
         else{return true;}
     }
 }

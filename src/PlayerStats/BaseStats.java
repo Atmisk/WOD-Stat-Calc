@@ -106,6 +106,8 @@ public abstract class BaseStats {
     protected HealthLevel aggrevated = HealthLevel.NODAMAGE;
     // List of gifts
     ArrayList<Gift> giftList = new ArrayList<>();
+    // List of weapons
+    ArrayList<Weapon> weaponList = new ArrayList<>();
     
     protected int permRage = BasePower;
     protected int permGnosis = BasePower;
@@ -334,5 +336,11 @@ public abstract class BaseStats {
             default:
                 return false;
         }
+    }
+    public boolean hasGifts(){
+        if(giftList.isEmpty()){
+            return false;
+        }
+        else{return true;}
     }
 }

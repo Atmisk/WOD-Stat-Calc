@@ -26,7 +26,7 @@ public class WerewolfStats extends BaseStats{
         HOMID, GLRABRO, CRINOS, HISPO, LUPUS
     }
     
-    protected ShiftedForm form = null;
+    protected ShiftedForm form = ShiftedForm.HOMID;
     
     public WerewolfStats(){
         super();
