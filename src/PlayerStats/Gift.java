@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package PlayerStats;
+import java.io.Serializable;
 
 /**
  *
@@ -11,7 +12,7 @@ package PlayerStats;
  * Gift represents a gift from the Role-playing game World of Darkness.
  * 
  */
-public class Gift {
+public class Gift implements Serializable{
     final int defaultDiff = 6;
     /**
      * Represents the attributes Rage, Gnosis, and Willpower.
@@ -45,7 +46,7 @@ public class Gift {
     public enum BoostType{
         ATTRIBUTE, ABILITY
     }
-    private class Cost{
+    private class Cost implements Serializable{
         private Power power;
         private int amount;
         private boolean adjustable;
@@ -76,7 +77,7 @@ public class Gift {
             }
         }
     }
-    private class AttributeRoll{
+    private class AttributeRoll implements Serializable{
         private Attribute attr;
         private Talent talent;
         private int difficulty;
@@ -107,7 +108,7 @@ public class Gift {
             }
         }
     }
-    private class PowerRoll{
+    private class PowerRoll implements Serializable{
         private Power power;
         private int difficulty;
         
@@ -132,7 +133,7 @@ public class Gift {
             }
         }
     }
-    private class Effect{
+    private class Effect implements Serializable{
         private String description;
         private int boostAmt;
         private BoostType boostT;

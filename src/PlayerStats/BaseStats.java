@@ -3,14 +3,24 @@
  * and open the template in the editor.
  */
 package PlayerStats;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
  * @author Mike
  */
 
-public abstract class BaseStats {
+public abstract class BaseStats implements Serializable{
     private final int BaseAttVal = 1;
     private final int BaseSkillVal = 0;
     final int BasePower = 0;
@@ -342,5 +352,54 @@ public abstract class BaseStats {
             return false;
         }
         else{return true;}
+    }
+    
+    public Gift getGift(String giftName){
+        for(Gift gift : giftList){
+            if(gift.getName().equals(giftName)){
+                return gift;
+            }
+        }
+        return null;
+    }
+    
+    public boolean addGift(Gift gift){
+        return giftList.add(gift);
+    }
+    
+    public Weapon getWeapon(String wpnName){
+        for(Weapon wpn : weaponList){
+            if(wpn.getName().equals(wpnName)){
+                return wpn;
+            }
+        }
+        return null;
+    }
+    
+    public boolean addWeapon(Weapon wpn){
+        return weaponList.add(wpn);
+    }
+    
+    public static void SaveStats(BaseStats stats)throws IOException{
+        //Path dir = Paths.get("..\\Character Data\\");
+        //Files.createDirectories(dir);
+        String fileName = stats.characterName + ".dat";
+        File outFile = new File(fileName);
+        FileOutputStream fos = new FileOutputStream(outFile);
+        try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(stats);
+        }
+    }
+    
+    public static BaseStats LoadStats(String charName)
+            throws IOException, ClassNotFoundException{
+        String fileName = charName + ".dat";
+        File inFile = new File(fileName);
+        FileInputStream fin = new FileInputStream(inFile);
+        BaseStats loadedStats;
+        try (ObjectInputStream ois = new ObjectInputStream(fin)) {
+            loadedStats = (BaseStats) ois.readObject();
+        }
+        return loadedStats;
     }
 }
