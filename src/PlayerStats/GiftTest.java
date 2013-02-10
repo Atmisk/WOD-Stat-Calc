@@ -4,7 +4,11 @@
  */
 package PlayerStats;
 
+import PlayerStats.BaseStats.name;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
@@ -27,6 +31,8 @@ public class GiftTest {
                                                 2,
                                                 Gift.BoostType.ABILITY);
         */
+        
+        final String CharDataPath = "\\Character Data\\";
         Gift gift1 = new Gift("test gift",
                               "A test gift",
                               Gift.Power.GNOSIS,
@@ -111,11 +117,21 @@ public class GiftTest {
         tempGift = tStats.getGift("test gift");
         System.out.println(tempGift.getDescription());
         
-        WerewolfStats.SaveStats(tStats);
-        WerewolfStats tStats2 = WerewolfStats.LoadStats("Xidel");
+        String workingDir = System.getProperty("user.dir");
+        Path dir = Paths.get(workingDir + CharDataPath);
+        if(Files.notExists(dir)){
+            Files.createDirectory(dir);
+        }
+        
+        tStats.SaveStats(dir.toString());
+        WerewolfStats tStats2 = WerewolfStats.LoadStats("Xidel", dir.toString());
+        WerewolfStats tStats3 = new WerewolfStats("Mike", name.CHARACTER);
+        tStats3.SaveStats(dir.toString());
         
         System.out.format(tStats2.getPName() + ","
                           + tStats2.getGift("test gift").getAttRollTal() + ","
                           + tStats2.getWeapon("Pistol").getCnclT() +"\n");
+        
+        WerewolfStats.GetNameList();
     }
 }

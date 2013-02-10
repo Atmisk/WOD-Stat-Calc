@@ -5,15 +5,16 @@
 package PlayerStats;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,8 +24,10 @@ import java.nio.file.Paths;
 public abstract class BaseStats implements Serializable{
     private final int BaseAttVal = 1;
     private final int BaseSkillVal = 0;
-    final int BasePower = 0;
+    private final int BasePower = 0;
     public final String defaultName= "Character";
+    final static String CharDataPath = "\\Character Data\\";
+    public static ArrayList<String> NameList;
     
     public enum HealthLevel {
         NODAMAGE, BRUISED, HURT, INJURED, WOUNDED, MAULED, CRIPPLED, 
@@ -380,26 +383,46 @@ public abstract class BaseStats implements Serializable{
         return weaponList.add(wpn);
     }
     
-    public static void SaveStats(BaseStats stats)throws IOException{
-        //Path dir = Paths.get("..\\Character Data\\");
-        //Files.createDirectories(dir);
-        String fileName = stats.characterName + ".dat";
-        File outFile = new File(fileName);
+    // MOVE OUTSIDE OF CLASS
+    
+    public void SaveStats(String dir)throws IOException{
+        String fileName = characterName + ".dat";
+        File outFile = new File(dir + "\\" + fileName);
         FileOutputStream fos = new FileOutputStream(outFile);
         try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(stats);
+            oos.writeObject(this);
+            GetNameList();
         }
     }
     
-    public static BaseStats LoadStats(String charName)
-            throws IOException, ClassNotFoundException{
+    public static BaseStats LoadStats(String charName, String dir)
+            throws IOException, ClassNotFoundException, FileNotFoundException{
         String fileName = charName + ".dat";
-        File inFile = new File(fileName);
+        File inFile = new File(dir + "\\" + fileName);
         FileInputStream fin = new FileInputStream(inFile);
         BaseStats loadedStats;
         try (ObjectInputStream ois = new ObjectInputStream(fin)) {
             loadedStats = (BaseStats) ois.readObject();
         }
         return loadedStats;
+    }
+    
+    public static void GetNameList(){
+        NameList = new ArrayList<>();
+        String workingDir = System.getProperty("user.dir");
+        Path dir = Paths.get(workingDir + CharDataPath);
+        String fName;
+        if(Files.exists(dir)){
+            File CharFiles = dir.toFile();
+            File[] listOfFiles = CharFiles.listFiles();
+            for(File file : listOfFiles){
+                fName = file.toString();
+                if(fName.endsWith(".dat")){
+                    fName = fName.replace(".dat", "");
+                    fName = fName.substring(dir.toString().length() + 1);
+                    NameList.add(fName);
+                }
+            }
+        }
     }
 }

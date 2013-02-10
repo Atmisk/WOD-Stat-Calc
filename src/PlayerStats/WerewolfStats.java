@@ -162,8 +162,8 @@ public class WerewolfStats extends BaseStats{
         }
     }
     
-    public static WerewolfStats LoadStats(String charName) 
+    public static WerewolfStats LoadStats(String charName, String dir) 
             throws IOException, ClassNotFoundException{
-        return (WerewolfStats) BaseStats.LoadStats(charName);
+        return (WerewolfStats) BaseStats.LoadStats(charName, dir);
     }
 }
