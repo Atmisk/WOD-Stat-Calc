@@ -28,47 +28,235 @@ public class CharacterSheetGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        characterTabs = new javax.swing.JTabbedPane();
+        characterPanel = new javax.swing.JPanel();
+        nameLabel = new java.awt.Label();
+        breedLabel = new java.awt.Label();
+        playerLabel = new java.awt.Label();
+        nameField = new java.awt.TextField();
+        playerField = new java.awt.TextField();
+        breedField = new java.awt.TextField();
+        auspiceLabel = new java.awt.Label();
+        auspiceField = new java.awt.TextField();
+        campLabel = new java.awt.Label();
+        campField = new java.awt.TextField();
+        totemLabel = new java.awt.Label();
+        totemField = new java.awt.TextField();
+        tribeLabel = new java.awt.Label();
+        tribeField = new java.awt.TextField();
+        packLabel = new java.awt.Label();
+        packField = new java.awt.TextField();
+        attrLabel = new javax.swing.JLabel();
+        tribeLabel1 = new java.awt.Label();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        charMenuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        newChar = new javax.swing.JMenuItem();
+        openChar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBounds(new java.awt.Rectangle(0, 0, 600, 800));
 
-        jMenu1.setText("File");
+        characterPanel.setName(""); // NOI18N
 
-        jMenuItem2.setText("New");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        nameLabel.setText("Name");
+
+        breedLabel.setText("Breed");
+
+        playerLabel.setText("Player");
+
+        nameField.setPreferredSize(new java.awt.Dimension(100, 20));
+        nameField.setText("Character");
+
+        playerField.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        breedField.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        auspiceLabel.setText("Auspice");
+
+        auspiceField.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        campLabel.setText("Camp");
+
+        campField.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        totemLabel.setText("Totem");
+
+        totemField.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        tribeLabel.setText("Tribe");
+
+        tribeField.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        packLabel.setText("Pack");
+
+        packField.setPreferredSize(new java.awt.Dimension(100, 20));
+
+        attrLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        attrLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        attrLabel.setText("Attributes");
+
+        tribeLabel1.setText("Strength");
+
+        jRadioButton1.setAlignmentY(0.0F);
+        jRadioButton1.setName("radioStr1"); // NOI18N
+
+        jRadioButton2.setAlignmentY(0.0F);
+        jRadioButton2.setName("radioStr1"); // NOI18N
+
+        jRadioButton3.setAlignmentY(0.0F);
+        jRadioButton3.setName("radioStr1"); // NOI18N
+
+        jRadioButton4.setAlignmentY(0.0F);
+        jRadioButton4.setName("radioStr1"); // NOI18N
+
+        jRadioButton5.setAlignmentY(0.0F);
+        jRadioButton5.setName("radioStr1"); // NOI18N
+
+        javax.swing.GroupLayout characterPanelLayout = new javax.swing.GroupLayout(characterPanel);
+        characterPanel.setLayout(characterPanelLayout);
+        characterPanelLayout.setHorizontalGroup(
+            characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(characterPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(characterPanelLayout.createSequentialGroup()
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(breedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(breedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(characterPanelLayout.createSequentialGroup()
+                        .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(characterPanelLayout.createSequentialGroup()
+                                .addComponent(tribeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButton5))
+                            .addGroup(characterPanelLayout.createSequentialGroup()
+                                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tribeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(playerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(playerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tribeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(characterPanelLayout.createSequentialGroup()
+                                .addComponent(auspiceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(auspiceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, characterPanelLayout.createSequentialGroup()
+                                .addComponent(campLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(campField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(characterPanelLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(attrLabel)))))))
+                .addGap(25, 25, 25)
+                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(characterPanelLayout.createSequentialGroup()
+                        .addComponent(totemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(characterPanelLayout.createSequentialGroup()
+                        .addComponent(packLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(packField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        characterPanelLayout.setVerticalGroup(
+            characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(characterPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(breedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(breedField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(packField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(packLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(playerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(auspiceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(auspiceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(totemField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(totemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(playerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tribeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tribeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(characterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(characterPanelLayout.createSequentialGroup()
+                        .addComponent(attrLabel)
+                        .addGap(14, 14, 14)
+                        .addComponent(tribeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4)
+                    .addComponent(jRadioButton5))
+                .addContainerGap(377, Short.MAX_VALUE))
+        );
+
+        characterTabs.addTab("Character", characterPanel);
+
+        fileMenu.setText("File");
+
+        newChar.setText("New");
+        newChar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                newCharActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        fileMenu.add(newChar);
 
-        jMenuItem1.setText("Open");
-        jMenu1.add(jMenuItem1);
+        openChar.setText("Open");
+        fileMenu.add(openChar);
 
-        jMenuBar1.add(jMenu1);
+        charMenuBar.add(fileMenu);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(charMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(characterTabs)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(characterTabs)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void newCharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCharActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_newCharActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,9 +293,40 @@ public class CharacterSheetGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JLabel attrLabel;
+    private java.awt.TextField auspiceField;
+    private java.awt.Label auspiceLabel;
+    private java.awt.TextField breedField;
+    private java.awt.Label breedLabel;
+    private java.awt.TextField campField;
+    private java.awt.Label campLabel;
+    private javax.swing.JMenuBar charMenuBar;
+    private javax.swing.JPanel characterPanel;
+    private javax.swing.JTabbedPane characterTabs;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton10;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
+    private javax.swing.JRadioButton jRadioButton8;
+    private javax.swing.JRadioButton jRadioButton9;
+    private java.awt.TextField nameField;
+    private java.awt.Label nameLabel;
+    private javax.swing.JMenuItem newChar;
+    private javax.swing.JMenuItem openChar;
+    private java.awt.TextField packField;
+    private java.awt.Label packLabel;
+    private java.awt.TextField playerField;
+    private java.awt.Label playerLabel;
+    private java.awt.TextField totemField;
+    private java.awt.Label totemLabel;
+    private java.awt.TextField tribeField;
+    private java.awt.Label tribeLabel;
+    private java.awt.Label tribeLabel1;
     // End of variables declaration//GEN-END:variables
 }
