@@ -19,7 +19,7 @@ public class GiftTest {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+    public static void Test(String[] args) 
             throws IOException, ClassNotFoundException {
         /*Gift.Cost tCost = new Gift.Cost(Gift.Power.GNOSIS,1,false);
         Gift.AttributeRoll tAttr 
