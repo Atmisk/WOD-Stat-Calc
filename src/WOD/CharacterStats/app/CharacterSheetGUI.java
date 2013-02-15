@@ -4,19 +4,32 @@
  */
 package WOD.CharacterStats.app;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
  *
  * @author Mike
  */
-public class CharacterSheetGUI {
+public class CharacterSheetGUI{
 
+    class testListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("It Worked");
+        }  
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        createAndShowGUI();
+        javax.swing.SwingUtilities.invokeLater(new Runnable(){
+            @Override
+            public void run(){
+                createAndShowGUI();
+            }
+        });
     }
     
     public static void createAndShowGUI(){
@@ -454,7 +467,9 @@ public class CharacterSheetGUI {
         c = setGridPos(5, 19);
         mainPanel.add(sciencePanel, c);
         
-        mainFrame.add(mainSPane);
+        mainTabPane.addTab("Tab", mainSPane);
+        mainTabPane.addTab("Tab2", new JPanel());
+        mainFrame.add(mainTabPane);
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null); // set frame to center of screen
         mainFrame.setVisible(true);

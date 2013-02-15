@@ -28,6 +28,8 @@ public class RadioPanel extends JPanel {
                     radio3.setSelected(false);
                     radio4.setSelected(false);
                     radio5.setSelected(false);
+                    //System.out.println("IF 1");
+                    value = 1;
                 }
                 else if(radio2.isSelected()){
                     radio1.setSelected(true);
@@ -35,6 +37,8 @@ public class RadioPanel extends JPanel {
                     radio3.setSelected(false);
                     radio4.setSelected(false);
                     radio5.setSelected(false);
+                    //System.out.println("IF 2");
+                    value = 1;
                 }
                 else{
                     radio1.setSelected(false);
@@ -42,6 +46,8 @@ public class RadioPanel extends JPanel {
                     radio3.setSelected(false);
                     radio4.setSelected(false);
                     radio5.setSelected(false);
+                    //System.out.println("IF 3");
+                    value = 0;
                 }
             }
             else if(e.getSource().equals(radio2)){
@@ -130,13 +136,24 @@ public class RadioPanel extends JPanel {
         
         RadioListener listener = new RadioListener();
         
-        radio1.addActionListener(listener);
-        radio2.addActionListener(listener);
-        radio3.addActionListener(listener);
-        radio4.addActionListener(listener);
-        radio5.addActionListener(listener);
+        setInitListeners(listener);
     }
+
     public int Value(){
         return value;
+    }
+    private void setInitListeners(ActionListener l){
+        radio1.addActionListener(l);
+        radio2.addActionListener(l);
+        radio3.addActionListener(l);
+        radio4.addActionListener(l);
+        radio5.addActionListener(l);
+    }
+    public void addActionListener(ActionListener l){
+        radio1.addActionListener(l);
+        radio2.addActionListener(l);
+        radio3.addActionListener(l);
+        radio4.addActionListener(l);
+        radio5.addActionListener(l);
     }
 }
