@@ -25,9 +25,13 @@ public abstract class BaseStats implements Serializable{
     private final int BaseAttVal = 1;
     private final int BaseSkillVal = 0;
     private final int BasePower = 0;
-    public final String defaultName= "Character";
-    final static String CharDataPath = "\\Character Data\\";
+    public final String defaultName= "Character";   // move out of class
+    final static String CharDataPath = "\\Character Data\\"; // move out of class
     public static ArrayList<String> NameList;
+    
+    public enum Race{
+        WOLF, FOX
+    }
     
     public enum HealthLevel {
         NODAMAGE, BRUISED, HURT, INJURED, WOUNDED, MAULED, CRIPPLED, 

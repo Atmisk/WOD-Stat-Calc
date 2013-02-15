@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package WOD.CharacterStats.app;
+import PlayerStats.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,14 +13,143 @@ import javax.swing.*;
  *
  * @author Mike
  */
-public class CharacterSheetGUI{
-
-    class testListener implements ActionListener{
+public class CharacterSheetGUI extends JFrame{
+    BaseStats stats;
+    
+    class StatListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("It Worked");
+            if(e.getSource().equals(strPanel)){
+                
+            }
+            else if(e.getSource().equals(dexPanel)){
+                
+            }
         }  
     }
+    
+    JPanel mainPanel = new JPanel();
+    JTabbedPane mainTabPane = new JTabbedPane();
+    JScrollPane mainSPane = new JScrollPane(mainPanel);
+    GridBagLayout mainLayout = new GridBagLayout();
+    GridBagConstraints c;
+    StatListener statListen = new StatListener();
+    
+    JMenuBar menuBar = new JMenuBar();
+    JMenu fileMenu = new JMenu("File");
+    JMenuItem openFile = new JMenuItem("Open");
+    JMenuItem newFile = new JMenuItem("New");
+        
+    JLabel nameLabel = new JLabel("Name");
+    JTextField nameField = new JTextField(10);
+    JLabel breedLabel = new JLabel("Breed");
+    JTextField breedField = new JTextField(10);
+    JLabel playerLabel = new JLabel("Player");
+    JTextField playerField = new JTextField(10);
+    JLabel tribeLabel = new JLabel("Tribe");
+    JTextField tribeField = new JTextField(10);
+    JLabel auspiceLabel = new JLabel("Auspice");
+    JTextField auspiceField = new JTextField(10);
+    JLabel campLabel = new JLabel("Camp");
+    JTextField campField = new JTextField(10);
+    JLabel packLabel = new JLabel("Pack");
+    JTextField packField = new JTextField(10);
+    JLabel totemLabel = new JLabel("Totem");
+    JTextField totemField = new JTextField(10);
+
+    JLabel attrLabel = new JLabel("Attributes", JLabel.CENTER);
+    JLabel physLabel = new JLabel("Physical", JLabel.CENTER);
+    JLabel socialLabel = new JLabel("Social", JLabel.CENTER);
+    JLabel mentalLabel = new JLabel("Mental", JLabel.CENTER);
+    JLabel abilityLabel = new JLabel("Abilities", JLabel.CENTER);
+    JLabel talentLabel = new JLabel("Talents", JLabel.CENTER);
+    JLabel skillLabel = new JLabel("Skills", JLabel.CENTER);
+    JLabel knowLabel = new JLabel("Knowledges", JLabel.CENTER);
+    Font font;
+
+    JLabel strLbl = new JLabel("Strength");
+    RadioPanel strPanel = new RadioPanel();
+    JLabel dexLbl = new JLabel("Dexterity");
+    RadioPanel dexPanel = new RadioPanel();
+    JLabel stamLbl = new JLabel("Stamina");
+    RadioPanel stamPanel = new RadioPanel();
+
+    JLabel charisLbl = new JLabel("Charisma");
+    RadioPanel charisPanel = new RadioPanel();
+    JLabel manipLbl = new JLabel("Manipulation");
+    RadioPanel manipPanel = new RadioPanel();
+    JLabel appearLbl = new JLabel("Appearance");
+    RadioPanel appearPanel = new RadioPanel();
+
+    JLabel perceptLbl = new JLabel("Perception");
+    RadioPanel perceptPanel = new RadioPanel();
+    JLabel intLbl = new JLabel("Intelligence");
+    RadioPanel intPanel = new RadioPanel();
+    JLabel witsLbl = new JLabel("Wits");
+    RadioPanel witsPanel = new RadioPanel();
+
+    JLabel alertLbl = new JLabel("Alertness");
+    RadioPanel alertPanel = new RadioPanel();
+    JLabel athletLbl = new JLabel("Athletics");
+    RadioPanel athletPanel = new RadioPanel();
+    JLabel brawlLbl = new JLabel("Brawl");
+    RadioPanel brawlPanel = new RadioPanel();
+    JLabel dodgeLbl = new JLabel("Dodge");
+    RadioPanel dodgePanel = new RadioPanel();
+    JLabel empathyLbl = new JLabel("Empathy");
+    RadioPanel empathyPanel = new RadioPanel();
+    JLabel expressLbl = new JLabel("Expression");
+    RadioPanel expressPanel = new RadioPanel();
+    JLabel intimidateLbl = new JLabel("Intimidation");
+    RadioPanel intimidatePanel = new RadioPanel();
+    JLabel primalLbl = new JLabel("Pimal-Urge");
+    RadioPanel primalPanel = new RadioPanel();
+    JLabel streetwiseLbl = new JLabel("Streetwise");
+    RadioPanel streetPanel = new RadioPanel();
+    JLabel subterLbl = new JLabel("Subterfuge");
+    RadioPanel subterPanel = new RadioPanel();
+
+    JLabel animalKenLbl = new JLabel("Animale Ken");
+    RadioPanel animalPanel = new RadioPanel();
+    JLabel craftLbl = new JLabel("Crafts");
+    RadioPanel craftPanel = new RadioPanel();
+    JLabel driveLbl = new JLabel("Drive");
+    RadioPanel drivePanel = new RadioPanel();
+    JLabel etiquetteLbl = new JLabel("Etiquette");
+    RadioPanel etiquettePanel = new RadioPanel();
+    JLabel firearmLbl = new JLabel("Firearms");
+    RadioPanel firearmPanel = new RadioPanel();
+    JLabel leaderLbl = new JLabel("Leadership");
+    RadioPanel leaderPanel = new RadioPanel();
+    JLabel meleeLbl = new JLabel("Melee");
+    RadioPanel meleePanel = new RadioPanel();
+    JLabel performLbl = new JLabel("Performance");
+    RadioPanel performPanel = new RadioPanel();
+    JLabel stealthLbl = new JLabel("Stealth");
+    RadioPanel stealthPanel = new RadioPanel();
+    JLabel surviveLbl = new JLabel("Survival");
+    RadioPanel survivePanel = new RadioPanel();
+
+    JLabel compLbl = new JLabel("Computer");
+    RadioPanel compPanel = new RadioPanel();
+    JLabel enigmaLbl = new JLabel("Enigmas");
+    RadioPanel enigmaPanel = new RadioPanel();
+    JLabel investigateLbl = new JLabel("Investigation");
+    RadioPanel investigatePanel = new RadioPanel();
+    JLabel lawLbl = new JLabel("Law");
+    RadioPanel lawPanel = new RadioPanel();
+    JLabel linguistLbl = new JLabel("Linquistics");
+    RadioPanel linguistPanel = new RadioPanel();
+    JLabel medicLbl = new JLabel("Medicine");
+    RadioPanel medicPanel = new RadioPanel();
+    JLabel occultLbl = new JLabel("Occult");
+    RadioPanel occultPanel = new RadioPanel();
+    JLabel politicsLbl = new JLabel("Politics");
+    RadioPanel politicsPanel = new RadioPanel();
+    JLabel ritualsLbl = new JLabel("Rituals");
+    RadioPanel ritualsPanel = new RadioPanel();
+    JLabel scienceLbl = new JLabel("Science");
+    RadioPanel sciencePanel = new RadioPanel();
     /**
      * @param args the command line arguments
      */
@@ -27,142 +157,26 @@ public class CharacterSheetGUI{
         javax.swing.SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
-                createAndShowGUI();
+                new CharacterSheetGUI().setVisible(true);
             }
         });
     }
     
-    public static void createAndShowGUI(){
-        JFrame mainFrame = new JFrame("Character Sheet");
-        JPanel mainPanel = new JPanel();
-        JTabbedPane mainTabPane = new JTabbedPane();
-        JScrollPane mainSPane = new JScrollPane(mainPanel);
-        GridBagLayout mainLayout = new GridBagLayout();
-        GridBagConstraints c;
-        
-        JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem openFile = new JMenuItem("Open");
-        JMenuItem newFile = new JMenuItem("New");
-        
-        JLabel nameLabel = new JLabel("Name");
-        JTextField nameField = new JTextField(10);
-        JLabel breedLabel = new JLabel("Breed");
-        JTextField breedField = new JTextField(10);
-        JLabel playerLabel = new JLabel("Player");
-        JTextField playerField = new JTextField(10);
-        JLabel tribeLabel = new JLabel("Tribe");
-        JTextField tribeField = new JTextField(10);
-        JLabel auspiceLabel = new JLabel("Auspice");
-        JTextField auspiceField = new JTextField(10);
-        JLabel campLabel = new JLabel("Camp");
-        JTextField campField = new JTextField(10);
-        JLabel packLabel = new JLabel("Pack");
-        JTextField packField = new JTextField(10);
-        JLabel totemLabel = new JLabel("Totem");
-        JTextField totemField = new JTextField(10);
-        
-        JLabel attrLabel = new JLabel("Attributes", JLabel.CENTER);
-        JLabel physLabel = new JLabel("Physical", JLabel.CENTER);
-        JLabel socialLabel = new JLabel("Social", JLabel.CENTER);
-        JLabel mentalLabel = new JLabel("Mental", JLabel.CENTER);
-        JLabel abilityLabel = new JLabel("Abilities", JLabel.CENTER);
-        JLabel talentLabel = new JLabel("Talents", JLabel.CENTER);
-        JLabel skillLabel = new JLabel("Skills", JLabel.CENTER);
-        JLabel knowLabel = new JLabel("Knowledges", JLabel.CENTER);
-        Font font;
-        
-        JLabel strLbl = new JLabel("Strength");
-        RadioPanel strPanel = new RadioPanel();
-        JLabel dexLbl = new JLabel("Dexterity");
-        RadioPanel dexPanel = new RadioPanel();
-        JLabel stamLbl = new JLabel("Stamina");
-        RadioPanel stamPanel = new RadioPanel();
-        
-        JLabel charisLbl = new JLabel("Charisma");
-        RadioPanel charisPanel = new RadioPanel();
-        JLabel manipLbl = new JLabel("Manipulation");
-        RadioPanel manipPanel = new RadioPanel();
-        JLabel appearLbl = new JLabel("Appearance");
-        RadioPanel appearPanel = new RadioPanel();
-        
-        JLabel perceptLbl = new JLabel("Perception");
-        RadioPanel perceptPanel = new RadioPanel();
-        JLabel intLbl = new JLabel("Intelligence");
-        RadioPanel intPanel = new RadioPanel();
-        JLabel witsLbl = new JLabel("Wits");
-        RadioPanel witsPanel = new RadioPanel();
-        
-        JLabel alertLbl = new JLabel("Alertness");
-        RadioPanel alertPanel = new RadioPanel();
-        JLabel athletLbl = new JLabel("Athletics");
-        RadioPanel athletPanel = new RadioPanel();
-        JLabel brawlLbl = new JLabel("Brawl");
-        RadioPanel brawlPanel = new RadioPanel();
-        JLabel dodgeLbl = new JLabel("Dodge");
-        RadioPanel dodgePanel = new RadioPanel();
-        JLabel empathyLbl = new JLabel("Empathy");
-        RadioPanel empathyPanel = new RadioPanel();
-        JLabel expressLbl = new JLabel("Expression");
-        RadioPanel expressPanel = new RadioPanel();
-        JLabel intimidateLbl = new JLabel("Intimidation");
-        RadioPanel intimidatePanel = new RadioPanel();
-        JLabel primalLbl = new JLabel("Pimal-Urge");
-        RadioPanel primalPanel = new RadioPanel();
-        JLabel streetwiseLbl = new JLabel("Streetwise");
-        RadioPanel streetPanel = new RadioPanel();
-        JLabel subterLbl = new JLabel("Subterfuge");
-        RadioPanel subterPanel = new RadioPanel();
-        
-        JLabel animalKenLbl = new JLabel("Animale Ken");
-        RadioPanel animalPanel = new RadioPanel();
-        JLabel craftLbl = new JLabel("Crafts");
-        RadioPanel craftPanel = new RadioPanel();
-        JLabel driveLbl = new JLabel("Drive");
-        RadioPanel drivePanel = new RadioPanel();
-        JLabel etiquetteLbl = new JLabel("Etiquette");
-        RadioPanel etiquettePanel = new RadioPanel();
-        JLabel firearmLbl = new JLabel("Firearms");
-        RadioPanel firearmPanel = new RadioPanel();
-        JLabel leaderLbl = new JLabel("Leadership");
-        RadioPanel leaderPanel = new RadioPanel();
-        JLabel meleeLbl = new JLabel("Melee");
-        RadioPanel meleePanel = new RadioPanel();
-        JLabel performLbl = new JLabel("Performance");
-        RadioPanel performPanel = new RadioPanel();
-        JLabel stealthLbl = new JLabel("Stealth");
-        RadioPanel stealthPanel = new RadioPanel();
-        JLabel surviveLbl = new JLabel("Survival");
-        RadioPanel survivePanel = new RadioPanel();
-        
-        JLabel compLbl = new JLabel("Computer");
-        RadioPanel compPanel = new RadioPanel();
-        JLabel enigmaLbl = new JLabel("Enigmas");
-        RadioPanel enigmaPanel = new RadioPanel();
-        JLabel investigateLbl = new JLabel("Investigation");
-        RadioPanel investigatePanel = new RadioPanel();
-        JLabel lawLbl = new JLabel("Law");
-        RadioPanel lawPanel = new RadioPanel();
-        JLabel linguistLbl = new JLabel("Linquistics");
-        RadioPanel linguistPanel = new RadioPanel();
-        JLabel medicLbl = new JLabel("Medicine");
-        RadioPanel medicPanel = new RadioPanel();
-        JLabel occultLbl = new JLabel("Occult");
-        RadioPanel occultPanel = new RadioPanel();
-        JLabel politicsLbl = new JLabel("Politics");
-        RadioPanel politicsPanel = new RadioPanel();
-        JLabel ritualsLbl = new JLabel("Rituals");
-        RadioPanel ritualsPanel = new RadioPanel();
-        JLabel scienceLbl = new JLabel("Science");
-        RadioPanel sciencePanel = new RadioPanel();
+    public CharacterSheetGUI(){
+        createAndShowGUI();
+        strPanel.addActionListener(statListen);
+    }
+    
+    public final void createAndShowGUI(){
+        //JFrame mainFrame = new JFrame("Character Sheet");
         
         menuBar.add(fileMenu);
         fileMenu.add(newFile);
         fileMenu.add(openFile);
         
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setPreferredSize(new Dimension(800, 600));
-        mainFrame.setJMenuBar(menuBar);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setPreferredSize(new Dimension(800, 600));
+        this.setJMenuBar(menuBar);
         mainPanel.setLayout(mainLayout); //READ MORE ON THIS        
     
         //----------------------------------------------------------------------
@@ -469,10 +483,10 @@ public class CharacterSheetGUI{
         
         mainTabPane.addTab("Tab", mainSPane);
         mainTabPane.addTab("Tab2", new JPanel());
-        mainFrame.add(mainTabPane);
-        mainFrame.pack();
-        mainFrame.setLocationRelativeTo(null); // set frame to center of screen
-        mainFrame.setVisible(true);
+        this.add(mainTabPane);
+        this.pack();
+        this.setLocationRelativeTo(null); // set frame to center of screen
+        this.setVisible(true);
     }
     
     private static GridBagConstraints setGridPos(int x, int y){
