@@ -133,6 +133,8 @@ public abstract class BaseStats implements Serializable{
     protected int tempRage = BasePower;
     protected int tempGnosis = BasePower;
     protected int tempWillpower = BasePower;
+    
+    protected Race race = null;
     // Constructors
     public BaseStats(){
         playerName = null;
@@ -240,6 +242,7 @@ public abstract class BaseStats implements Serializable{
     public int TempRage(){return tempRage;}
     public int TempGnosis(){return tempGnosis;}
     public int TempWillpower(){return tempWillpower;}
+    public Race getRace(){return race;}
     
     public void setPName(String Name){playerName = Name;}
     public void setCName(String Name){characterName = Name;}

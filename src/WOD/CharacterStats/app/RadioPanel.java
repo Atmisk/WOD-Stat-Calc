@@ -6,6 +6,7 @@ package WOD.CharacterStats.app;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 /**
@@ -107,7 +108,35 @@ public class RadioPanel extends JPanel {
         }
     }
     
+    //private AffineTransform scalingTransform;
+    //private AffineTransform inverseScalingTransform;
+    //double originalW = this.getWidth();
+    //double originalH = this.getHeight();
+    
     JRadioButton radio1 = new JRadioButton();
+        /*{
+            @Override
+            public void paint(Graphics g)
+            {
+                resize();
+                ((Graphics2D)g).setTransform(scalingTransform);
+                super.paint(g);
+            }
+            @Override
+            public void paintAll(Graphics g)
+            {
+                resize();
+                ((Graphics2D)g).setTransform(scalingTransform);
+                super.paintAll(g);
+            }
+            @Override
+            public void paintComponents(Graphics g)
+            {
+                resize();
+                ((Graphics2D)g).setTransform(scalingTransform);
+                super.paintComponents(g);
+            }
+    };*/
     JRadioButton radio2 = new JRadioButton();
     JRadioButton radio3 = new JRadioButton();
     JRadioButton radio4 = new JRadioButton();
@@ -120,6 +149,11 @@ public class RadioPanel extends JPanel {
     public RadioPanel(){
         value = 0;
         
+        this.setMaximumSize(new Dimension(250, 20));
+        this.setLayout(layout);
+        
+        //this.setBackground(Color.red);
+        
         layout.setHgap(NONE);
         
         radio1.setBorder(noBorder);
@@ -127,6 +161,8 @@ public class RadioPanel extends JPanel {
         radio3.setBorder(noBorder);
         radio4.setBorder(noBorder);
         radio5.setBorder(noBorder);
+        
+        
         
         this.add(radio1);
         this.add(radio2);
@@ -156,4 +192,17 @@ public class RadioPanel extends JPanel {
         radio4.addActionListener(l);
         radio5.addActionListener(l);
     }
+    /*private void resize(){
+        double xFactor;
+        double yFactor;
+        xFactor = ((double)(this.getWidth()))/(originalW);
+        yFactor = ((double)(this.getHeight()))/(originalH);
+        this.scalingTransform = new AffineTransform();
+        this.inverseScalingTransform = new AffineTransform();
+        this.scalingTransform.scale(xFactor,yFactor);
+        this.inverseScalingTransform.scale(1D/xFactor,1D/yFactor);
+        
+        originalW = this.getWidth();
+        originalH = this.getHeight();
+    }*/
 }

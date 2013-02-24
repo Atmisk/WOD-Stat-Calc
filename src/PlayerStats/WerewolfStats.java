@@ -30,6 +30,10 @@ public class WerewolfStats extends BaseStats{
         GLASSWALKER, REDTALON, SHADOWLORD, SILENTSTRIDER, SILVERFANG,
         STARGAZER, UKTENA, WENDIGO
     }
+    
+    public enum Rank{
+        CLIATH1, FOSTERN2, ADREN3, ATHRO4, ELDER5
+    }
     private Breed breed= null;
     private Auspice auspice= null;
     private String camp= null;
@@ -57,12 +61,15 @@ public class WerewolfStats extends BaseStats{
     
     public WerewolfStats(){
         super();
+        race = Race.WOLF;
     }
     public WerewolfStats(String Name, name type){
         super(Name, type);
+        race = Race.WOLF;
     }
     public WerewolfStats(String playerName, String characterName){
         super(playerName, characterName);
+        race = Race.WOLF;
     }
     
     public Breed Breed(){return breed;}
