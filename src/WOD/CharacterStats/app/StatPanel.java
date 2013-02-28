@@ -4,18 +4,151 @@
  */
 package WOD.CharacterStats.app;
 
+import PlayerStats.*;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
  *
  * @author Mike
  */
-public class StatPanel extends JPanel {
-    //JPanel panel = new JPanel();
+public class StatPanel extends JScrollPane {
+    
+    class statListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource().equals(str)){
+                stats.Strength(str.getValue());
+                System.out.println(stats.Strength());
+            }
+            else if(e.getSource().equals(dex)){
+                System.out.println("dexterity edit");
+            }
+            else if(e.getSource().equals(stam)){
+                
+            }
+            else if(e.getSource().equals(charis)){
+                
+            }
+            else if(e.getSource().equals(manip)){
+                
+            }
+            else if(e.getSource().equals(appear)){
+                
+            }
+            else if(e.getSource().equals(percept)){
+                
+            }
+            else if(e.getSource().equals(intel)){
+                
+            }
+            else if(e.getSource().equals(wits)){
+                
+            }
+            
+            else if(e.getSource().equals(alert)){
+                
+            }
+            else if(e.getSource().equals(athlet)){
+                
+            }
+            else if(e.getSource().equals(brawl)){
+                
+            }
+            else if(e.getSource().equals(dodge)){
+                
+            }
+            else if(e.getSource().equals(empathy)){
+                
+            }
+            else if(e.getSource().equals(express)){
+                
+            }
+            else if(e.getSource().equals(intimidate)){
+                
+            }
+            else if(e.getSource().equals(primal)){
+                
+            }
+            else if(e.getSource().equals(streetwise)){
+                
+            }
+            else if(e.getSource().equals(subter)){
+                
+            }
+            
+            else if(e.getSource().equals(animalKen)){
+                
+            }
+            else if(e.getSource().equals(crafts)){
+                
+            }
+            else if(e.getSource().equals(drive)){
+                
+            }
+            else if(e.getSource().equals(etiquette)){
+                
+            }
+            else if(e.getSource().equals(firearm)){
+                
+            }
+            else if(e.getSource().equals(melee)){
+                
+            }
+            else if(e.getSource().equals(leader)){
+                
+            }
+            else if(e.getSource().equals(perform)){
+                
+            }
+            else if(e.getSource().equals(stealth)){
+                
+            }
+            else if(e.getSource().equals(survive)){
+                
+            }
+            
+            else if(e.getSource().equals(comp)){
+                
+            }
+            else if(e.getSource().equals(enigma)){
+                
+            }
+            else if(e.getSource().equals(investigate)){
+                
+            }
+            else if(e.getSource().equals(law)){
+                
+            }
+            else if(e.getSource().equals(linguist)){
+                
+            }
+            else if(e.getSource().equals(medic)){
+                
+            }
+            else if(e.getSource().equals(occult)){
+                
+            }
+            else if(e.getSource().equals(politics)){
+                
+            }
+            else if(e.getSource().equals(rituals)){
+                
+            }
+            else if(e.getSource().equals(science)){
+                
+            }
+        }  
+    }
+    
+    BaseStats stats = new WerewolfStats();
+    
+    JPanel panel = new JPanel();
     GridBagLayout mainLayout = new GridBagLayout();
     GridBagConstraints c;
     
@@ -38,8 +171,8 @@ public class StatPanel extends JPanel {
     JLabel knowLabel = new JLabel("Knowledges", JLabel.CENTER);
     Font font;
 
-    Stat str = new Stat("Strength");
-    Stat dex = new Stat("Dexterity");
+    Stat str = new Stat("Strength", new statListener());
+    Stat dex = new Stat("Dexterity", new statListener());
     Stat stam = new Stat("Stamina");
 
     Stat charis = new Stat("Charisma");
@@ -88,35 +221,35 @@ public class StatPanel extends JPanel {
     }
     
     private void InitPanel(){
-        //this.add(panel);
-        this.setLayout(mainLayout);
+        this.setViewportView(panel);
+        panel.setLayout(mainLayout);
         
         //----------------------------------------------------------------------
         // CHARACTER INFO
         
         c = setGridPos(0 ,0, 5);
-        this.add(name, c);
+        panel.add(name, c);
         
         c = setGridPos(1, 0, 5);
-        this.add(breed, c);
+        panel.add(breed, c);
         
         c = setGridPos(2, 0, 5);
-        this.add(pack, c);
+        panel.add(pack, c);
         
         c = setGridPos(0, 1, 5);
-        this.add(player, c);
+        panel.add(player, c);
         
         c = setGridPos(1, 1, 5);
-        this.add(auspice, c);
+        panel.add(auspice, c);
         
         c = setGridPos(2, 1, 5);
-        this.add(totem, c);
+        panel.add(totem, c);
         
         c = setGridPos(0, 2, 5);
-        this.add(tribe, c);
+        panel.add(tribe, c);
         
         c = setGridPos(1, 2, 5);
-        this.add(camp, c);
+        panel.add(camp, c);
         
         //----------------------------------------------------------------------
         // ATTRIBUTES
@@ -124,49 +257,50 @@ public class StatPanel extends JPanel {
         c = setLabelPos(1, 3);
         font = new Font(attrLabel.getFont().getName(), Font.PLAIN, 20);
         attrLabel.setFont(font);
-        this.add(attrLabel, c);
+        panel.add(attrLabel, c);
         
         c = setLabelPos(0, 4);
         font = new Font(physLabel.getFont().getName(), Font.PLAIN, 16);
         physLabel.setFont(font);
-        this.add(physLabel, c);
+        panel.add(physLabel, c);
         
         c = setGridPos(0, 5, 0);
-        this.add(str, c);
+        panel.add(str, c);
+        //str.addActionListener(new statListener());
         
         c = setGridPos(0, 6, 0);
-        this.add(dex, c);
+        panel.add(dex, c);
         
         c = setGridPos(0, 7, 0);
-        this.add(stam, c);
+        panel.add(stam, c);
         
         c = setLabelPos(1, 4);
         font = new Font(socialLabel.getFont().getName(), Font.PLAIN, 16);
         socialLabel.setFont(font);
-        this.add(socialLabel, c);
+        panel.add(socialLabel, c);
         
         c = setGridPos(1, 5, 0);
-        this.add(charis, c);
+        panel.add(charis, c);
         
         c = setGridPos(1, 6, 0);
-        this.add(manip, c);
+        panel.add(manip, c);
         
         c = setGridPos(1, 7, 0);
-        this.add(appear, c);
+        panel.add(appear, c);
         
         c = setLabelPos(2, 4);
         font = new Font(mentalLabel.getFont().getName(), Font.PLAIN, 16);
         mentalLabel.setFont(font);
-        this.add(mentalLabel, c);
+        panel.add(mentalLabel, c);
         
         c = setGridPos(2, 5, 0);
-        this.add(percept, c);
+        panel.add(percept, c);
         
         c = setGridPos(2, 6, 0);
-        this.add(intel, c);
+        panel.add(intel, c);
         
         c = setGridPos(2, 7, 0);
-        this.add(wits, c);
+        panel.add(wits, c);
         
         //----------------------------------------------------------------------
         // ABILITIES - TALENTS
@@ -174,43 +308,43 @@ public class StatPanel extends JPanel {
         c = setLabelPos(1, 8);
         font = new Font(abilityLabel.getFont().getName(), Font.PLAIN, 20);
         abilityLabel.setFont(font);
-        this.add(abilityLabel, c);
+        panel.add(abilityLabel, c);
         
         c = setLabelPos(0, 9);
         font = new Font(talentLabel.getFont().getName(), Font.PLAIN, 16);
         talentLabel.setFont(font);
-        this.add(talentLabel, c);
+        panel.add(talentLabel, c);
         
         c = setGridPos(0, 10, 0);
-        this.add(alert, c);
+        panel.add(alert, c);
         
         c = setGridPos(0, 11, 0);
-        this.add(athlet, c);
+        panel.add(athlet, c);
         
         c = setGridPos(0, 12, 0);
-        this.add(brawl, c);
+        panel.add(brawl, c);
         
         c = setGridPos(0, 13, 0);
-        this.add(dodge, c);
+        panel.add(dodge, c);
         
         c = setGridPos(0, 14, 0);
-        this.add(empathy, c);
+        panel.add(empathy, c);
         
 
         c = setGridPos(0, 15, 0);
-        this.add(express, c);
+        panel.add(express, c);
         
         c = setGridPos(0, 16, 0);
-        this.add(intimidate, c);
+        panel.add(intimidate, c);
         
         c = setGridPos(0, 17, 0);
-        this.add(primal, c);
+        panel.add(primal, c);
         
         c = setGridPos(0, 18, 0);
-        this.add(streetwise, c);
+        panel.add(streetwise, c);
         
         c = setGridPos(0, 19, 0);
-        this.add(subter, c);
+        panel.add(subter, c);
         
         //----------------------------------------------------------------------
         // ABILITIES - SKILLS
@@ -218,37 +352,37 @@ public class StatPanel extends JPanel {
         c = setLabelPos(1, 9);
         font = new Font(skillLabel.getFont().getName(), Font.PLAIN, 16);
         skillLabel.setFont(font);
-        this.add(skillLabel, c);
+        panel.add(skillLabel, c);
         
         c = setGridPos(1, 10, 0);
-        this.add(animalKen, c);
+        panel.add(animalKen, c);
         
         c = setGridPos(1, 11, 0);
-        this.add(crafts, c);
+        panel.add(crafts, c);
         
         c = setGridPos(1, 12, 0);
-        this.add(drive, c);
+        panel.add(drive, c);
         
         c = setGridPos(1, 13, 0);
-        this.add(etiquette, c);
+        panel.add(etiquette, c);
         
         c = setGridPos(1, 14, 0);
-        this.add(firearm, c);
+        panel.add(firearm, c);
         
         c = setGridPos(1, 15, 0);
-        this.add(leader, c);
+        panel.add(leader, c);
         
         c = setGridPos(1, 16, 0);
-        this.add(melee, c);
+        panel.add(melee, c);
         
         c = setGridPos(1, 17, 0);
-        this.add(perform, c);
+        panel.add(perform, c);
         
         c = setGridPos(1, 18, 0);
-        this.add(stealth, c);
+        panel.add(stealth, c);
         
         c = setGridPos(1, 19, 0);
-        this.add(survive, c);
+        panel.add(survive, c);
         
         //----------------------------------------------------------------------
         // ABILITIES - KNOWLEDGES
@@ -256,37 +390,37 @@ public class StatPanel extends JPanel {
         c = setLabelPos(2, 9);
         font = new Font(knowLabel.getFont().getName(), Font.PLAIN, 16);
         knowLabel.setFont(font);
-        this.add(knowLabel, c);
+        panel.add(knowLabel, c);
         
         c = setGridPos(2, 10, 0);
-        this.add(comp, c);
+        panel.add(comp, c);
         
         c = setGridPos(2, 11, 0);
-        this.add(enigma, c);
+        panel.add(enigma, c);
         
         c = setGridPos(2, 12, 0);
-        this.add(investigate, c);
+        panel.add(investigate, c);
         
         c = setGridPos(2, 13, 0);
-        this.add(law, c);
+        panel.add(law, c);
         
         c = setGridPos(2, 14, 0);
-        this.add(linguist, c);
+        panel.add(linguist, c);
 
         c = setGridPos(2, 15, 0);
-        this.add(medic, c);
+        panel.add(medic, c);
 
         c = setGridPos(2, 16, 0);
-        this.add(occult, c);
+        panel.add(occult, c);
 
         c = setGridPos(2, 17, 0);
-        this.add(politics, c);
+        panel.add(politics, c);
         
         c = setGridPos(2, 18, 0);
-        this.add(rituals, c);
+        panel.add(rituals, c);
         
         c = setGridPos(2, 19, 0);
-        this.add(science, c);
+        panel.add(science, c);
     }
     private static GridBagConstraints setGridPos(int x, int y, int yGap){
         GridBagConstraints c;

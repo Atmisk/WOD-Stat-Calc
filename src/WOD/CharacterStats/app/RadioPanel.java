@@ -6,7 +6,8 @@ package WOD.CharacterStats.app;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+//import java.awt.geom.AffineTransform;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 /**
@@ -18,6 +19,8 @@ public class RadioPanel extends JPanel {
     private final int NONE = 0;
     
     private int value;
+    
+    ArrayList<ActionListener> aListeners = new ArrayList<>();
     
     private class RadioListener implements ActionListener{
         @Override
@@ -50,6 +53,8 @@ public class RadioPanel extends JPanel {
                     //System.out.println("IF 3");
                     value = 0;
                 }
+                notifyListeners();
+
             }
             else if(e.getSource().equals(radio2)){
                 //JOptionPane.showMessageDialog(radio2, "Radio2 clicked");
@@ -65,6 +70,8 @@ public class RadioPanel extends JPanel {
                     radio4.setSelected(false);
                     radio5.setSelected(false);
                 }
+                value = 2;
+                notifyListeners();
             }
             else if(e.getSource().equals(radio3)){
                 //JOptionPane.showMessageDialog(radio3, "Radio3 clicked");
@@ -79,6 +86,8 @@ public class RadioPanel extends JPanel {
                     radio4.setSelected(false);
                     radio5.setSelected(false);
                 }
+                value = 3;
+                notifyListeners();
             }
             else if(e.getSource().equals(radio4)){
                 //JOptionPane.showMessageDialog(radio4, "Radio4 clicked");
@@ -92,6 +101,8 @@ public class RadioPanel extends JPanel {
                     radio4.setSelected(true);
                     radio5.setSelected(false);
                 }
+                value = 4;
+                notifyListeners();
             }
             else if(e.getSource().equals(radio5)){
                 //JOptionPane.showMessageDialog(radio5, "Radio5 clicked");
@@ -104,6 +115,8 @@ public class RadioPanel extends JPanel {
                 else{
                     radio5.setSelected(true);
                 }
+                value = 5;
+                notifyListeners();
             }
         }
     }
@@ -145,6 +158,9 @@ public class RadioPanel extends JPanel {
     private EmptyBorder noBorder = new EmptyBorder(new Insets(0, 0, 0, 0));
     
     GridLayout layout = new GridLayout(0, COLUMNS);
+    
+    RadioListener listener;
+    ActionEvent event = new ActionEvent(this, 1, "Select");
 
     public RadioPanel(){
         value = 0;
@@ -162,15 +178,13 @@ public class RadioPanel extends JPanel {
         radio4.setBorder(noBorder);
         radio5.setBorder(noBorder);
         
-        
-        
         this.add(radio1);
         this.add(radio2);
         this.add(radio3);
         this.add(radio4);
         this.add(radio5);
         
-        RadioListener listener = new RadioListener();
+        listener = new RadioListener();
         
         setInitListeners(listener);
     }
@@ -186,12 +200,14 @@ public class RadioPanel extends JPanel {
         radio5.addActionListener(l);
     }
     public void addActionListener(ActionListener l){
-        radio1.addActionListener(l);
-        radio2.addActionListener(l);
-        radio3.addActionListener(l);
-        radio4.addActionListener(l);
-        radio5.addActionListener(l);
+        aListeners.add(l);
     }
+    public void notifyListeners(){
+        for(ActionListener listen : aListeners){
+            listen.actionPerformed(event);
+        }
+    }
+    
     /*private void resize(){
         double xFactor;
         double yFactor;
