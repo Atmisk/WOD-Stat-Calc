@@ -189,9 +189,39 @@ public class RadioPanel extends JPanel {
         setInitListeners(listener);
     }
 
-    public int Value(){
+    public int getValue(){
         return value;
     }
+    public void setValue(int value){
+        switch(value){
+            case 0:
+                this.value = value;
+                break;
+            case 1:
+                this.value = value;
+                radio1.doClick();
+                break;
+            case 2:
+                this.value = value;
+                radio2.doClick();
+                break;
+            case 3:
+                this.value = value;
+                radio3.doClick();
+                break;
+            case 4:
+                this.value = value;
+                radio4.doClick();
+                break;
+            case 5:
+                this.value = value;
+                radio5.doClick();
+                break;
+            default:
+                this.value = 0;
+        }
+    }
+    
     private void setInitListeners(ActionListener l){
         radio1.addActionListener(l);
         radio2.addActionListener(l);

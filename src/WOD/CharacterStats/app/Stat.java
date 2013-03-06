@@ -122,7 +122,11 @@ public class Stat extends JPanel {
     }
     
     public int getValue(){
-        return statRank.Value();
+        return statRank.getValue();
+    }
+    
+    public void setValue(int value){
+        this.statRank.setValue(value);
     }
     private static GridBagConstraints setAnchor(int anchor){
         GridBagConstraints c;

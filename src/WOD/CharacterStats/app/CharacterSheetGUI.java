@@ -3,9 +3,14 @@
  * and open the template in the editor.
  */
 package WOD.CharacterStats.app;
+import PlayerStats.BaseStats.Race;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 /**
@@ -18,20 +23,55 @@ public class CharacterSheetGUI extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource().equals(newFile)){
-                mainTabPane.addTab("New Character", new StatPanel());
+                panelList.add(new StatPanel());
+                mainTabPane.addTab(
+                        "New Character", panelList.get(panelList.size()-1));
+            }
+            else if(e.getSource().equals(saveFile)){
+                int index;
+                index = mainTabPane.getSelectedIndex();
+                try {
+                    panelList.get(index).saveStats();
+                    panelList.get(index).changeMade = false;
+                    mainTabPane.setTitleAt(index, panelList.get(index)
+                                                  .name.detail.getText());
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(
+                            CharacterSheetGUI.class.getName()).log(
+                                Level.SEVERE, null, ex);
+                }
+            }
+            else if(e.getSource().equals(openFile)){
+                panelList.add(new StatPanel());
+                mainTabPane.addTab("Character", panelList.get(panelList.size()-1));
+                try {
+                    openType = fileChooser.showOpenDialog(null);
+                    if(openType == JFileChooser.APPROVE_OPTION){
+                        panelList.get(
+                                panelList.size()-1).loadStats(
+                                    fileChooser.getSelectedFile()
+                                    .getName(), Race.WOLF);
+                    }
+                } catch (IOException | ClassNotFoundException ex) {
+                    Logger.getLogger(
+                            CharacterSheetGUI.class.getName()).log(
+                                Level.SEVERE, null, ex);
+                }
             }
         }
     }
-    
-    StatPanel statPanel = new StatPanel();    // CHANGE TO NEW CLASS
-    StatPanel statPanel2 = new StatPanel();
     
     JTabbedPane mainTabPane = new JTabbedPane();
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     JMenuItem openFile = new JMenuItem("Open");
     JMenuItem newFile = new JMenuItem("New");
-        
+    JMenuItem saveFile = new JMenuItem("Save");
+    JFileChooser fileChooser = new JFileChooser();
+    int openType = 0;
+    
+    ArrayList<StatPanel> panelList = new ArrayList<>();
+    
     
     /**
      * @param args the command line arguments
@@ -47,44 +87,26 @@ public class CharacterSheetGUI extends JFrame{
     
     public CharacterSheetGUI(){
         createAndShowGUI();
-        //strPanel.addActionListener(statListen);
     }
     
     public final void createAndShowGUI(){
-        //JFrame mainFrame = new JFrame("Character Sheet");
         
         newFile.addActionListener(new menuItemListener());
+        saveFile.addActionListener(new menuItemListener());
+        openFile.addActionListener(new menuItemListener());
         menuBar.add(fileMenu);
         fileMenu.add(newFile);
         fileMenu.add(openFile);
+        fileMenu.add(saveFile);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(700, 600));
         this.setJMenuBar(menuBar);
         
-        //statPanel.setLayout(mainLayout);// CHANGE TO NEW CLASS
-        
         this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-    
-        
-        
-//        Stat testStat = new Stat("Repair", 7);
-//        c = setGridPos(0, 20, 0);
-//        statPanel.add(testStat, c);
-//        
-//        Detail testDetail = new Detail("Blargh", "Wort");
-//        c = setGridPos(0, 21, 0);
-//        statPanel.add(testDetail, c);
-        
-        //mainTabPane.addTab("Tab", statPanel);
-        //mainTabPane.addTab("Tab2", statPanel2);
         this.add(mainTabPane);
         this.pack();
         this.setLocationRelativeTo(null); // set frame to center of screen
         this.setVisible(true);
     }
-    
-//    private JScrollPane newScrollTab(StatPanel panel){
-//        return new JScrollPane(panel);
-//    }
 }

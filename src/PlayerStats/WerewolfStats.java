@@ -63,10 +63,10 @@ public class WerewolfStats extends BaseStats{
         super();
         race = Race.WOLF;
     }
-    public WerewolfStats(String Name, name type){
+    /*public WerewolfStats(String Name, name type){
         super(Name, type);
         race = Race.WOLF;
-    }
+    }*/
     public WerewolfStats(String playerName, String characterName){
         super(playerName, characterName);
         race = Race.WOLF;
@@ -169,8 +169,8 @@ public class WerewolfStats extends BaseStats{
         }
     }
     
-    public static WerewolfStats LoadStats(String charName, String dir) 
+    public static WerewolfStats LoadStats(String fileName, String dir) 
             throws IOException, ClassNotFoundException{
-        return (WerewolfStats) BaseStats.LoadStats(charName, dir);
+        return (WerewolfStats) BaseStats.LoadStats(fileName, dir);
     }
 }

@@ -5,13 +5,25 @@
 package WOD.CharacterStats.app;
 
 import PlayerStats.*;
+import PlayerStats.BaseStats.Race;
+import PlayerStats.WerewolfStats.Auspice;
+import PlayerStats.WerewolfStats.Breed;
+import PlayerStats.WerewolfStats.Tribe;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.IOException;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
+
 
 /**
  *
@@ -24,142 +36,288 @@ public class StatPanel extends JScrollPane {
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(str)){
                 stats.Strength(str.getValue());
-                System.out.println(stats.Strength());
             }
             else if(e.getSource().equals(dex)){
-                System.out.println("dexterity edit");
+                stats.Dexterity(dex.getValue());
             }
             else if(e.getSource().equals(stam)){
-                
+                stats.Stamina(stam.getValue());
             }
             else if(e.getSource().equals(charis)){
-                
+                stats.Charisma(charis.getValue());
             }
             else if(e.getSource().equals(manip)){
-                
+                stats.Manip(manip.getValue());
             }
             else if(e.getSource().equals(appear)){
-                
+                stats.Appear(appear.getValue());
             }
             else if(e.getSource().equals(percept)){
-                
+                stats.Percept(percept.getValue());
             }
             else if(e.getSource().equals(intel)){
-                
+                stats.Intel(intel.getValue());
             }
             else if(e.getSource().equals(wits)){
-                
+                stats.Wits(wits.getValue());
             }
             
             else if(e.getSource().equals(alert)){
-                
+                stats.Alert(alert.getValue());
             }
             else if(e.getSource().equals(athlet)){
-                
+                stats.Athletic(athlet.getValue());
             }
             else if(e.getSource().equals(brawl)){
-                
+                stats.Brawl(brawl.getValue());
             }
             else if(e.getSource().equals(dodge)){
-                
+                stats.Dodge(dodge.getValue());
             }
             else if(e.getSource().equals(empathy)){
-                
+                stats.Empathy(empathy.getValue());
             }
             else if(e.getSource().equals(express)){
-                
+                stats.Express(express.getValue());
             }
             else if(e.getSource().equals(intimidate)){
-                
+                stats.Intimidate(intimidate.getValue());
             }
             else if(e.getSource().equals(primal)){
-                
+                stats.Primal(primal.getValue());
             }
             else if(e.getSource().equals(streetwise)){
-                
+                stats.StreetWise(streetwise.getValue());
             }
             else if(e.getSource().equals(subter)){
-                
+                stats.Subterfuge(subter.getValue());
             }
             
             else if(e.getSource().equals(animalKen)){
-                
+                stats.AnimalKen(animalKen.getValue());
             }
             else if(e.getSource().equals(crafts)){
-                
+                stats.Crafts(crafts.getValue());
             }
             else if(e.getSource().equals(drive)){
-                
+                stats.Drive(drive.getValue());
             }
             else if(e.getSource().equals(etiquette)){
-                
+                stats.Etiquette(etiquette.getValue());
             }
             else if(e.getSource().equals(firearm)){
-                
+                stats.Firearms(firearm.getValue());
             }
             else if(e.getSource().equals(melee)){
-                
+                stats.Melee(melee.getValue());
             }
             else if(e.getSource().equals(leader)){
-                
+                stats.Leadership(leader.getValue());
             }
             else if(e.getSource().equals(perform)){
-                
+                stats.Performance(perform.getValue());
             }
             else if(e.getSource().equals(stealth)){
-                
+                stats.Stealth(stealth.getValue());
             }
             else if(e.getSource().equals(survive)){
-                
+                stats.Survival(survive.getValue());
             }
             
             else if(e.getSource().equals(comp)){
-                
+                stats.Computer(comp.getValue());
             }
             else if(e.getSource().equals(enigma)){
-                
+                stats.Enigmas(enigma.getValue());
             }
             else if(e.getSource().equals(investigate)){
-                
+                stats.Investigate(investigate.getValue());
             }
             else if(e.getSource().equals(law)){
-                
+                stats.Law(law.getValue());
             }
             else if(e.getSource().equals(linguist)){
-                
+                stats.Linguistics(linguist.getValue());
             }
             else if(e.getSource().equals(medic)){
-                
+                stats.Medicine(medic.getValue());
             }
             else if(e.getSource().equals(occult)){
-                
+                stats.Occult(occult.getValue());
             }
             else if(e.getSource().equals(politics)){
-                
+                stats.Politics(politics.getValue());
             }
             else if(e.getSource().equals(rituals)){
-                
+                stats.Rituals(rituals.getValue());
             }
             else if(e.getSource().equals(science)){
-                
+                stats.Science(science.getValue());
             }
+            changeMade = true;
         }  
     }
+    class detailListener implements DocumentListener {
+        @Override
+        public void changedUpdate(DocumentEvent e){
+            saveChanges(e);
+            //System.out.println("Change made");
+        }
+        @Override
+        public void removeUpdate(DocumentEvent e){
+            saveChanges(e);
+            //System.out.println("Change made");
+        }
+        @Override
+        public void insertUpdate(DocumentEvent e){
+            saveChanges(e);
+            //System.out.println("Change made");
+        }
+
+        private void saveChanges(DocumentEvent e){
+            Document nameDoc = name.detail.getDocument();
+            Document playerDoc = player.detail.getDocument();
+            Document campDoc = camp.detail.getDocument();
+            Document packDoc = pack.detail.getDocument();
+            Document totemDoc = totem.detail.getDocument();
+
+            if(e.getDocument().equals(nameDoc)){
+                stats.setCName(name.getDetail());
+                //System.out.println("Player Name: " + name.getDetail());
+            }
+            
+            else if(e.getDocument().equals(playerDoc)){
+                stats.setPName(player.getDetail());
+            }
+            
+            else if(e.getDocument().equals(campDoc)){
+                stats.Camp(camp.getDetail());
+            }
+            else if(e.getDocument().equals(packDoc)){
+                stats.PackName(pack.getDetail());
+            }
+            else if(e.getDocument().equals(totemDoc)){
+                stats.TotemName(totem.getDetail());
+            }
+            changeMade = true;
+        }
+    }
+    class comboListener implements ItemListener{
+        @Override
+        public void itemStateChanged(ItemEvent e){
+            if(e.getStateChange() == ItemEvent.SELECTED)
+            {
+                if(e.getSource().equals(breed.detailBox)){
+                    switch (breed.getDetail()) {
+                        case "Homid":
+                            stats.Breed(Breed.HOMID);
+                            break;
+                        case "Crinos":
+                            stats.Breed(Breed.CRINOS);
+                            break;
+                        case "Lupus":
+                            stats.Breed(Breed.LUPUS);
+                            break;
+                    }
+                }
+                else if(e.getSource().equals(tribe.detailBox)){
+                    switch (tribe.getDetail()) {
+                        case "Black Furries":
+                            stats.Tribe(Tribe.BLACKFURY);
+                            break;
+                        case "Bone Gnawers":
+                            stats.Tribe(Tribe.BONEGNAWER);
+                            break;
+                        case "Children of Gaia":
+                            stats.Tribe(Tribe.CHILDOFGAIA);
+                            break;
+                        case "Fianna":
+                            stats.Tribe(Tribe.FIANNA);
+                            break;
+                        case "Get of Fenris":
+                            stats.Tribe(Tribe.GETOFFENRIS);
+                            break;
+                        case "Glasswalkers":
+                            stats.Tribe(Tribe.GLASSWALKER);
+                            break;
+                        case "Red Talons":
+                            stats.Tribe(Tribe.REDTALON);
+                            break;
+                        case "Shadow Lords":
+                            stats.Tribe(Tribe.SHADOWLORD);
+                            break;
+                        case "Silent Striders":
+                            stats.Tribe(Tribe.SILENTSTRIDER);
+                            break;
+                        case "Silverfangs":
+                            stats.Tribe(Tribe.SILVERFANG);
+                            break;
+                        case "Stargazers":
+                            stats.Tribe(Tribe.STARGAZER);
+                            break;
+                        case "Uktena":
+                            stats.Tribe(Tribe.UKTENA);
+                            break;
+                        case "Wendigo":
+                            stats.Tribe(Tribe.WENDIGO);
+                            break;
+                    }
+                }
+                else if(e.getSource().equals(auspice.detailBox)){
+                    switch(auspice.getDetail()){
+                        case "Ahroun":
+                            stats.Auspice(Auspice.AHROUN);
+                            break;
+                        case "Galliard":
+                            stats.Auspice(Auspice.GALLIARD);
+                            break;
+                        case "Philodox":
+                            stats.Auspice(Auspice.PHILODOX);
+                            break;
+                        case "Ragabash":
+                            stats.Auspice(Auspice.RAGABASH);
+                            break;
+                        case "Theurge":
+                            stats.Auspice(Auspice.THEURGE);
+                            break;
+                        //default:
+                          //  stats.Auspice(null);
+                    }
+                }
+                //System.out.println("Selection changed");
+                changeMade = true;
+            }
+        }
+    }
     
-    BaseStats stats = new WerewolfStats();
+    boolean changeMade = false;
+    private WerewolfStats stats = new WerewolfStats();
     
     JPanel panel = new JPanel();
     GridBagLayout mainLayout = new GridBagLayout();
     GridBagConstraints c;
+    statListener listener = new statListener();
+    detailListener docListener = new detailListener();
+    comboListener comboListener = new comboListener();
     
-    Detail name = new Detail("Name");
-    Detail breed = new Detail("Breed");
-    Detail player = new Detail("Player");
-    Detail tribe = new Detail("Tribe");
-    Detail auspice = new Detail("Auspice");
-    Detail camp = new Detail("Camp");
-    Detail pack = new Detail("Pack");
-    Detail totem = new Detail("Totem");
+    String[] breedList = {  "Homid", "Crinos", "Lupus"};
+    
+    String[] tribeList = {  "Black Furries", "Bone Gnawers", "Children of Gaia",
+                            "Fianna", "Get of Fenris", "Glasswalkers", 
+                            "Red Talons", "Shadow Lords", "Silent Striders",
+                            "Silverfangs", "Stargazers", "Uktena", "Wendigo"};
+    
+    String[] auspiceList = {"Ragabash", "Theurge", "Philodox", 
+                            "Galliard", "Ahroun"};
+    
+    Detail name = new Detail("Name", docListener);
+    Detail breed = new Detail("Breed", breedList, comboListener);
+    Detail player = new Detail("Player", docListener);
+    Detail tribe = new Detail("Tribe", tribeList, comboListener);
+    Detail auspice = new Detail("Auspice", auspiceList, comboListener);
+    Detail camp = new Detail("Camp", docListener);
+    Detail pack = new Detail("Pack", docListener);
+    Detail totem = new Detail("Totem", docListener); // CREATE PRESEST?
 
     JLabel attrLabel = new JLabel("Attributes", JLabel.CENTER);
     JLabel physLabel = new JLabel("Physical", JLabel.CENTER);
@@ -171,50 +329,50 @@ public class StatPanel extends JScrollPane {
     JLabel knowLabel = new JLabel("Knowledges", JLabel.CENTER);
     Font font;
 
-    Stat str = new Stat("Strength", new statListener());
-    Stat dex = new Stat("Dexterity", new statListener());
-    Stat stam = new Stat("Stamina");
+    Stat str = new Stat("Strength", listener);
+    Stat dex = new Stat("Dexterity", listener);
+    Stat stam = new Stat("Stamina", listener);
 
-    Stat charis = new Stat("Charisma");
-    Stat manip = new Stat("Manipulation");
-    Stat appear = new Stat("Appearance");
+    Stat charis = new Stat("Charisma", listener);
+    Stat manip = new Stat("Manipulation", listener);
+    Stat appear = new Stat("Appearance", listener);
 
-    Stat percept = new Stat("Perception");
-    Stat intel = new Stat("Inteligence");
-    Stat wits = new Stat("Wits");
+    Stat percept = new Stat("Perception", listener);
+    Stat intel = new Stat("Inteligence", listener);
+    Stat wits = new Stat("Wits", listener);
 
-    Stat alert = new Stat("Alertness");
-    Stat athlet = new Stat("Athletics");
-    Stat brawl = new Stat("Brawl");
-    Stat dodge = new Stat("Dodge");
-    Stat empathy = new Stat("Empathy");
-    Stat express = new Stat("Expression");
-    Stat intimidate = new Stat("Intimidate");
-    Stat primal = new Stat("Pimal Urge");
-    Stat streetwise = new Stat("Streetwise");
-    Stat subter = new Stat("Subterfuge");
+    Stat alert = new Stat("Alertness", listener);
+    Stat athlet = new Stat("Athletics", listener);
+    Stat brawl = new Stat("Brawl", listener);
+    Stat dodge = new Stat("Dodge", listener);
+    Stat empathy = new Stat("Empathy", listener);
+    Stat express = new Stat("Expression", listener);
+    Stat intimidate = new Stat("Intimidate", listener);
+    Stat primal = new Stat("Pimal Urge", listener);
+    Stat streetwise = new Stat("Streetwise", listener);
+    Stat subter = new Stat("Subterfuge", listener);
 
-    Stat animalKen = new Stat("Animal Ken");
-    Stat crafts = new Stat("Crafts");
-    Stat drive = new Stat("Drive");
-    Stat etiquette = new Stat("Etiquette");
-    Stat firearm = new Stat("Firearms");
-    Stat leader = new Stat("Leadership");
-    Stat melee = new Stat("Melee");
-    Stat perform = new Stat("Perform");
-    Stat stealth = new Stat("Stealth");
-    Stat survive = new Stat("Survival");
+    Stat animalKen = new Stat("Animal Ken", listener);
+    Stat crafts = new Stat("Crafts", listener);
+    Stat drive = new Stat("Drive", listener);
+    Stat etiquette = new Stat("Etiquette", listener);
+    Stat firearm = new Stat("Firearms", listener);
+    Stat leader = new Stat("Leadership", listener);
+    Stat melee = new Stat("Melee", listener);
+    Stat perform = new Stat("Perform", listener);
+    Stat stealth = new Stat("Stealth", listener);
+    Stat survive = new Stat("Survival", listener);
 
-    Stat comp = new Stat("Computers");
-    Stat enigma = new Stat("Enigma");
-    Stat investigate = new Stat("Investigate");
-    Stat law = new Stat("Law");
-    Stat linguist = new Stat("Linquistics");
-    Stat medic = new Stat("Medicine");
-    Stat occult = new Stat("Occult");
-    Stat politics = new Stat("Politics");
-    Stat rituals = new Stat("Rituals");
-    Stat science = new Stat("Science");
+    Stat comp = new Stat("Computers", listener);
+    Stat enigma = new Stat("Enigma", listener);
+    Stat investigate = new Stat("Investigate", listener);
+    Stat law = new Stat("Law", listener);
+    Stat linguist = new Stat("Linquistics", listener);
+    Stat medic = new Stat("Medicine", listener);
+    Stat occult = new Stat("Occult", listener);
+    Stat politics = new Stat("Politics", listener);
+    Stat rituals = new Stat("Rituals", listener);
+    Stat science = new Stat("Science", listener);
     
     public StatPanel(){
         InitPanel();
@@ -444,5 +602,138 @@ public class StatPanel extends JScrollPane {
         c.gridx = x;
         c.gridy = y;
         return c;
+    }
+    
+    public void saveStats()throws IOException, ClassNotFoundException{
+        String dir = System.getProperty("user.dir");// + "\\Characters";
+        stats.SaveStats(dir);
+    }
+    
+    public void loadStats(String charName, Race race) 
+            throws IOException, ClassNotFoundException{
+        String dir = System.getProperty("user.dir");// + "\\Characters";
+        if(race == Race.WOLF){
+            stats = WerewolfStats.LoadStats(charName, dir);
+            initStats();
+        }
+    }
+    
+    private void initStats(){
+        name.setDetail(stats.getCName());
+        breed.setDetail(breedToString(stats.Breed()));
+        player.setDetail(stats.getPName());
+        tribe.setDetail(tribeToString(stats.Tribe()));
+        auspice.setDetail(auspToString(stats.Auspice()));
+        camp.setDetail(stats.Camp());
+        pack.setDetail(stats.PackName());
+        totem.setDetail(stats.TotemName());
+        
+        str.setValue(stats.Strength());
+        dex.setValue(stats.Dexterity());
+        stam.setValue(stats.Stamina());
+        
+        charis.setValue(stats.Charisma());
+        manip.setValue(stats.Manip());
+        appear.setValue(stats.Appear());
+        
+        intel.setValue(stats.Intel());
+        percept.setValue(stats.Percept());
+        wits.setValue(stats.Wits());
+        
+        alert.setValue(stats.Alert());
+        athlet.setValue(stats.Athletic());
+        brawl.setValue(stats.Brawl());
+        dodge.setValue(stats.Dodge());
+        empathy.setValue(stats.Empathy());
+        express.setValue(stats.Express());
+        intimidate.setValue(stats.Intimidate());
+        primal.setValue(stats.Primal());
+        streetwise.setValue(stats.StreetWise());
+        subter.setValue(stats.Subterfuge());
+        
+        animalKen.setValue(stats.AnimalKen());
+        crafts.setValue(stats.Crafts());
+        drive.setValue(stats.Drive());
+        etiquette.setValue(stats.Etiquette());
+        firearm.setValue(stats.Firearms());
+        leader.setValue(stats.Leadership());
+        melee.setValue(stats.Melee());
+        perform.setValue(stats.Performance());
+        stealth.setValue(stats.Stealth());
+        survive.setValue(stats.Survival());
+        
+        comp.setValue(stats.Computer());
+        enigma.setValue(stats.Enigmas());
+        investigate.setValue(stats.Investigate());
+        law.setValue(stats.Law());
+        linguist.setValue(stats.Linguistics());
+        medic.setValue(stats.Medicine());
+        occult.setValue(stats.Occult());
+        politics.setValue(stats.Politics());
+        rituals.setValue(stats.Rituals());
+        science.setValue(stats.Science());
+    }
+    
+    private String auspToString(Auspice auspice){
+        switch(auspice){
+            case AHROUN:
+                return "Ahroun";
+            case PHILODOX:
+                return "Philodox";
+            case GALLIARD:
+                return "Galliard";
+            case THEURGE:
+                return "Theurge";
+            case RAGABASH:
+                return "Ragabash";
+            default:
+                return null;
+        }
+    }
+    
+    private String breedToString(Breed breed){
+        switch(breed){
+            case HOMID:
+                return "Homid";
+            case CRINOS:
+                return "Crinos";
+            case LUPUS:
+                return "Lupus";
+            default:
+                return null;
+        }
+    }
+    
+    private String tribeToString(Tribe tribe){
+        switch(tribe){
+            case BLACKFURY:
+                return "Black Furries";
+            case BONEGNAWER:
+                return "Bone Gnawers";
+            case CHILDOFGAIA:
+                return "Children of Gaia";
+            case FIANNA:
+                return "Fianna";
+            case GETOFFENRIS:
+                return "Get of Fenris";
+            case GLASSWALKER:
+                return "Glasswalkers";
+            case REDTALON:
+                return "Red Talons";
+            case SHADOWLORD:
+                return "Shadow Lords";
+            case SILENTSTRIDER:
+                return "Silent Striders";
+            case SILVERFANG:
+                return "Silverfangs";
+            case STARGAZER:
+                return "Stargazers";
+            case UKTENA:
+                return "Uktena";
+            case WENDIGO:
+                return "Wendigo";
+            default:
+                return null;
+        }
     }
 }

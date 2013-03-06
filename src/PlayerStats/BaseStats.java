@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -25,8 +25,8 @@ public abstract class BaseStats implements Serializable{
     private final int BaseAttVal = 1;
     private final int BaseSkillVal = 0;
     private final int BasePower = 0;
-    public final String defaultName= "Character";   // move out of class
-    final static String CharDataPath = "\\Character Data\\"; // move out of class
+    public final String defaultName = "Character";   // move out of class
+    //final static String CharDataPath = "\\Character Data\\"; // move out of class
     public static ArrayList<String> NameList;
     
     public enum Race{
@@ -140,7 +140,7 @@ public abstract class BaseStats implements Serializable{
         playerName = null;
         characterName = defaultName;
     }
-    public BaseStats(String Name, name type){
+    /*public BaseStats(String Name, name type){
         if(type == name.CHARACTER){
             characterName = Name;
             playerName = null;
@@ -149,7 +149,7 @@ public abstract class BaseStats implements Serializable{
             playerName = Name;
             characterName = defaultName;
         }
-    }
+    }*/
     public BaseStats(String playerName, String characterName) {
         this.playerName = playerName;
         this.characterName = characterName;
@@ -177,7 +177,7 @@ public abstract class BaseStats implements Serializable{
     public int Express() {return expression;}
     public int Intimidate() {return intimidation;}
     public int Primal() {return primalUrge;}
-    public int StreeWise() {return streetwise;}
+    public int StreetWise() {return streetwise;}
     public int Subterfuge() {return subterfuge;}
     public int Search() {return search;}
     
@@ -196,14 +196,14 @@ public abstract class BaseStats implements Serializable{
     public int Ventril() {return ventriloquism;}
     public int Archery() {return archery;}
     public int Gambling() {return gambling;}
-    public int Medication() {return meditation;}
+    public int Meditation() {return meditation;}
     public int Traps() {return traps;}
     public int Swimming() {return swimming;}
     public int Kailindo() {return kailindo;}
     public int KlaiveDuel() {return klaiveDuel;}
     public int Repair() {return repair;}
     
-    public int Comuter() {return computer;}
+    public int Computer() {return computer;}
     public int Enigmas() {return enigmas;}
     public int Investigate() {return investigation;}
     public int Law() {return law;}
@@ -267,7 +267,7 @@ public abstract class BaseStats implements Serializable{
     public void Express(int value) {expression = value;}
     public void Intimidate(int value) {intimidation = value;}
     public void Primal(int value) {primalUrge = value;}
-    public void StreeWise(int value) {streetwise = value;}
+    public void StreetWise(int value) {streetwise = value;}
     public void Subterfuge(int value) {subterfuge = value;}
     public void Search(int value) {search = value;}
     
@@ -286,14 +286,14 @@ public abstract class BaseStats implements Serializable{
     public void Ventril(int value) {ventriloquism = value;}
     public void Archery(int value) {archery = value;}
     public void Gambling(int value) {gambling = value;}
-    public void Medication(int value) {meditation = value;}
+    public void Meditation(int value) {meditation = value;}
     public void Traps(int value) {traps = value;}
     public void Swimming(int value) {swimming = value;}
     public void Kailindo(int value) {kailindo = value;}
     public void KlaiveDuel(int value) {klaiveDuel = value;}
     public void Repair(int value) {repair = value;}
     
-    public void Comuter(int value) {computer = value;}
+    public void Computer(int value) {computer = value;}
     public void Enigmas(int value) {enigmas = value;}
     public void Investigate(int value) {investigation = value;}
     public void Law(int value) {law = value;}
@@ -398,13 +398,13 @@ public abstract class BaseStats implements Serializable{
         FileOutputStream fos = new FileOutputStream(outFile);
         try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(this);
-            GetNameList();
+            //GetNameList();
         }
     }
     
-    public static BaseStats LoadStats(String charName, String dir)
+    public static BaseStats LoadStats(String fileName, String dir)
             throws IOException, ClassNotFoundException, FileNotFoundException{
-        String fileName = charName + ".dat";
+        //String fName = fileName + ".dat";
         File inFile = new File(dir + "\\" + fileName);
         FileInputStream fin = new FileInputStream(inFile);
         BaseStats loadedStats;
@@ -414,10 +414,10 @@ public abstract class BaseStats implements Serializable{
         return loadedStats;
     }
     
-    public static void GetNameList(){
+    /*public static void GetNameList(){
         NameList = new ArrayList<>();
         String workingDir = System.getProperty("user.dir");
-        Path dir = Paths.get(workingDir + CharDataPath);
+        Path dir = Paths.get(workingDir);// + CharDataPath);
         String fName;
         if(Files.exists(dir)){
             File CharFiles = dir.toFile();
@@ -431,5 +431,5 @@ public abstract class BaseStats implements Serializable{
                 }
             }
         }
-    }
+    }*/
 }
