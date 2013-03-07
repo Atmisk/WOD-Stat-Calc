@@ -390,8 +390,6 @@ public abstract class BaseStats implements Serializable{
         return weaponList.add(wpn);
     }
     
-    // MOVE OUTSIDE OF CLASS
-    
     public void SaveStats(String dir)throws IOException{
         String fileName = characterName + ".dat";
         File outFile = new File(dir + "\\" + fileName);

@@ -22,7 +22,6 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
-import javax.swing.text.JTextComponent;
 
 
 /**
@@ -329,17 +328,17 @@ public class StatPanel extends JScrollPane {
     JLabel knowLabel = new JLabel("Knowledges", JLabel.CENTER);
     Font font;
 
-    Stat str = new Stat("Strength", listener);
-    Stat dex = new Stat("Dexterity", listener);
-    Stat stam = new Stat("Stamina", listener);
+    Stat str = new Stat("Strength", 1, listener);
+    Stat dex = new Stat("Dexterity", 1, listener);
+    Stat stam = new Stat("Stamina", 1, listener);
 
-    Stat charis = new Stat("Charisma", listener);
-    Stat manip = new Stat("Manipulation", listener);
-    Stat appear = new Stat("Appearance", listener);
+    Stat charis = new Stat("Charisma", 1, listener);
+    Stat manip = new Stat("Manipulation", 1, listener);
+    Stat appear = new Stat("Appearance", 1, listener);
 
-    Stat percept = new Stat("Perception", listener);
-    Stat intel = new Stat("Inteligence", listener);
-    Stat wits = new Stat("Wits", listener);
+    Stat percept = new Stat("Perception", 1, listener);
+    Stat intel = new Stat("Inteligence", 1, listener);
+    Stat wits = new Stat("Wits", 1, listener);
 
     Stat alert = new Stat("Alertness", listener);
     Stat athlet = new Stat("Athletics", listener);

@@ -7,11 +7,9 @@ package WOD.CharacterStats.app;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import javax.swing.*;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.JTextComponent;
 
 /**
  *
