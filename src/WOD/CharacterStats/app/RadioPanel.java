@@ -7,126 +7,127 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-//import java.awt.geom.AffineTransform;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 /**
  *
  * @author Mike
+ * 
+ * A RadioPanel is made up of 5 radio buttons aligned horizontally and is used
+ * to display a value from 0 to 5, starting from the left to right.
  */
-public class RadioPanel extends JPanel {
-    private final int COLUMNS = 5;
-    private final int NONE = 0;
+public class RadioPanel extends JPanel implements ActionListener{
+//    private final int COLUMNS = 5;
+//    private final int NONE = 0;
     
     private int value;
     
     ArrayList<ActionListener> aListeners = new ArrayList<>();
     
-    private class RadioListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            if(e.getSource().equals(radio1)){
-                //JOptionPane.showMessageDialog(radio1, "Radio1 clicked");
-                if(((JRadioButton)e.getSource()).isSelected()){
-                    radio2.setSelected(false);
-                    radio3.setSelected(false);
-                    radio4.setSelected(false);
-                    radio5.setSelected(false);
-                    //System.out.println("IF 1");
-                    value = 1;
-                }
-                else if(radio2.isSelected()){
-                    radio1.setSelected(true);
-                    radio2.setSelected(false);
-                    radio3.setSelected(false);
-                    radio4.setSelected(false);
-                    radio5.setSelected(false);
-                    //System.out.println("IF 2");
-                    value = 1;
-                }
-                else{
-                    radio1.setSelected(false);
-                    radio2.setSelected(false);
-                    radio3.setSelected(false);
-                    radio4.setSelected(false);
-                    radio5.setSelected(false);
-                    //System.out.println("IF 3");
-                    value = 0;
-                }
-                notifyListeners();
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource().equals(radio1)){
+            // If the first(left-most) button is already selected
+            // deselect the others as well
+            if(((JRadioButton)e.getSource()).isSelected()){
+                radio2.setSelected(false);
+                radio3.setSelected(false);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
+                value = 1;
+            }
+            // If the second(from left) button is selected  
+            // deselct all buttons except the first
+            else if(radio2.isSelected()){
+                radio1.setSelected(true);
+                radio2.setSelected(false);
+                radio3.setSelected(false);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
+                value = 1;
+            }
+            // If the first is the only selected, deselect
+            else{
+                radio1.setSelected(false);
+                radio2.setSelected(false);
+                radio3.setSelected(false);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
+                value = 0;
+            }
+            notifyListeners();
 
+        }
+        else if(e.getSource().equals(radio2)){
+            if(((JRadioButton)e.getSource()).isSelected()){
+                radio1.setSelected(true);
+                radio3.setSelected(false);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
             }
-            else if(e.getSource().equals(radio2)){
-                //JOptionPane.showMessageDialog(radio2, "Radio2 clicked");
-                if(((JRadioButton)e.getSource()).isSelected()){
-                    radio1.setSelected(true);
-                    radio3.setSelected(false);
-                    radio4.setSelected(false);
-                    radio5.setSelected(false);
-                }
-                else{
-                    radio2.setSelected(true);
-                    radio3.setSelected(false);
-                    radio4.setSelected(false);
-                    radio5.setSelected(false);
-                }
-                value = 2;
-                notifyListeners();
+            else{
+                radio2.setSelected(true);
+                radio3.setSelected(false);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
             }
-            else if(e.getSource().equals(radio3)){
-                //JOptionPane.showMessageDialog(radio3, "Radio3 clicked");
-                if(((JRadioButton)e.getSource()).isSelected()){
-                    radio1.setSelected(true);
-                    radio2.setSelected(true);
-                    radio4.setSelected(false);
-                    radio5.setSelected(false);
-                }
-                else{
-                    radio3.setSelected(true);
-                    radio4.setSelected(false);
-                    radio5.setSelected(false);
-                }
-                value = 3;
-                notifyListeners();
+            value = 2;
+            notifyListeners();
+        }
+        else if(e.getSource().equals(radio3)){
+            if(((JRadioButton)e.getSource()).isSelected()){
+                radio1.setSelected(true);
+                radio2.setSelected(true);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
             }
-            else if(e.getSource().equals(radio4)){
-                //JOptionPane.showMessageDialog(radio4, "Radio4 clicked");
-                if(((JRadioButton)e.getSource()).isSelected()){
-                    radio1.setSelected(true);
-                    radio2.setSelected(true);
-                    radio3.setSelected(true);
-                    radio5.setSelected(false);
-                }
-                else{
-                    radio4.setSelected(true);
-                    radio5.setSelected(false);
-                }
-                value = 4;
-                notifyListeners();
+            else{
+                radio3.setSelected(true);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
             }
-            else if(e.getSource().equals(radio5)){
-                //JOptionPane.showMessageDialog(radio5, "Radio5 clicked");
-                if(((JRadioButton)e.getSource()).isSelected()){
-                    radio1.setSelected(true);
-                    radio2.setSelected(true);
-                    radio3.setSelected(true);
-                    radio4.setSelected(true);
-                }
-                else{
-                    radio5.setSelected(true);
-                }
-                value = 5;
-                notifyListeners();
+            value = 3;
+            notifyListeners();
+        }
+        else if(e.getSource().equals(radio4)){
+            if(((JRadioButton)e.getSource()).isSelected()){
+                radio1.setSelected(true);
+                radio2.setSelected(true);
+                radio3.setSelected(true);
+                radio5.setSelected(false);
             }
+            else{
+                radio4.setSelected(true);
+                radio5.setSelected(false);
+            }
+            value = 4;
+            notifyListeners();
+        }
+        else if(e.getSource().equals(radio5)){
+            if(((JRadioButton)e.getSource()).isSelected()){
+                radio1.setSelected(true);
+                radio2.setSelected(true);
+                radio3.setSelected(true);
+                radio4.setSelected(true);
+            }
+            else{
+                radio5.setSelected(true);
+            }
+            value = 5;
+            notifyListeners();
         }
     }
     
+    // <editor-fold defaultstate="collapsed" desc="unused vars for resizing">
     //private AffineTransform scalingTransform;
     //private AffineTransform inverseScalingTransform;
     //double originalW = this.getWidth();
     //double originalH = this.getHeight();
+    // </editor-fold>
     
     JRadioButton radio1 = new JRadioButton();
+    
+    // <editor-fold defaultstate="collapsed" desc="Code for repainting">
         /*{
             @Override
             public void paint(Graphics g)
@@ -150,6 +151,8 @@ public class RadioPanel extends JPanel {
                 super.paintComponents(g);
             }
     };*/
+    // </editor-fold>
+    
     JRadioButton radio2 = new JRadioButton();
     JRadioButton radio3 = new JRadioButton();
     JRadioButton radio4 = new JRadioButton();
@@ -157,20 +160,54 @@ public class RadioPanel extends JPanel {
     
     private EmptyBorder noBorder = new EmptyBorder(new Insets(0, 0, 0, 0));
     
-    GridLayout layout = new GridLayout(0, COLUMNS);
+    GridBagLayout layout = new GridBagLayout();
     
-    RadioListener listener;
     ActionEvent event = new ActionEvent(this, 1, "Select");
-
+    
+    /**
+     * Base Constructor
+     */
     public RadioPanel(){
-        value = 0;
+        InitRadPan();
+    }
+    
+    /**
+     * Constructor that sets the components size if a look and feel has been
+     * set and supports it
+     * 
+     * @param size string that sets the size for the components. Can be "large"
+     * or "small".
+     */
+    public RadioPanel(String size){
+        InitRadPan();
         
-        this.setMaximumSize(new Dimension(250, 20));
+        switch(size){
+            case "large":
+                radio1.putClientProperty("JComponent.sizeVariant", "large");
+                radio2.putClientProperty("JComponent.sizeVariant", "large");
+                radio3.putClientProperty("JComponent.sizeVariant", "large");
+                radio4.putClientProperty("JComponent.sizeVariant", "large");
+                radio5.putClientProperty("JComponent.sizeVariant", "large");
+                break;
+            case "small":
+                radio1.putClientProperty("JComponent.sizeVariant", "small");
+                radio2.putClientProperty("JComponent.sizeVariant", "small");
+                radio3.putClientProperty("JComponent.sizeVariant", "small");
+                radio4.putClientProperty("JComponent.sizeVariant", "small");
+                radio5.putClientProperty("JComponent.sizeVariant", "small");
+        }
+    }
+    
+    /**
+     * Initializes the component. Used by constructors.
+     */
+    private void InitRadPan(){
+        value = 0;
+        Dimension dim = new Dimension(115, 18);
+        
         this.setLayout(layout);
         
         //this.setBackground(Color.red);
-        
-        layout.setHgap(NONE);
         
         radio1.setBorder(noBorder);
         radio2.setBorder(noBorder);
@@ -184,11 +221,22 @@ public class RadioPanel extends JPanel {
         this.add(radio4);
         this.add(radio5);
         
-        listener = new RadioListener();
+        //SwingUtilities.updateComponentTreeUI(this);
         
-        setInitListeners(listener);
+        radio1.addActionListener(this);
+        radio2.addActionListener(this);
+        radio3.addActionListener(this);
+        radio4.addActionListener(this);
+        radio5.addActionListener(this);
+        
+        this.setMinimumSize(dim);
     }
 
+    /**
+     * getValue returns the stored value of the radio panel
+     * 
+     * @return the rank set in the radio panel
+     */
     public int getValue(){
         return value;
     }
@@ -218,17 +266,16 @@ public class RadioPanel extends JPanel {
                 radio5.doClick();
                 break;
             default:
-                this.value = 0;
+                if(value > 5){
+                    this.value = 5;
+                    radio5.doClick();
+                }
+                else{
+                    this.value = 0;
+                }
         }
     }
     
-    private void setInitListeners(ActionListener l){
-        radio1.addActionListener(l);
-        radio2.addActionListener(l);
-        radio3.addActionListener(l);
-        radio4.addActionListener(l);
-        radio5.addActionListener(l);
-    }
     public void addActionListener(ActionListener l){
         aListeners.add(l);
     }
@@ -237,7 +284,7 @@ public class RadioPanel extends JPanel {
             listen.actionPerformed(event);
         }
     }
-    
+    // <editor-fold defaultstate="collapsed" desc="unused function for resize">
     /*private void resize(){
         double xFactor;
         double yFactor;
@@ -251,4 +298,5 @@ public class RadioPanel extends JPanel {
         originalW = this.getWidth();
         originalH = this.getHeight();
     }*/
+    // </editor-fold>
 }

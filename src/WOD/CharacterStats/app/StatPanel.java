@@ -9,6 +9,8 @@ import PlayerStats.BaseStats.Race;
 import PlayerStats.WerewolfStats.Auspice;
 import PlayerStats.WerewolfStats.Breed;
 import PlayerStats.WerewolfStats.Tribe;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -29,12 +31,13 @@ import javax.swing.text.Document;
  * @author Mike
  */
 public class StatPanel extends JScrollPane {
-    
+    // <editor-fold defaultstate="collapsed" desc="Listeners">
     class statListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(str)){
                 stats.Strength(str.getValue());
+                //System.out.println("listener success");
             }
             else if(e.getSource().equals(dex)){
                 stats.Dexterity(dex.getValue());
@@ -160,17 +163,14 @@ public class StatPanel extends JScrollPane {
         @Override
         public void changedUpdate(DocumentEvent e){
             saveChanges(e);
-            //System.out.println("Change made");
         }
         @Override
         public void removeUpdate(DocumentEvent e){
             saveChanges(e);
-            //System.out.println("Change made");
         }
         @Override
         public void insertUpdate(DocumentEvent e){
             saveChanges(e);
-            //System.out.println("Change made");
         }
 
         private void saveChanges(DocumentEvent e){
@@ -182,21 +182,25 @@ public class StatPanel extends JScrollPane {
 
             if(e.getDocument().equals(nameDoc)){
                 stats.setCName(name.getDetail());
-                //System.out.println("Player Name: " + name.getDetail());
+                //System.out.println("Character Name: " + name.getDetail());
             }
             
             else if(e.getDocument().equals(playerDoc)){
                 stats.setPName(player.getDetail());
+                //System.out.println("Player Name: " + player.getDetail());
             }
             
             else if(e.getDocument().equals(campDoc)){
                 stats.Camp(camp.getDetail());
+                //System.out.println("Camp: " + camp.getDetail());
             }
             else if(e.getDocument().equals(packDoc)){
                 stats.PackName(pack.getDetail());
+                //System.out.println("Pack: " + pack.getDetail());
             }
             else if(e.getDocument().equals(totemDoc)){
                 stats.TotemName(totem.getDetail());
+                //System.out.println("Totem: " + totem.getDetail());
             }
             changeMade = true;
         }
@@ -218,6 +222,7 @@ public class StatPanel extends JScrollPane {
                             stats.Breed(Breed.LUPUS);
                             break;
                     }
+                    System.out.println("Breed: " + breed.getDetail());
                 }
                 else if(e.getSource().equals(tribe.detailBox)){
                     switch (tribe.getDetail()) {
@@ -261,6 +266,7 @@ public class StatPanel extends JScrollPane {
                             stats.Tribe(Tribe.WENDIGO);
                             break;
                     }
+                    System.out.println("Tribe: " + tribe.getDetail());
                 }
                 else if(e.getSource().equals(auspice.detailBox)){
                     switch(auspice.getDetail()){
@@ -282,13 +288,15 @@ public class StatPanel extends JScrollPane {
                         //default:
                           //  stats.Auspice(null);
                     }
+                    System.out.println("Auspice: " + auspice.getDetail());
                 }
                 //System.out.println("Selection changed");
                 changeMade = true;
             }
         }
     }
-    
+    // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="variables and components">
     boolean changeMade = false;
     private WerewolfStats stats = new WerewolfStats();
     
@@ -298,6 +306,7 @@ public class StatPanel extends JScrollPane {
     statListener listener = new statListener();
     detailListener docListener = new detailListener();
     comboListener comboListener = new comboListener();
+    Dimension dim;
     
     String[] breedList = {  "Homid", "Crinos", "Lupus"};
     
@@ -309,6 +318,8 @@ public class StatPanel extends JScrollPane {
     String[] auspiceList = {"Ragabash", "Theurge", "Philodox", 
                             "Galliard", "Ahroun"};
     
+    String[] formList =    {"Homid", "Glabro", "Crinos", "Hispo", "Lupus"};
+
     Detail name = new Detail("Name", docListener);
     Detail breed = new Detail("Breed", breedList, comboListener);
     Detail player = new Detail("Player", docListener);
@@ -373,39 +384,37 @@ public class StatPanel extends JScrollPane {
     Stat rituals = new Stat("Rituals", listener);
     Stat science = new Stat("Science", listener);
     
+    JComboBox formBox = new JComboBox(formList);
+    // </editor-fold>
     public StatPanel(){
-        InitPanel();
-    }
-    
-    private void InitPanel(){
         this.setViewportView(panel);
         panel.setLayout(mainLayout);
         
         //----------------------------------------------------------------------
         // CHARACTER INFO
         
-        c = setGridPos(0 ,0, 5);
+        c = setGridPos(0 ,0);
         panel.add(name, c);
         
-        c = setGridPos(1, 0, 5);
+        c = setGridPos(1, 0);
         panel.add(breed, c);
         
-        c = setGridPos(2, 0, 5);
+        c = setGridPos(2, 0);
         panel.add(pack, c);
         
-        c = setGridPos(0, 1, 5);
+        c = setGridPos(0, 1);
         panel.add(player, c);
         
-        c = setGridPos(1, 1, 5);
+        c = setGridPos(1, 1);
         panel.add(auspice, c);
         
-        c = setGridPos(2, 1, 5);
+        c = setGridPos(2, 1);
         panel.add(totem, c);
         
-        c = setGridPos(0, 2, 5);
+        c = setGridPos(0, 2);
         panel.add(tribe, c);
         
-        c = setGridPos(1, 2, 5);
+        c = setGridPos(1, 2);
         panel.add(camp, c);
         
         //----------------------------------------------------------------------
@@ -421,14 +430,13 @@ public class StatPanel extends JScrollPane {
         physLabel.setFont(font);
         panel.add(physLabel, c);
         
-        c = setGridPos(0, 5, 0);
+        c = setGridPos(0, 5);
         panel.add(str, c);
-        //str.addActionListener(new statListener());
         
-        c = setGridPos(0, 6, 0);
+        c = setGridPos(0, 6);
         panel.add(dex, c);
         
-        c = setGridPos(0, 7, 0);
+        c = setGridPos(0, 7);
         panel.add(stam, c);
         
         c = setLabelPos(1, 4);
@@ -436,13 +444,13 @@ public class StatPanel extends JScrollPane {
         socialLabel.setFont(font);
         panel.add(socialLabel, c);
         
-        c = setGridPos(1, 5, 0);
+        c = setGridPos(1, 5);
         panel.add(charis, c);
         
-        c = setGridPos(1, 6, 0);
+        c = setGridPos(1, 6);
         panel.add(manip, c);
         
-        c = setGridPos(1, 7, 0);
+        c = setGridPos(1, 7);
         panel.add(appear, c);
         
         c = setLabelPos(2, 4);
@@ -450,13 +458,13 @@ public class StatPanel extends JScrollPane {
         mentalLabel.setFont(font);
         panel.add(mentalLabel, c);
         
-        c = setGridPos(2, 5, 0);
+        c = setGridPos(2, 5);
         panel.add(percept, c);
         
-        c = setGridPos(2, 6, 0);
+        c = setGridPos(2, 6);
         panel.add(intel, c);
         
-        c = setGridPos(2, 7, 0);
+        c = setGridPos(2, 7);
         panel.add(wits, c);
         
         //----------------------------------------------------------------------
@@ -472,35 +480,34 @@ public class StatPanel extends JScrollPane {
         talentLabel.setFont(font);
         panel.add(talentLabel, c);
         
-        c = setGridPos(0, 10, 0);
+        c = setGridPos(0, 10);
         panel.add(alert, c);
         
-        c = setGridPos(0, 11, 0);
+        c = setGridPos(0, 11);
         panel.add(athlet, c);
         
-        c = setGridPos(0, 12, 0);
+        c = setGridPos(0, 12);
         panel.add(brawl, c);
         
-        c = setGridPos(0, 13, 0);
+        c = setGridPos(0, 13);
         panel.add(dodge, c);
         
-        c = setGridPos(0, 14, 0);
+        c = setGridPos(0, 14);
         panel.add(empathy, c);
         
-
-        c = setGridPos(0, 15, 0);
+        c = setGridPos(0, 15);
         panel.add(express, c);
         
-        c = setGridPos(0, 16, 0);
+        c = setGridPos(0, 16);
         panel.add(intimidate, c);
         
-        c = setGridPos(0, 17, 0);
+        c = setGridPos(0, 17);
         panel.add(primal, c);
         
-        c = setGridPos(0, 18, 0);
+        c = setGridPos(0, 18);
         panel.add(streetwise, c);
         
-        c = setGridPos(0, 19, 0);
+        c = setGridPos(0, 19);
         panel.add(subter, c);
         
         //----------------------------------------------------------------------
@@ -511,34 +518,34 @@ public class StatPanel extends JScrollPane {
         skillLabel.setFont(font);
         panel.add(skillLabel, c);
         
-        c = setGridPos(1, 10, 0);
+        c = setGridPos(1, 10);
         panel.add(animalKen, c);
         
-        c = setGridPos(1, 11, 0);
+        c = setGridPos(1, 11);
         panel.add(crafts, c);
         
-        c = setGridPos(1, 12, 0);
+        c = setGridPos(1, 12);
         panel.add(drive, c);
         
-        c = setGridPos(1, 13, 0);
+        c = setGridPos(1, 13);
         panel.add(etiquette, c);
         
-        c = setGridPos(1, 14, 0);
+        c = setGridPos(1, 14);
         panel.add(firearm, c);
         
-        c = setGridPos(1, 15, 0);
+        c = setGridPos(1, 15);
         panel.add(leader, c);
         
-        c = setGridPos(1, 16, 0);
+        c = setGridPos(1, 16);
         panel.add(melee, c);
         
-        c = setGridPos(1, 17, 0);
+        c = setGridPos(1, 17);
         panel.add(perform, c);
         
-        c = setGridPos(1, 18, 0);
+        c = setGridPos(1, 18);
         panel.add(stealth, c);
         
-        c = setGridPos(1, 19, 0);
+        c = setGridPos(1, 19);
         panel.add(survive, c);
         
         //----------------------------------------------------------------------
@@ -549,41 +556,52 @@ public class StatPanel extends JScrollPane {
         knowLabel.setFont(font);
         panel.add(knowLabel, c);
         
-        c = setGridPos(2, 10, 0);
+        c = setGridPos(2, 10);
         panel.add(comp, c);
         
-        c = setGridPos(2, 11, 0);
+        c = setGridPos(2, 11);
         panel.add(enigma, c);
         
-        c = setGridPos(2, 12, 0);
+        c = setGridPos(2, 12);
         panel.add(investigate, c);
         
-        c = setGridPos(2, 13, 0);
+        c = setGridPos(2, 13);
         panel.add(law, c);
         
-        c = setGridPos(2, 14, 0);
+        c = setGridPos(2, 14);
         panel.add(linguist, c);
 
-        c = setGridPos(2, 15, 0);
+        c = setGridPos(2, 15);
         panel.add(medic, c);
 
-        c = setGridPos(2, 16, 0);
+        c = setGridPos(2, 16);
         panel.add(occult, c);
 
-        c = setGridPos(2, 17, 0);
+        c = setGridPos(2, 17);
         panel.add(politics, c);
         
-        c = setGridPos(2, 18, 0);
+        c = setGridPos(2, 18);
         panel.add(rituals, c);
         
-        c = setGridPos(2, 19, 0);
+        c = setGridPos(2, 19);
         panel.add(science, c);
+        
+        c = setLabelPos(2, 20);
+        panel.add(formBox, c);
     }
-    private static GridBagConstraints setGridPos(int x, int y, int yGap){
+    
+    /**
+     * 
+     * @param x horizontal position in grid
+     * @param y vertical position in grid
+     * @param yGap space between object and the object above it
+     * @return a GridBagConstraints object
+     */
+    private static GridBagConstraints setGridPos(int x, int y){
         GridBagConstraints c;
         c = new GridBagConstraints();
         c.ipadx = 10;
-        c.insets = new Insets(yGap,0,0,0);
+        c.insets = new Insets(0,0,0,0);
         c.gridx = x;
         c.gridy = y;
         c.anchor = GridBagConstraints.LINE_START;
@@ -596,7 +614,7 @@ public class StatPanel extends JScrollPane {
     private static GridBagConstraints setLabelPos(int x, int y){
         GridBagConstraints c;
         c = new GridBagConstraints();
-        c.insets = new Insets(10,0,0,0);
+        c.insets = new Insets(5,0,5,0);
         c.gridwidth = 1;
         c.gridx = x;
         c.gridy = y;
@@ -617,6 +635,9 @@ public class StatPanel extends JScrollPane {
         }
     }
     
+    // overide with or make abstract with subclasses
+    // BEFORE ADDING CHECK FOR NULL, CHANGE HOW ELEMENTS ADDED FIRST
+    // COULD HAVE BEEN TAKEN CARE OF IN INDIVIDUAL CLASSES
     private void initStats(){
         name.setDetail(stats.getCName());
         breed.setDetail(breedToString(stats.Breed()));
