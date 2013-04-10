@@ -46,7 +46,7 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
                 panelList.get(index).saveStats();
                 panelList.get(index).changeMade = false;
                 mainTabPane.setTitleAt(index, panelList.get(index)
-                                              .name.detail.getText());
+                                              .nameField.getText());
             } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(
                         CharacterSheetGUI.class.getName()).log(
@@ -122,8 +122,6 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(700, 600));
         this.setJMenuBar(menuBar);
-        
-        //this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         
         this.add(mainTabPane);
         this.pack();

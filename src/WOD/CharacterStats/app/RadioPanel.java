@@ -22,8 +22,8 @@ public class RadioPanel extends JPanel implements ActionListener{
     
     private int value;
     
-    ArrayList<ActionListener> aListeners = new ArrayList<>();
-    
+    private ArrayList<ActionListener> aListeners = new ArrayList<>();
+    // <editor-fold defaultstate="collapsed" desc="button selection code">
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource().equals(radio1)){
@@ -117,7 +117,7 @@ public class RadioPanel extends JPanel implements ActionListener{
             notifyListeners();
         }
     }
-    
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="unused vars for resizing">
     //private AffineTransform scalingTransform;
     //private AffineTransform inverseScalingTransform;
@@ -125,7 +125,7 @@ public class RadioPanel extends JPanel implements ActionListener{
     //double originalH = this.getHeight();
     // </editor-fold>
     
-    JRadioButton radio1 = new JRadioButton();
+    private JRadioButton radio1 = new JRadioButton();
     
     // <editor-fold defaultstate="collapsed" desc="Code for repainting">
         /*{
@@ -153,16 +153,16 @@ public class RadioPanel extends JPanel implements ActionListener{
     };*/
     // </editor-fold>
     
-    JRadioButton radio2 = new JRadioButton();
-    JRadioButton radio3 = new JRadioButton();
-    JRadioButton radio4 = new JRadioButton();
-    JRadioButton radio5 = new JRadioButton();
+    private JRadioButton radio2 = new JRadioButton();
+    private JRadioButton radio3 = new JRadioButton();
+    private JRadioButton radio4 = new JRadioButton();
+    private JRadioButton radio5 = new JRadioButton();
     
     private EmptyBorder noBorder = new EmptyBorder(new Insets(0, 0, 0, 0));
     
-    GridBagLayout layout = new GridBagLayout();
+    private GridBagLayout layout = new GridBagLayout();
     
-    ActionEvent event = new ActionEvent(this, 1, "Select");
+    private ActionEvent event = new ActionEvent(this, 1, "Select");
     
     /**
      * Base Constructor
@@ -170,10 +170,19 @@ public class RadioPanel extends JPanel implements ActionListener{
     public RadioPanel(){
         InitRadPan();
     }
+    /**
+     * Constructor That sets initial value to the RadioPanel
+     * 
+     * @param rank Integer representing the initial value
+     */
+    public RadioPanel(int rank){
+        InitRadPan();
+        setValue(rank);
+    }
     
     /**
      * Constructor that sets the components size if a look and feel has been
-     * set and supports it
+     * set and supports a size change
      * 
      * @param size string that sets the size for the components. Can be "large"
      * or "small".
@@ -237,13 +246,22 @@ public class RadioPanel extends JPanel implements ActionListener{
      * 
      * @return the rank set in the radio panel
      */
-    public int getValue(){
+    public final int getValue(){
         return value;
     }
-    public void setValue(int value){
+    /**
+     * 
+     * @param value 
+     */
+    public final void setValue(int value){
         switch(value){
             case 0:
                 this.value = value;
+                radio1.setSelected(false);
+                radio2.setSelected(false);
+                radio3.setSelected(false);
+                radio4.setSelected(false);
+                radio5.setSelected(false);
                 break;
             case 1:
                 this.value = value;
@@ -272,14 +290,25 @@ public class RadioPanel extends JPanel implements ActionListener{
                 }
                 else{
                     this.value = 0;
+                    radio1.setSelected(false);
+                    radio2.setSelected(false);
+                    radio3.setSelected(false);
+                    radio4.setSelected(false);
+                    radio5.setSelected(false);
                 }
         }
     }
-    
+    /**
+     * 
+     * @param l 
+     */
     public void addActionListener(ActionListener l){
         aListeners.add(l);
     }
-    public void notifyListeners(){
+    /**
+     * 
+     */
+    private void notifyListeners(){
         for(ActionListener listen : aListeners){
             listen.actionPerformed(event);
         }
