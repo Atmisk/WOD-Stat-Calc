@@ -18,7 +18,7 @@ public class WerewolfStats extends BaseStats{
     }
     
     public enum Breed{
-        HOMID, CRINOS, LUPUS
+        HOMID, METIS, LUPUS
     }
     
     public enum Auspice{
@@ -44,18 +44,6 @@ public class WerewolfStats extends BaseStats{
     private int glory = BaseRenown;
     private int honor = BaseRenown;
     private int wisdom = BaseRenown;
-    // Adjusted Stats
-    private int adjStr = strength;
-    private int adjDex = dexterity;
-    private int adjStam = stamina;
-    
-    private int adjChrsma = charisma;
-    private int adjManip = manipulation;
-    private int adjAppear = appearance;
-    
-    private int adjPerc = perception;
-    private int adjInt = intelligence;
-    private int adjWits = wits;
     
     private ShiftedForm form = ShiftedForm.HOMID;
     
@@ -63,50 +51,38 @@ public class WerewolfStats extends BaseStats{
         super();
         race = Race.WOLF;
     }
-    /*public WerewolfStats(String Name, name type){
-        super(Name, type);
-        race = Race.WOLF;
-    }*/
+    
     public WerewolfStats(String playerName, String characterName){
         super(playerName, characterName);
         race = Race.WOLF;
     }
     
-    public Breed Breed(){return breed;}
-    public Auspice Auspice(){return auspice;}
-    public String Camp(){return camp;}
-    public String PackName(){return packName;}
-    public String TotemName(){return totemName;}
-    public Tribe Tribe(){return tribe;}
-    public ShiftedForm Form(){return form;}
+    public Breed getBreed(){return breed;}
+    public Auspice getAuspice(){return auspice;}
+    public String getCamp(){return camp;}
+    public String getPackName(){return packName;}
+    public String getTotemName(){return totemName;}
+    public Tribe getTribe(){return tribe;}
+    public ShiftedForm getForm(){return form;}
     
-    public int Glory(){return glory;}
-    public int Honor(){return honor;}
-    public int Wisdom(){return wisdom;}
+    public int getGlory(){return glory;}
+    public int getHonor(){return honor;}
+    public int getWisdom(){return wisdom;}
     
-    public int AdjStr(){return adjStr;}
-    public int AdjDex(){return adjDex;}
-    public int AdjStam(){return adjStam;}
+    public void setBreed(Breed value){breed = value;}
+    public void setAuspice(Auspice value){auspice = value;}
+    public void setCamp(String value){camp = value;}
+    public void setPackName(String value){packName = value;}
+    public void setTotemName(String value){totemName = value;}
+    public void setTribe(Tribe value){tribe = value;}
+    public void setForm(ShiftedForm form){
+        this.form = form;
+        FormShift(form);
+    }
     
-    public int AdjChrsma(){return adjChrsma;}
-    public int AdjManip(){return adjManip;}
-    public int AdjAppear(){return adjAppear;}
-    
-    public int AdjPerc(){return adjPerc;}
-    public int AdjInt(){return adjInt;}
-    public int AdjWits(){return adjWits;}
-    
-    public void Breed(Breed value){breed = value;}
-    public void Auspice(Auspice value){auspice = value;}
-    public void Camp(String value){camp = value;}
-    public void PackName(String value){packName = value;}
-    public void TotemName(String value){totemName = value;}
-    public void Tribe(Tribe value){tribe = value;}
-    public void Form(ShiftedForm value){form = value;}
-    
-    public void Glory(int value){glory = value;}
-    public void Honor(int value){honor = value;}
-    public void Wisdom(int value){wisdom = value;}
+    public void setGlory(int value){glory = value;}
+    public void setHonor(int value){honor = value;}
+    public void setWisdom(int value){wisdom = value;}
     
     public void FormShift(ShiftedForm form){
         switch(form){
@@ -126,8 +102,12 @@ public class WerewolfStats extends BaseStats{
                 adjDex = dexterity;
                 adjStam = stamina+2;
                 adjChrsma = charisma;
-                adjManip = manipulation-1;
-                adjAppear = appearance-1;
+                if((adjManip = manipulation-1) < 0){
+                    adjManip = 0;
+                }
+                if((adjAppear = appearance-1) < 0){
+                    adjAppear = 0;
+                }
                 adjPerc = perception;
                 adjInt = intelligence;
                 adjWits = wits;
@@ -150,7 +130,9 @@ public class WerewolfStats extends BaseStats{
                 adjDex = dexterity+2;
                 adjStam = stamina+3;
                 adjChrsma = charisma;
-                adjManip = manipulation-3;
+                if((adjManip = manipulation-3) < 0){
+                    adjManip = 0;
+                }
                 adjAppear = appearance;
                 adjPerc = perception;
                 adjInt = intelligence;
@@ -161,8 +143,12 @@ public class WerewolfStats extends BaseStats{
                 adjDex = dexterity+2;
                 adjStam = stamina+2;
                 adjChrsma = charisma;
-                adjManip = manipulation-3;
-                adjAppear = appearance-1;
+                if((adjManip = manipulation-3) < 0){
+                    adjManip = 0;
+                }
+                if((adjAppear = appearance-1) < 0){
+                    adjAppear = 0;
+                }
                 adjPerc = perception;
                 adjInt = intelligence;
                 adjWits = wits;

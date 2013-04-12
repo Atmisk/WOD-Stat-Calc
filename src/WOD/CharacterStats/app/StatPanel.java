@@ -4,25 +4,12 @@
  */
 package WOD.CharacterStats.app;
 
-import PlayerStats.*;
-import PlayerStats.BaseStats.Race;
-import PlayerStats.WerewolfStats.Auspice;
-import PlayerStats.WerewolfStats.Breed;
-import PlayerStats.WerewolfStats.Tribe;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.IOException;
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.Document;
 
 
 /**
@@ -30,6 +17,10 @@ import javax.swing.text.Document;
  * @author Mike
  * 
  * GUI uses a GridBagLayout and goes 6 columns wide
+ * 
+ * lines are generally formated like this:
+ *  0     1          2     3          4     5
+ * Label radioPanel label radioPanel label radioPanel
  *       ___________
  *   0  |0|1|2|3|4|5|
  *   1  | | | | | | |
@@ -37,309 +28,22 @@ import javax.swing.text.Document;
  *   .
  *   .  |_|_|_|_|_|_|
  */
-public class StatPanel extends JScrollPane {
+public abstract class StatPanel extends JScrollPane {
     final private int initRank = 1;
     
-    // <editor-fold defaultstate="collapsed" desc="Listeners">
-    class statListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(e.getSource().equals(str)){
-                stats.Strength(str.getValue());
-            }
-            else if(e.getSource().equals(dex)){
-                stats.Dexterity(dex.getValue());
-            }
-            else if(e.getSource().equals(stam)){
-                stats.Stamina(stam.getValue());
-            }
-            else if(e.getSource().equals(charis)){
-                stats.Charisma(charis.getValue());
-            }
-            else if(e.getSource().equals(manip)){
-                stats.Manip(manip.getValue());
-            }
-            else if(e.getSource().equals(appear)){
-                stats.Appear(appear.getValue());
-            }
-            else if(e.getSource().equals(percept)){
-                stats.Percept(percept.getValue());
-            }
-            else if(e.getSource().equals(intel)){
-                stats.Intel(intel.getValue());
-            }
-            else if(e.getSource().equals(wit)){
-                stats.Wits(wit.getValue());
-            }
-            
-            else if(e.getSource().equals(alert)){
-                stats.Alert(alert.getValue());
-            }
-            else if(e.getSource().equals(athlet)){
-                stats.Athletic(athlet.getValue());
-            }
-            else if(e.getSource().equals(brawl)){
-                stats.Brawl(brawl.getValue());
-            }
-            else if(e.getSource().equals(dodge)){
-                stats.Dodge(dodge.getValue());
-            }
-            else if(e.getSource().equals(empathy)){
-                stats.Empathy(empathy.getValue());
-            }
-            else if(e.getSource().equals(express)){
-                stats.Express(express.getValue());
-            }
-            else if(e.getSource().equals(intimidate)){
-                stats.Intimidate(intimidate.getValue());
-            }
-            else if(e.getSource().equals(primalUrge)){
-                stats.Primal(primalUrge.getValue());
-            }
-            else if(e.getSource().equals(streetwise)){
-                stats.StreetWise(streetwise.getValue());
-            }
-            else if(e.getSource().equals(subterfuge)){
-                stats.Subterfuge(subterfuge.getValue());
-            }
-            
-            else if(e.getSource().equals(animalKen)){
-                stats.AnimalKen(animalKen.getValue());
-            }
-            else if(e.getSource().equals(crafts)){
-                stats.Crafts(crafts.getValue());
-            }
-            else if(e.getSource().equals(drive)){
-                stats.Drive(drive.getValue());
-            }
-            else if(e.getSource().equals(etiquette)){
-                stats.Etiquette(etiquette.getValue());
-            }
-            else if(e.getSource().equals(firearms)){
-                stats.Firearms(firearms.getValue());
-            }
-            else if(e.getSource().equals(melee)){
-                stats.Melee(melee.getValue());
-            }
-            else if(e.getSource().equals(leadership)){
-                stats.Leadership(leadership.getValue());
-            }
-            else if(e.getSource().equals(perform)){
-                stats.Performance(perform.getValue());
-            }
-            else if(e.getSource().equals(stealth)){
-                stats.Stealth(stealth.getValue());
-            }
-            else if(e.getSource().equals(survival)){
-                stats.Survival(survival.getValue());
-            }
-            
-            else if(e.getSource().equals(computers)){
-                stats.Computer(computers.getValue());
-            }
-            else if(e.getSource().equals(enigmas)){
-                stats.Enigmas(enigmas.getValue());
-            }
-            else if(e.getSource().equals(investigate)){
-                stats.Investigate(investigate.getValue());
-            }
-            else if(e.getSource().equals(law)){
-                stats.Law(law.getValue());
-            }
-            else if(e.getSource().equals(linguist)){
-                stats.Linguistics(linguist.getValue());
-            }
-            else if(e.getSource().equals(medicine)){
-                stats.Medicine(medicine.getValue());
-            }
-            else if(e.getSource().equals(occult)){
-                stats.Occult(occult.getValue());
-            }
-            else if(e.getSource().equals(politics)){
-                stats.Politics(politics.getValue());
-            }
-            else if(e.getSource().equals(rituals)){
-                stats.Rituals(rituals.getValue());
-            }
-            else if(e.getSource().equals(science)){
-                stats.Science(science.getValue());
-            }
-            changeMade = true;
-            System.out.println("listener success");
-        }  
-    }
-    class detailListener implements DocumentListener {
-        @Override
-        public void changedUpdate(DocumentEvent e){
-            saveChanges(e);
-        }
-        @Override
-        public void removeUpdate(DocumentEvent e){
-            saveChanges(e);
-        }
-        @Override
-        public void insertUpdate(DocumentEvent e){
-            saveChanges(e);
-        }
-
-        private void saveChanges(DocumentEvent e){
-            Document nameDoc = nameField.getDocument();
-            Document playerDoc = playerField.getDocument();
-            Document campDoc = campField.getDocument();
-            Document packDoc = packField.getDocument();
-            Document totemDoc = totemField.getDocument();
-
-            if(e.getDocument().equals(nameDoc)){
-                stats.setCName(nameField.getText());
-                //System.out.println("Character Name: " + name.getDetail());
-            }
-            
-            else if(e.getDocument().equals(playerDoc)){
-                stats.setPName(playerField.getText());
-                //System.out.println("Player Name: " + player.getDetail());
-            }
-            
-            else if(e.getDocument().equals(campDoc)){
-                stats.Camp(campField.getText());
-                //System.out.println("Camp: " + camp.getDetail());
-            }
-            else if(e.getDocument().equals(packDoc)){
-                stats.PackName(packField.getText());
-                //System.out.println("Pack: " + pack.getDetail());
-            }
-            else if(e.getDocument().equals(totemDoc)){
-                stats.TotemName(totemField.getText());
-                //System.out.println("Totem: " + totem.getDetail());
-            }
-            System.out.println("Detail changed");
-            changeMade = true;
-        }
-    }
-    class comboListener implements ItemListener{
-        @Override
-        public void itemStateChanged(ItemEvent e){
-            if(e.getStateChange() == ItemEvent.SELECTED)
-            {
-                if(e.getSource().equals(breedCombo)){
-                    switch (breedCombo.getSelectedItem().toString()) {
-                        case "Homid":
-                            stats.Breed(Breed.HOMID);
-                            break;
-                        case "Crinos":
-                            stats.Breed(Breed.CRINOS);
-                            break;
-                        case "Lupus":
-                            stats.Breed(Breed.LUPUS);
-                            break;
-                    }
-                    System.out.println("Breed: " + breedCombo.getSelectedItem()
-                            .toString());
-                }
-                else if(e.getSource().equals(tribeCombo)){
-                    switch (tribeCombo.getSelectedItem().toString()) {
-                        case "Black Furries":
-                            stats.Tribe(Tribe.BLACKFURY);
-                            break;
-                        case "Bone Gnawers":
-                            stats.Tribe(Tribe.BONEGNAWER);
-                            break;
-                        case "Children of Gaia":
-                            stats.Tribe(Tribe.CHILDOFGAIA);
-                            break;
-                        case "Fianna":
-                            stats.Tribe(Tribe.FIANNA);
-                            break;
-                        case "Get of Fenris":
-                            stats.Tribe(Tribe.GETOFFENRIS);
-                            break;
-                        case "Glasswalkers":
-                            stats.Tribe(Tribe.GLASSWALKER);
-                            break;
-                        case "Red Talons":
-                            stats.Tribe(Tribe.REDTALON);
-                            break;
-                        case "Shadow Lords":
-                            stats.Tribe(Tribe.SHADOWLORD);
-                            break;
-                        case "Silent Striders":
-                            stats.Tribe(Tribe.SILENTSTRIDER);
-                            break;
-                        case "Silverfangs":
-                            stats.Tribe(Tribe.SILVERFANG);
-                            break;
-                        case "Stargazers":
-                            stats.Tribe(Tribe.STARGAZER);
-                            break;
-                        case "Uktena":
-                            stats.Tribe(Tribe.UKTENA);
-                            break;
-                        case "Wendigo":
-                            stats.Tribe(Tribe.WENDIGO);
-                            break;
-                    }
-                    System.out.println("Tribe: " + tribeCombo.getSelectedItem()
-                            .toString());
-                }
-                else if(e.getSource().equals(auspiceCombo)){
-                    switch(auspiceCombo.getSelectedItem().toString()){
-                        case "Ahroun":
-                            stats.Auspice(Auspice.AHROUN);
-                            break;
-                        case "Galliard":
-                            stats.Auspice(Auspice.GALLIARD);
-                            break;
-                        case "Philodox":
-                            stats.Auspice(Auspice.PHILODOX);
-                            break;
-                        case "Ragabash":
-                            stats.Auspice(Auspice.RAGABASH);
-                            break;
-                        case "Theurge":
-                            stats.Auspice(Auspice.THEURGE);
-                            break;
-                        //default:
-                          //  stats.Auspice(null);
-                    }
-                    System.out.println("Auspice: " + auspiceCombo
-                            .getSelectedItem().toString());
-                }
-                changeMade = true;
-            }
-        }
-    }
-    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="variables and components">
     boolean changeMade = false;
-    private WerewolfStats stats = new WerewolfStats(); // needs to be base stat
     
     JPanel panel = new JPanel();
     GridBagLayout mainLayout = new GridBagLayout();
     GridBagConstraints c;
-    
-    statListener   listener      = new statListener();
-    detailListener docListener   = new detailListener();
-    comboListener  comboListener = new comboListener();
-    
-    String[] breedList = {  "Homid", "Crinos", "Lupus"};
-    
-    String[] tribeList = {  "Black Furries", "Bone Gnawers", "Children of Gaia",
-                            "Fianna", "Get of Fenris", "Glasswalkers", 
-                            "Red Talons", "Shadow Lords", "Silent Striders",
-                            "Silverfangs", "Stargazers", "Uktena", "Wendigo"};
-    
-    String[] auspiceList = {"Ragabash", "Theurge", "Philodox", 
-                            "Galliard", "Ahroun"};
-    
-    String[] formList =    {"Homid", "Glabro", "Crinos", "Hispo", "Lupus"};
 
+    //<editor-fold defaultstate="collapsed" desc="Detail labels">
     JLabel name          = new JLabel("Name");
-    JLabel breed         = new JLabel("Breed");
     JLabel player        = new JLabel("Player");
-    JLabel tribe         = new JLabel("Tribe");
-    JLabel auspice       = new JLabel("Auspice");
-    JLabel camp          = new JLabel("Camp");
-    JLabel pack          = new JLabel("Pack");
-    JLabel totem         = new JLabel("Totem");
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Section Labels">
     JLabel attrLabel     = new JLabel("Attributes", JLabel.CENTER);
     JLabel physLabel     = new JLabel("Physical", JLabel.CENTER);
     JLabel socialLabel   = new JLabel("Social", JLabel.CENTER);
@@ -348,6 +52,9 @@ public class StatPanel extends JScrollPane {
     JLabel talentLabel   = new JLabel("Talents", JLabel.CENTER);
     JLabel skillLabel    = new JLabel("Skills", JLabel.CENTER);
     JLabel knowLabel     = new JLabel("Knowledges", JLabel.CENTER);
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Attribute and Ability labels">
     JLabel strength      = new JLabel("Strength");
     JLabel dexterity     = new JLabel("Dexterity");
     JLabel stamina       = new JLabel("Stamina");
@@ -387,13 +94,14 @@ public class StatPanel extends JScrollPane {
     JLabel politicsLabel = new JLabel("Politics");
     JLabel ritualsLabel  = new JLabel("Rituals");
     JLabel scienceLabel  = new JLabel("Science");
+    //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="Textfields">
     JTextField nameField   = new JTextField();
     JTextField playerField = new JTextField();
-    JTextField campField   = new JTextField();
-    JTextField packField   = new JTextField();
-    JTextField totemField  = new JTextField();
+    //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="RadioPanels">
     RadioPanel str         = new RadioPanel(initRank);
     RadioPanel dex         = new RadioPanel(initRank);
     RadioPanel stam        = new RadioPanel(initRank);
@@ -433,11 +141,51 @@ public class StatPanel extends JScrollPane {
     RadioPanel politics    = new RadioPanel();
     RadioPanel rituals     = new RadioPanel();
     RadioPanel science     = new RadioPanel();
+    //</editor-fold>
     
-    JComboBox breedCombo   = new JComboBox(breedList);
-    JComboBox tribeCombo   = new JComboBox(tribeList);
-    JComboBox auspiceCombo = new JComboBox(auspiceList);
-    JComboBox formBox      = new JComboBox(formList);
+    // <editor-fold defaultstate="collapsed" desc="Unused Modifiers">
+//    Modifier strMod         = new Modifier();
+//    Modifier dexMod         = new Modifier();
+//    Modifier stamMod        = new Modifier();
+//    Modifier manipMod       = new Modifier();
+//    Modifier appearMod      = new Modifier();
+//    Modifier charisMod      = new Modifier();
+//    Modifier perceptMod     = new Modifier();
+//    Modifier intelMod       = new Modifier();
+//    Modifier witMod         = new Modifier();
+//    Modifier alertMod       = new Modifier();
+//    Modifier athletMod      = new Modifier();
+//    Modifier brawlMod       = new Modifier();
+//    Modifier dodgeMod       = new Modifier();
+//    Modifier empathyMod     = new Modifier();
+//    Modifier expressMod     = new Modifier();
+//    Modifier intimidateMod  = new Modifier();
+//    Modifier primalUrgeMod  = new Modifier();
+//    Modifier streetwiseMod  = new Modifier();
+//    Modifier subterfugeMod  = new Modifier();
+//    Modifier animalKenMod   = new Modifier();
+//    Modifier craftsMod      = new Modifier();
+//    Modifier driveMod       = new Modifier();
+//    Modifier etiquetteMod   = new Modifier();
+//    Modifier firearmsMod    = new Modifier();
+//    Modifier leadershipMod  = new Modifier();
+//    Modifier meleeMod       = new Modifier();
+//    Modifier performMod     = new Modifier();
+//    Modifier stealthMod     = new Modifier();
+//    Modifier survivalMod    = new Modifier();
+//    Modifier computersMod   = new Modifier();
+//    Modifier enigmasMod     = new Modifier();
+//    Modifier investigateMod = new Modifier();
+//    Modifier lawMod         = new Modifier();
+//    Modifier linguistMod    = new Modifier();
+//    Modifier medicineMod    = new Modifier();
+//    Modifier occultMod      = new Modifier();
+//    Modifier politicsMod    = new Modifier();
+//    Modifier ritualsMod     = new Modifier();
+//    Modifier scienceMod     = new Modifier();
+    // </editor-fold>
+    
+    JButton moreAbilities = new JButton("More");
     
     Font font;
     // </editor-fold>
@@ -445,56 +193,6 @@ public class StatPanel extends JScrollPane {
     public StatPanel(){
         this.setViewportView(panel);
         panel.setLayout(mainLayout);
-        
-        nameField.getDocument().addDocumentListener(docListener);
-        playerField.getDocument().addDocumentListener(docListener);
-        campField.getDocument().addDocumentListener(docListener);
-        packField.getDocument().addDocumentListener(docListener);
-        totemField.getDocument().addDocumentListener(docListener);
-        
-        breedCombo.addItemListener(comboListener);
-        tribeCombo.addItemListener(comboListener);
-        auspiceCombo.addItemListener(comboListener);
-        
-        str.addActionListener(listener);
-        dex.addActionListener(listener);
-        stam.addActionListener(listener);
-        manip.addActionListener(listener);
-        appear.addActionListener(listener);
-        charis.addActionListener(listener);
-        percept.addActionListener(listener);
-        intel.addActionListener(listener);
-        wit.addActionListener(listener);
-        alert.addActionListener(listener);
-        athlet.addActionListener(listener);
-        brawl.addActionListener(listener);
-        dodge.addActionListener(listener);
-        empathy.addActionListener(listener);
-        express.addActionListener(listener);
-        intimidate.addActionListener(listener);
-        primalUrge.addActionListener(listener);
-        streetwise.addActionListener(listener);
-        subterfuge.addActionListener(listener);
-        animalKen.addActionListener(listener);
-        crafts.addActionListener(listener);
-        drive.addActionListener(listener);
-        etiquette.addActionListener(listener);
-        firearms.addActionListener(listener);
-        leadership.addActionListener(listener);
-        melee.addActionListener(listener);
-        perform.addActionListener(listener);
-        stealth.addActionListener(listener);
-        survival.addActionListener(listener);
-        computers.addActionListener(listener);
-        enigmas.addActionListener(listener);
-        investigate.addActionListener(listener);
-        law.addActionListener(listener);
-        linguist.addActionListener(listener);
-        medicine.addActionListener(listener);
-        occult.addActionListener(listener);
-        politics.addActionListener(listener);
-        rituals.addActionListener(listener);
-        science.addActionListener(listener);
         
         //----------------------------------------------------------------------
         // CHARACTER INFO
@@ -505,47 +203,11 @@ public class StatPanel extends JScrollPane {
         c = setGridPos(1 ,0);
         panel.add(nameField, c);
         //---------------------//
-        c = setGridPos(2, 0);
-        panel.add(breed, c);
-        
-        c = setGridPos(3, 0);
-        panel.add(breedCombo, c);
-        //---------------------//
-        c = setGridPos(4, 0);
-        panel.add(pack, c);
-        
-        c = setGridPos(5, 0);
-        panel.add(packField, c);
-        //---------------------//
         c = setGridPos(0, 1);
         panel.add(player, c);
         
         c = setGridPos(1, 1);
         panel.add(playerField, c);
-        //---------------------//
-        c = setGridPos(2, 1);
-        panel.add(auspice, c);
-        
-        c = setGridPos(3, 1);
-        panel.add(auspiceCombo, c);
-        //---------------------//
-        c = setGridPos(4, 1);
-        panel.add(totem, c);
-        
-        c = setGridPos(5, 1);
-        panel.add(totemField, c);
-        //---------------------//
-        c = setGridPos(0, 2);
-        panel.add(tribe, c);
-        
-        c = setGridPos(1, 2);
-        panel.add(tribeCombo, c);
-        //---------------------//
-        c = setGridPos(2, 2);
-        panel.add(camp, c);
-        
-        c = setGridPos(3, 2);
-        panel.add(campField, c);
         
         //----------------------------------------------------------------------
         // ATTRIBUTES
@@ -833,10 +495,10 @@ public class StatPanel extends JScrollPane {
         c = setGridPos(5, 19);
         panel.add(science, c);
         //---------------------//
-        c = setLabelPos(4, 20);
-        panel.add(formBox, c);
+        // Button for more abilities/ability editing
+        c = setLabelPos(0, 20);
+        panel.add(moreAbilities, c);
     }
-    
     
     /**
      * 
@@ -845,7 +507,7 @@ public class StatPanel extends JScrollPane {
      * 
      * @return a GridBagConstraints object
      */
-    private static GridBagConstraints setGridPos(int x, int y){
+    protected static GridBagConstraints setGridPos(int x, int y){
         GridBagConstraints c;
         c = new GridBagConstraints();
         c.ipadx = 10;
@@ -869,140 +531,10 @@ public class StatPanel extends JScrollPane {
         return c;
     }
     
-    public void saveStats()throws IOException, ClassNotFoundException{
-        String dir = System.getProperty("user.dir");// + "\\Characters";
-        stats.SaveStats(dir);
-    }
+    public abstract void saveStats()throws IOException, ClassNotFoundException;
     
-    public void loadStats(String charName, Race race) 
-            throws IOException, ClassNotFoundException{
-        String dir = System.getProperty("user.dir");// + "\\Characters";
-        if(race == Race.WOLF){
-            stats = WerewolfStats.LoadStats(charName, dir);
-            initStats();
-        }
-    }
+    public abstract void loadStats(String charName) 
+            throws IOException, ClassNotFoundException;
     
-    // overide with or make abstract with subclasses
-    // BEFORE ADDING CHECK FOR NULL, CHANGE HOW ELEMENTS ADDED FIRST
-    // COULD HAVE BEEN TAKEN CARE OF IN INDIVIDUAL CLASSES
-    private void initStats(){
-        nameField.setText(stats.getCName());
-        breedCombo.setSelectedItem(breedToString(stats.Breed()));
-        playerField.setText(stats.getPName());
-        tribeCombo.setSelectedItem(tribeToString(stats.Tribe()));
-        auspiceCombo.setSelectedItem(auspToString(stats.Auspice()));
-        campField.setText(stats.Camp());
-        packField.setText(stats.PackName());
-        totemField.setText(stats.TotemName());
-        
-        str.setValue(stats.Strength());
-        dex.setValue(stats.Dexterity());
-        stam.setValue(stats.Stamina());
-        
-        charis.setValue(stats.Charisma());
-        manip.setValue(stats.Manip());
-        appear.setValue(stats.Appear());
-        
-        intel.setValue(stats.Intel());
-        percept.setValue(stats.Percept());
-        wit.setValue(stats.Wits());
-        
-        alert.setValue(stats.Alert());
-        athlet.setValue(stats.Athletic());
-        brawl.setValue(stats.Brawl());
-        dodge.setValue(stats.Dodge());
-        empathy.setValue(stats.Empathy());
-        express.setValue(stats.Express());
-        intimidate.setValue(stats.Intimidate());
-        primalUrge.setValue(stats.Primal());
-        streetwise.setValue(stats.StreetWise());
-        subterfuge.setValue(stats.Subterfuge());
-        
-        animalKen.setValue(stats.AnimalKen());
-        crafts.setValue(stats.Crafts());
-        drive.setValue(stats.Drive());
-        etiquette.setValue(stats.Etiquette());
-        firearms.setValue(stats.Firearms());
-        leadership.setValue(stats.Leadership());
-        melee.setValue(stats.Melee());
-        perform.setValue(stats.Performance());
-        stealth.setValue(stats.Stealth());
-        survival.setValue(stats.Survival());
-        
-        computers.setValue(stats.Computer());
-        enigmas.setValue(stats.Enigmas());
-        investigate.setValue(stats.Investigate());
-        law.setValue(stats.Law());
-        linguist.setValue(stats.Linguistics());
-        medicine.setValue(stats.Medicine());
-        occult.setValue(stats.Occult());
-        politics.setValue(stats.Politics());
-        rituals.setValue(stats.Rituals());
-        science.setValue(stats.Science());
-    }
-    // <editor-fold defaultstate="collapsed" desc="string conversion functions">
-    private String auspToString(Auspice auspice){
-        switch(auspice){
-            case AHROUN:
-                return "Ahroun";
-            case PHILODOX:
-                return "Philodox";
-            case GALLIARD:
-                return "Galliard";
-            case THEURGE:
-                return "Theurge";
-            case RAGABASH:
-                return "Ragabash";
-            default:
-                return null;
-        }
-    }
-    
-    private String breedToString(Breed breed){
-        switch(breed){
-            case HOMID:
-                return "Homid";
-            case CRINOS:
-                return "Crinos";
-            case LUPUS:
-                return "Lupus";
-            default:
-                return null;
-        }
-    }
-    
-    private String tribeToString(Tribe tribe){
-        switch(tribe){
-            case BLACKFURY:
-                return "Black Furries";
-            case BONEGNAWER:
-                return "Bone Gnawers";
-            case CHILDOFGAIA:
-                return "Children of Gaia";
-            case FIANNA:
-                return "Fianna";
-            case GETOFFENRIS:
-                return "Get of Fenris";
-            case GLASSWALKER:
-                return "Glasswalkers";
-            case REDTALON:
-                return "Red Talons";
-            case SHADOWLORD:
-                return "Shadow Lords";
-            case SILENTSTRIDER:
-                return "Silent Striders";
-            case SILVERFANG:
-                return "Silverfangs";
-            case STARGAZER:
-                return "Stargazers";
-            case UKTENA:
-                return "Uktena";
-            case WENDIGO:
-                return "Wendigo";
-            default:
-                return null;
-        }
-    }
+    protected abstract void initStats();
 }
-// </editor-fold>

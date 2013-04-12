@@ -23,22 +23,30 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
     // <editor-fold defaultstate="collapsed" desc="menu selection code">
     @Override
     public void actionPerformed(ActionEvent e){
-        JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser(
+                System.getProperty("user.dir"));
         String dir = System.getProperty("user.dir");
         String fileName;
         BaseStats stats;
         String charName;
         Race race;
-        int index;
+        int index = 0;
         int openType;
-        if(e.getSource().equals(newFile)){
-            panelList.add(new StatPanel());
+        if(e.getSource().equals(wolfSheet)){
+            panelList.add(new WerewolfPanel());
             index = panelList.size()-1;
             mainTabPane.addTab(
                     "New Character", panelList.get(index));
             mainTabPane.setSelectedIndex(index);
             //mainTabPane.setMinimumSize(panelList.get(index).getMinimumSize());
             //setMinSize(mainTabPane.getMinimumSize());
+        }
+        else if(e.getSource().equals(foxSheet)){
+            panelList.add(new WerefoxPanel());
+            index = panelList.size()-1;
+            mainTabPane.addTab(
+                    "New Character", panelList.get(index));
+            mainTabPane.setSelectedIndex(index);
         }
         else if(e.getSource().equals(saveFile)){
             index = mainTabPane.getSelectedIndex();
@@ -57,25 +65,28 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
             openType = fileChooser.showOpenDialog(null);
             if(openType == JFileChooser.APPROVE_OPTION){
                 fileName = fileChooser.getSelectedFile().getName();
-                panelList.add(new StatPanel());
-                index = panelList.size()-1;
-                mainTabPane.addTab("Character", panelList.get(index));
+                
                 try {
                     stats = BaseStats.LoadStats(fileName, dir);
                     charName = stats.getCName();
-                    if(charName != null){
-                        mainTabPane.setTitleAt(index, charName);
-                    }
                     race = stats.getRace();
                     switch(race){
                         case WOLF:
-                            panelList.get(index)
-                                    .loadStats(fileName, Race.WOLF);
+                            panelList.add(new WerewolfPanel());
                             break;
                         case FOX:
+                            panelList.add(new WerefoxPanel());
                             break;
                         default:
                     }
+                    index = panelList.size()-1;
+                    if(charName != null){
+                        mainTabPane.addTab(charName, panelList.get(index));
+                    }
+                    else{
+                        mainTabPane.addTab("Character", panelList.get(index));
+                    }
+                    panelList.get(index).loadStats(fileName);
                     mainTabPane.setSelectedIndex(index);
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(
@@ -93,8 +104,10 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
     JMenuItem openFile = new JMenuItem("Open");
-    JMenuItem newFile = new JMenuItem("New");
+    JMenu newFile = new JMenu("New");
     JMenuItem saveFile = new JMenuItem("Save");
+    JMenuItem wolfSheet = new JMenuItem("Garou - Werewolf");
+    JMenuItem foxSheet = new JMenuItem("Kitsune - Werefox");
     
     ArrayList<StatPanel> panelList = new ArrayList<>();
     
@@ -118,6 +131,8 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
         fileMenu.add(newFile);
         fileMenu.add(openFile);
         fileMenu.add(saveFile);
+        newFile.add(wolfSheet);
+        newFile.add(foxSheet);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(700, 600));
@@ -130,9 +145,11 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
     }
     
     private void InitMenuItems(){
-        newFile.addActionListener(this);
+        wolfSheet.addActionListener(this);
+        foxSheet.addActionListener(this);
         saveFile.addActionListener(this);
         openFile.addActionListener(this);
+        
     }
     
     private static void setLaF(){

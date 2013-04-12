@@ -265,7 +265,9 @@ public class RadioPanel extends JPanel implements ActionListener{
                 break;
             case 1:
                 this.value = value;
-                radio1.doClick();
+                if(!radio1.isSelected()){
+                    radio1.doClick();
+                }
                 break;
             case 2:
                 this.value = value;
