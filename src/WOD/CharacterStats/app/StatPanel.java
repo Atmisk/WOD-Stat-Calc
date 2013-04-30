@@ -30,6 +30,7 @@ import javax.swing.*;
  */
 public abstract class StatPanel extends JScrollPane {
     final private int initRank = 1;
+    final protected String prototypeString= "Item############";
     
     // <editor-fold defaultstate="collapsed" desc="variables and components">
     boolean changeMade = false;
@@ -37,6 +38,8 @@ public abstract class StatPanel extends JScrollPane {
     JPanel panel = new JPanel();
     GridBagLayout mainLayout = new GridBagLayout();
     GridBagConstraints c;
+    
+    JLabel title = new JLabel("Title");
 
     //<editor-fold defaultstate="collapsed" desc="Detail labels">
     JLabel name          = new JLabel("Name");
@@ -194,309 +197,314 @@ public abstract class StatPanel extends JScrollPane {
         this.setViewportView(panel);
         panel.setLayout(mainLayout);
         
+        c = setLabelPos(2, 0);
+        font = new Font(title.getFont().getName(), Font.PLAIN, 30);
+        title.setFont(font);
+        panel.add(title, c);
+        
         //----------------------------------------------------------------------
         // CHARACTER INFO
         
-        c = setGridPos(0 ,0);
+        c = setGridPos(0 ,1);
         panel.add(name, c);
         
-        c = setGridPos(1 ,0);
+        c = setGridPos(1 ,1);
         panel.add(nameField, c);
         //---------------------//
-        c = setGridPos(0, 1);
+        c = setGridPos(0, 2);
         panel.add(player, c);
         
-        c = setGridPos(1, 1);
+        c = setGridPos(1, 2);
         panel.add(playerField, c);
         
         //----------------------------------------------------------------------
         // ATTRIBUTES
         
-        c = setLabelPos(2, 3);
+        c = setLabelPos(2, 4);
         font = new Font(attrLabel.getFont().getName(), Font.PLAIN, 20);
         attrLabel.setFont(font);
         panel.add(attrLabel, c);
         
-        c = setLabelPos(0, 4);
+        c = setLabelPos(0, 5);
         font = new Font(physLabel.getFont().getName(), Font.PLAIN, 16);
         physLabel.setFont(font);
         panel.add(physLabel, c);
         
-        c = setGridPos(0, 5);
+        c = setGridPos(0, 6);
         panel.add(strength, c);
         
-        c = setGridPos(1, 5);
+        c = setGridPos(1, 6);
         panel.add(str, c);
         //---------------------//
-        c = setGridPos(0, 6);
+        c = setGridPos(0, 7);
         panel.add(dexterity, c);
         
-        c = setGridPos(1, 6);
+        c = setGridPos(1, 7);
         panel.add(dex, c);
         //---------------------//
-        c = setGridPos(0, 7);
+        c = setGridPos(0, 8);
         panel.add(stamina, c);
         
-        c = setGridPos(1, 7);
+        c = setGridPos(1, 8);
         panel.add(stam, c);
         //---------------------//
-        c = setLabelPos(2, 4);
+        c = setLabelPos(2, 5);
         font = new Font(socialLabel.getFont().getName(), Font.PLAIN, 16);
         socialLabel.setFont(font);
         panel.add(socialLabel, c);
         
-        c = setGridPos(2, 5);
+        c = setGridPos(2, 6);
         panel.add(charisma, c);
         
-        c = setGridPos(3, 5);
+        c = setGridPos(3, 6);
         panel.add(charis, c);
         //---------------------//
-        c = setGridPos(2, 6);
+        c = setGridPos(2, 7);
         panel.add(manipulation, c);
         
-        c = setGridPos(3, 6);
+        c = setGridPos(3, 7);
         panel.add(manip, c);
         //---------------------//
-        c = setGridPos(2, 7);
+        c = setGridPos(2, 8);
         panel.add(appearance, c);
         
-        c = setGridPos(3, 7);
+        c = setGridPos(3, 8);
         panel.add(appear, c);
         //---------------------//
-        c = setLabelPos(4, 4);
+        c = setLabelPos(4, 5);
         font = new Font(mentalLabel.getFont().getName(), Font.PLAIN, 16);
         mentalLabel.setFont(font);
         panel.add(mentalLabel, c);
         
-        c = setGridPos(4, 5);
+        c = setGridPos(4, 6);
         panel.add(perception, c);
         
-        c = setGridPos(5, 5);
+        c = setGridPos(5, 6);
         panel.add(percept, c);
         //---------------------//
-        c = setGridPos(4, 6);
+        c = setGridPos(4, 7);
         panel.add(inteligence, c);
         
-        c = setGridPos(5, 6);
+        c = setGridPos(5, 7);
         panel.add(intel, c);
         //---------------------//
-        c = setGridPos(4, 7);
+        c = setGridPos(4, 8);
         panel.add(wits, c);
         
-        c = setGridPos(5, 7);
+        c = setGridPos(5, 8);
         panel.add(wit, c);
         
         //----------------------------------------------------------------------
         // ABILITIES - TALENTS
         
-        c = setLabelPos(2, 8);
+        c = setLabelPos(2, 9);
         font = new Font(abilityLabel.getFont().getName(), Font.PLAIN, 20);
         abilityLabel.setFont(font);
         panel.add(abilityLabel, c);
         
-        c = setLabelPos(0, 9);
+        c = setLabelPos(0, 10);
         font = new Font(talentLabel.getFont().getName(), Font.PLAIN, 16);
         talentLabel.setFont(font);
         panel.add(talentLabel, c);
         
-        c = setGridPos(0, 10);
+        c = setGridPos(0, 11);
         panel.add(alertLabel, c);
         
-        c = setGridPos(1, 10);
+        c = setGridPos(1, 11);
         panel.add(alert, c);
         //---------------------//
-        c = setGridPos(0, 11);
+        c = setGridPos(0, 12);
         panel.add(athletLabel, c);
         
-        c = setGridPos(1, 11);
+        c = setGridPos(1, 12);
         panel.add(athlet, c);
         //---------------------//
-        c = setGridPos(0, 12);
+        c = setGridPos(0, 13);
         panel.add(brawlLabel, c);
         
-        c = setGridPos(1, 12);
+        c = setGridPos(1, 13);
         panel.add(brawl, c);
         //---------------------//
-        c = setGridPos(0, 13);
+        c = setGridPos(0, 14);
         panel.add(dodgeLabel, c);
         
-        c = setGridPos(1, 13);
+        c = setGridPos(1, 14);
         panel.add(dodge, c);
         //---------------------//        
-        c = setGridPos(0, 14);
+        c = setGridPos(0, 15);
         panel.add(empLabel, c);
         
-        c = setGridPos(1, 14);
+        c = setGridPos(1, 15);
         panel.add(empathy, c);
         //---------------------//
-        c = setGridPos(0, 15);
+        c = setGridPos(0, 16);
         panel.add(expressLabel, c);
         
-        c = setGridPos(1, 15);
+        c = setGridPos(1, 16);
         panel.add(express, c);
         //---------------------//
-        c = setGridPos(0, 16);
+        c = setGridPos(0, 17);
         panel.add(intimLabel, c);
         
-        c = setGridPos(1, 16);
+        c = setGridPos(1, 17);
         panel.add(intimidate, c);
         //---------------------//
-        c = setGridPos(0, 17);
+        c = setGridPos(0, 18);
         panel.add(primalLabel, c);
         
-        c = setGridPos(1, 17);
+        c = setGridPos(1, 18);
         panel.add(primalUrge, c);
         //---------------------//
-        c = setGridPos(0, 18);
+        c = setGridPos(0, 19);
         panel.add(streetLabel, c);
         
-        c = setGridPos(1, 18);
+        c = setGridPos(1, 19);
         panel.add(streetwise, c);
         //---------------------//
-        c = setGridPos(0, 19);
+        c = setGridPos(0, 20);
         panel.add(subterLabel, c);
         
-        c = setGridPos(1, 19);
+        c = setGridPos(1, 20);
         panel.add(subterfuge, c);
         
         //----------------------------------------------------------------------
         // ABILITIES - SKILLS
         
-        c = setLabelPos(2, 9);
+        c = setLabelPos(2, 10);
         font = new Font(skillLabel.getFont().getName(), Font.PLAIN, 16);
         skillLabel.setFont(font);
         panel.add(skillLabel, c);
         
-        c = setGridPos(2, 10);
+        c = setGridPos(2, 11);
         panel.add(animalLabel, c);
         
-        c = setGridPos(3, 10);
+        c = setGridPos(3, 11);
         panel.add(animalKen, c);
         //---------------------//
-        c = setGridPos(2, 11);
+        c = setGridPos(2, 12);
         panel.add(craftLabel, c);
         
-        c = setGridPos(3, 11);
+        c = setGridPos(3, 12);
         panel.add(crafts, c);
         //---------------------//
-        c = setGridPos(2, 12);
+        c = setGridPos(2, 13);
         panel.add(driveLabel, c);
         
-        c = setGridPos(3, 12);
+        c = setGridPos(3, 13);
         panel.add(drive, c);
         //---------------------//
-        c = setGridPos(2, 13);
+        c = setGridPos(2, 14);
         panel.add(etiquLabel, c);
         
-        c = setGridPos(3, 13);
+        c = setGridPos(3, 14);
         panel.add(etiquette, c);
         //---------------------//
-        c = setGridPos(2, 14);
+        c = setGridPos(2, 15);
         panel.add(fireLabel, c);
         
-        c = setGridPos(3, 14);
+        c = setGridPos(3, 15);
         panel.add(firearms, c);
         //---------------------//
-        c = setGridPos(2, 15);
+        c = setGridPos(2, 16);
         panel.add(leadLabel, c);
         
-        c = setGridPos(3, 15);
+        c = setGridPos(3, 16);
         panel.add(leadership, c);
         //---------------------//
-        c = setGridPos(2, 16);
+        c = setGridPos(2, 17);
         panel.add(meleeLabel, c);
         
-        c = setGridPos(3, 16);
+        c = setGridPos(3, 17);
         panel.add(melee, c);
         //---------------------//
-        c = setGridPos(2, 17);
+        c = setGridPos(2, 18);
         panel.add(performLabel, c);
         
-        c = setGridPos(3, 17);
+        c = setGridPos(3, 18);
         panel.add(perform, c);
         //---------------------//
-        c = setGridPos(2, 18);
+        c = setGridPos(2, 19);
         panel.add(stealthLabel, c);
         
-        c = setGridPos(3, 18);
+        c = setGridPos(3, 19);
         panel.add(stealth, c);
         //---------------------//
-        c = setGridPos(2, 19);
+        c = setGridPos(2, 20);
         panel.add(survivalLabel, c);
         
-        c = setGridPos(3, 19);
+        c = setGridPos(3, 20);
         panel.add(survival, c);
         
         //----------------------------------------------------------------------
         // ABILITIES - KNOWLEDGES
         
-        c = setLabelPos(4, 9);
+        c = setLabelPos(4, 10);
         font = new Font(knowLabel.getFont().getName(), Font.PLAIN, 16);
         knowLabel.setFont(font);
         panel.add(knowLabel, c);
         
-        c = setGridPos(4, 10);
+        c = setGridPos(4, 11);
         panel.add(compLabel, c);
         
-        c = setGridPos(5, 10);
+        c = setGridPos(5, 11);
         panel.add(computers, c);
         //---------------------//
-        c = setGridPos(4, 11);
+        c = setGridPos(4, 12);
         panel.add(enigmaLabel, c);
         
-        c = setGridPos(5, 11);
+        c = setGridPos(5, 12);
         panel.add(enigmas, c);
         //---------------------//
-        c = setGridPos(4, 12);
+        c = setGridPos(4, 13);
         panel.add(invesLabel, c);
         
-        c = setGridPos(5, 12);
+        c = setGridPos(5, 13);
         panel.add(investigate, c);
         //---------------------//
-        c = setGridPos(4, 13);
+        c = setGridPos(4, 14);
         panel.add(lawLabel, c);
         
-        c = setGridPos(5, 13);
+        c = setGridPos(5, 14);
         panel.add(law, c);
         //---------------------//
-        c = setGridPos(4, 14);
+        c = setGridPos(4, 15);
         panel.add(linguistLabel, c);
 
-        c = setGridPos(5, 14);
+        c = setGridPos(5, 15);
         panel.add(linguist, c);
         //---------------------//
-        c = setGridPos(4, 15);
+        c = setGridPos(4, 16);
         panel.add(medicLabel, c);
 
-        c = setGridPos(5, 15);
+        c = setGridPos(5, 16);
         panel.add(medicine, c);
         //---------------------//
-        c = setGridPos(4, 16);
+        c = setGridPos(4, 17);
         panel.add(occultLabel, c);
 
-        c = setGridPos(5, 16);
+        c = setGridPos(5, 17);
         panel.add(occult, c);
         //---------------------//
-        c = setGridPos(4, 17);
+        c = setGridPos(4, 18);
         panel.add(politicsLabel, c);
         
-        c = setGridPos(5, 17);
+        c = setGridPos(5, 18);
         panel.add(politics, c);
         //---------------------//
-        c = setGridPos(4, 18);
+        c = setGridPos(4, 19);
         panel.add(ritualsLabel, c);
         
-        c = setGridPos(5, 18);
+        c = setGridPos(5, 19);
         panel.add(rituals, c);
         //---------------------//
-        c = setGridPos(4, 19);
+        c = setGridPos(4, 20);
         panel.add(scienceLabel, c);
         
-        c = setGridPos(5, 19);
+        c = setGridPos(5, 20);
         panel.add(science, c);
         //---------------------//
         // Button for more abilities/ability editing
-        c = setLabelPos(0, 20);
+        c = setLabelPos(0, 21);
         panel.add(moreAbilities, c);
     }
     
@@ -514,14 +522,13 @@ public abstract class StatPanel extends JScrollPane {
         c.insets = new Insets(0,0,0,0);
         c.gridx = x;
         c.gridy = y;
-        c.anchor = GridBagConstraints.LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1;
         c.weighty = 1;
         return c;
     }
     
-    private static GridBagConstraints setLabelPos(int x, int y){
+    protected static GridBagConstraints setLabelPos(int x, int y){
         GridBagConstraints c;
         c = new GridBagConstraints();
         c.insets = new Insets(5,0,5,0);

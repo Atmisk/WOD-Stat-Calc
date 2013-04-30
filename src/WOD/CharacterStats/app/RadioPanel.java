@@ -207,6 +207,26 @@ public class RadioPanel extends JPanel implements ActionListener{
         }
     }
     
+    public RadioPanel(int rank, String size){
+        InitRadPan();
+        setValue(rank);
+        switch(size){
+            case "large":
+                radio1.putClientProperty("JComponent.sizeVariant", "large");
+                radio2.putClientProperty("JComponent.sizeVariant", "large");
+                radio3.putClientProperty("JComponent.sizeVariant", "large");
+                radio4.putClientProperty("JComponent.sizeVariant", "large");
+                radio5.putClientProperty("JComponent.sizeVariant", "large");
+                break;
+            case "small":
+                radio1.putClientProperty("JComponent.sizeVariant", "small");
+                radio2.putClientProperty("JComponent.sizeVariant", "small");
+                radio3.putClientProperty("JComponent.sizeVariant", "small");
+                radio4.putClientProperty("JComponent.sizeVariant", "small");
+                radio5.putClientProperty("JComponent.sizeVariant", "small");
+        }
+    }
+    
     /**
      * Initializes the component. Used by constructors.
      */
@@ -246,9 +266,7 @@ public class RadioPanel extends JPanel implements ActionListener{
      * 
      * @return the rank set in the radio panel
      */
-    public final int getValue(){
-        return value;
-    }
+    public final int getValue(){return value;}
     /**
      * 
      * @param value 
@@ -315,6 +333,25 @@ public class RadioPanel extends JPanel implements ActionListener{
             listen.actionPerformed(event);
         }
     }
+    
+    public void clear(){
+        radio1.setSelected(false);
+        radio2.setSelected(false);
+        radio3.setSelected(false);
+        radio4.setSelected(false);
+        radio5.setSelected(false);
+        value = 0;
+    }
+    
+    public void setAll(){
+        radio1.setSelected(true);
+        radio2.setSelected(true);
+        radio3.setSelected(true);
+        radio4.setSelected(true);
+        radio5.setSelected(true);
+        value = 5;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="unused function for resize">
     /*private void resize(){
         double xFactor;

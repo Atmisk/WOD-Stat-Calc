@@ -5,7 +5,7 @@
 package WOD.CharacterStats.app;
 import PlayerStats.BaseStats;
 import PlayerStats.BaseStats.Race;
-import java.awt.*;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -29,24 +29,32 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
         String fileName;
         BaseStats stats;
         String charName;
-        Race race;
+        Race race; // might convert to string
         int index = 0;
         int openType;
         if(e.getSource().equals(wolfSheet)){
             panelList.add(new WerewolfPanel());
             index = panelList.size()-1;
+            
             mainTabPane.addTab(
                     "New Character", panelList.get(index));
+            mainTabPane.setTabComponentAt(index, 
+                    new TabClose(mainTabPane, panelList));
             mainTabPane.setSelectedIndex(index);
-            //mainTabPane.setMinimumSize(panelList.get(index).getMinimumSize());
-            //setMinSize(mainTabPane.getMinimumSize());
+            this.setSize(this.getPreferredSize());
+            
+            this.setLocationRelativeTo(null); // set frame to center of screen
         }
         else if(e.getSource().equals(foxSheet)){
             panelList.add(new WerefoxPanel());
             index = panelList.size()-1;
             mainTabPane.addTab(
                     "New Character", panelList.get(index));
+            mainTabPane.setTabComponentAt(index, 
+                    new TabClose(mainTabPane, panelList));
             mainTabPane.setSelectedIndex(index);
+            this.setSize(this.getPreferredSize());
+            this.setLocationRelativeTo(null); // set frame to center of screen
         }
         else if(e.getSource().equals(saveFile)){
             index = mainTabPane.getSelectedIndex();
@@ -87,6 +95,8 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
                         mainTabPane.addTab("Character", panelList.get(index));
                     }
                     panelList.get(index).loadStats(fileName);
+                    mainTabPane.setTabComponentAt(index, 
+                        new TabClose(mainTabPane, panelList));
                     mainTabPane.setSelectedIndex(index);
                 } catch (IOException | ClassNotFoundException ex) {
                     Logger.getLogger(
@@ -111,7 +121,6 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
     
     ArrayList<StatPanel> panelList = new ArrayList<>();
     
-    
     /**
      * @param args the command line arguments
      */
@@ -135,13 +144,14 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
         newFile.add(foxSheet);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(700, 600));
         this.setJMenuBar(menuBar);
         
         this.add(mainTabPane);
         this.pack();
-        this.setLocationRelativeTo(null); // set frame to center of screen
         this.setVisible(true);
+        this.setSize(new Dimension(600, 600));
+        this.setLocationRelativeTo(null); // set frame to center of screen
+        this.setResizable(false);
     }
     
     private void InitMenuItems(){
@@ -149,7 +159,6 @@ public class CharacterSheetGUI extends JFrame implements ActionListener{
         foxSheet.addActionListener(this);
         saveFile.addActionListener(this);
         openFile.addActionListener(this);
-        
     }
     
     private static void setLaF(){

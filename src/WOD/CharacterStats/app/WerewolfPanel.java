@@ -5,6 +5,7 @@
 package WOD.CharacterStats.app;
 
 import PlayerStats.WerewolfStats;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -22,20 +23,23 @@ import javax.swing.text.Document;
  * @author Mike
  */
 public class WerewolfPanel extends StatPanel{
+    //<editor-fold defaultstate="collapsed" desc="Variables and components">
     WerewolfStats stats = new WerewolfStats();
     
+    //<editor-fold defaultstate="collapsed" desc="String arrays">
     String[] breedList = {  "", "Homid", "Metis", "Lupus"};
     
-    String[] tribeList = {  "", "Black Furries", "Bone Gnawers", 
-                            "Children of Gaia", "Fianna", "Get of Fenris",
-                            "Glasswalkers", "Red Talons", "Shadow Lords", 
-                            "Silent Striders", "Silverfangs", "Stargazers", 
-                            "Uktena", "Wendigo"};
+    String[] tribeList = {  "", "Black Furries", "Bone Gnawers",
+        "Children of Gaia", "Fianna", "Get of Fenris",
+        "Glasswalkers", "Red Talons", "Shadow Lords",
+        "Silent Striders", "Silverfangs", "Stargazers",
+        "Uktena", "Wendigo"};
     
-    String[] auspiceList = {"", "Ragabash", "Theurge", "Philodox", 
-                            "Galliard", "Ahroun"};
+    String[] auspiceList = {"", "Ragabash", "Theurge", "Philodox",
+        "Galliard", "Ahroun"};
     
     String[] formList =    {"", "Homid", "Glabro", "Crinos", "Hispo", "Lupus"};
+    //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Listener declarations">
     private class comboListener implements ItemListener{
@@ -55,8 +59,8 @@ public class WerewolfPanel extends StatPanel{
                             stats.setBreed(WerewolfStats.Breed.LUPUS);
                             break;
                     }
-    //                    System.out.println("Breed: " + breedCombo.getSelectedItem()
-    //                            .toString());
+                    //                    System.out.println("Breed: " + breedCombo.getSelectedItem()
+                    //                            .toString());
                 }
                 else if(e.getSource().equals(tribeCombo)){
                     switch (tribeCombo.getSelectedItem().toString()) {
@@ -100,8 +104,8 @@ public class WerewolfPanel extends StatPanel{
                             stats.setTribe(WerewolfStats.Tribe.WENDIGO);
                             break;
                     }
-    //                    System.out.println("Tribe: " + tribeCombo.getSelectedItem()
-    //                            .toString());
+                    //                    System.out.println("Tribe: " + tribeCombo.getSelectedItem()
+                    //                            .toString());
                 }
                 else if(e.getSource().equals(auspiceCombo)){
                     switch(auspiceCombo.getSelectedItem().toString()){
@@ -120,8 +124,8 @@ public class WerewolfPanel extends StatPanel{
                         case "Theurge":
                             stats.setAuspice(WerewolfStats.Auspice.THEURGE);
                             break;
-                        //default:
-                          //  stats.Auspice(null);
+                            //default:
+                            //  stats.Auspice(null);
                     }
                     //System.out.println("Auspice: " + auspiceCombo
                     //        .getSelectedItem().toString());
@@ -143,14 +147,14 @@ public class WerewolfPanel extends StatPanel{
         public void insertUpdate(DocumentEvent e){
             saveChanges(e);
         }
-
+        
         private void saveChanges(DocumentEvent e){
             Document nameDoc = nameField.getDocument();
             Document playerDoc = playerField.getDocument();
             Document campDoc = campField.getDocument();
             Document packDoc = packField.getDocument();
             Document totemDoc = totemField.getDocument();
-
+            
             if(e.getDocument().equals(nameDoc)){
                 stats.setCName(nameField.getText());
                 //System.out.println("Character Name: " + name.getDetail());
@@ -302,8 +306,8 @@ public class WerewolfPanel extends StatPanel{
                 stats.setScience(science.getValue());
             }
             changeMade = true;
-           // System.out.println("listener success");
-        }  
+            // System.out.println("listener success");
+        }
     }
     //</editor-fold>
     
@@ -333,9 +337,14 @@ public class WerewolfPanel extends StatPanel{
     JTextField campField   = new JTextField();
     JTextField packField   = new JTextField();
     JTextField totemField  = new JTextField();
+    //</editor-fold>
     
     public WerewolfPanel(){
         super();
+        
+//        int width;
+        
+        title.setText("Garou");
         
         str.addActionListener(listener);
         dex.addActionListener(listener);
@@ -387,50 +396,65 @@ public class WerewolfPanel extends StatPanel{
         tribeCombo.addItemListener(comboListener);
         auspiceCombo.addItemListener(comboListener);
         
+        breedCombo.setPrototypeDisplayValue(prototypeString);
+        tribeCombo.setPrototypeDisplayValue(prototypeString);
+        auspiceCombo.setPrototypeDisplayValue(prototypeString);
+        formBox.setPrototypeDisplayValue(prototypeString);
+        
         //----------------------------------------------------------------------
         // CHARACTER INFO
 
-        c = setGridPos(2, 0);
+        c = setGridPos(2, 1);
         panel.add(breed, c);
         
-        c = setGridPos(3, 0);
+        c = setGridPos(3, 1);
         panel.add(breedCombo, c);
         //---------------------//
-        c = setGridPos(4, 0);
+        c = setGridPos(4, 1);
         panel.add(pack, c);
         
-        c = setGridPos(5, 0);
+        c = setGridPos(5, 1);
         panel.add(packField, c);
         //---------------------//
-        c = setGridPos(2, 1);
+        c = setGridPos(2, 2);
         panel.add(auspice, c);
         
-        c = setGridPos(3, 1);
+        c = setGridPos(3, 2);
         panel.add(auspiceCombo, c);
         //---------------------//
-        c = setGridPos(4, 1);
+        c = setGridPos(4, 2);
         panel.add(totem, c);
         
-        c = setGridPos(5, 1);
+        c = setGridPos(5, 2);
         panel.add(totemField, c);
         //---------------------//
-        c = setGridPos(0, 2);
-        panel.add(tribe, c);
-        
-        c = setGridPos(1, 2);
-        panel.add(tribeCombo, c);
-        //---------------------//
-        c = setGridPos(2, 2);
-        panel.add(camp, c);
-        
-        c = setGridPos(3, 2);
-        panel.add(campField, c);
-        //---------------------//
-        c = setGridPos(4, 2);
+        c = setGridPos(0, 3);
         panel.add(form, c);
         
-        c = setGridPos(5, 2);
+        c = setGridPos(1, 3);
         panel.add(formBox, c);
+        //---------------------//
+        c = setGridPos(2, 3);
+        panel.add(camp, c);
+        
+        c = setGridPos(3, 3);
+        panel.add(campField, c);
+        //---------------------//
+        c = setGridPos(4, 3);
+        panel.add(tribe, c);
+        
+        c = setGridPos(5, 3);
+        panel.add(tribeCombo, c);
+        
+//        width = name.getMinimumSize().width 
+//                + nameField.getMinimumSize().width
+//                + breed.getMinimumSize().width
+//                + breedCombo.getMinimumSize().width
+//                + pack.getMinimumSize().width
+//                + packField.getMinimumSize().width;
+//        
+//        System.out.println("Min Width: " + width);
+//        this.setPreferredSize(new Dimension(width, 700));
     }
     
     @Override

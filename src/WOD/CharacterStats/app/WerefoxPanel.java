@@ -5,6 +5,8 @@
 package WOD.CharacterStats.app;
 
 import PlayerStats.WerefoxStats;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -22,14 +24,17 @@ import javax.swing.text.Document;
  * @author Mike
  */
 public class WerefoxPanel extends StatPanel{
+    //<editor-fold defaultstate="collapsed" desc="Variables and components">
     WerefoxStats stats = new WerefoxStats();
     
+    //<editor-fold defaultstate="collapsed" desc="String arrays">
     String[] breedList = {  "", "Kojin", "Shinju", "Roko"};
     
     String[] pathList  = {"", "Doshi", "Eji", "Gukutsushi", "Kataribe"};
     
-    String[] formList  = {"", "Hitogata", "Sambuhenge", 
-                          "Koto", "Juko", "Kyubi"};
+    String[] formList  = {"", "Hitogata", "Sambuhenge",
+        "Koto", "Juko", "Kyubi"};
+    //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Listener declarations">
     private class comboListener implements ItemListener{
@@ -49,8 +54,8 @@ public class WerefoxPanel extends StatPanel{
                             stats.setBreed(WerefoxStats.Breed.ROKO);
                             break;
                     }
-    //                    System.out.println("Breed: " + breedCombo.getSelectedItem()
-    //                            .toString());
+                    //                    System.out.println("Breed: " + breedCombo.getSelectedItem()
+                    //                            .toString());
                 }
                 else if(e.getSource().equals(pathCombo)){
                     switch(pathCombo.getSelectedItem().toString()){
@@ -66,8 +71,8 @@ public class WerefoxPanel extends StatPanel{
                         case "Kataribe":
                             stats.setPath(WerefoxStats.Path.KATARIBE);
                             break;
-                        //default:
-                          //  stats.Auspice(null);
+                            //default:
+                            //  stats.Auspice(null);
                     }
                     //System.out.println("Auspice: " + auspiceCombo
                     //        .getSelectedItem().toString());
@@ -89,14 +94,14 @@ public class WerefoxPanel extends StatPanel{
         public void insertUpdate(DocumentEvent e){
             saveChanges(e);
         }
-
+        
         private void saveChanges(DocumentEvent e){
             Document nameDoc = nameField.getDocument();
             Document playerDoc = playerField.getDocument();
             Document missionDoc = missionField.getDocument();
             Document sentaiDoc = sentaiField.getDocument();
             Document totemDoc = totemField.getDocument();
-
+            
             if(e.getDocument().equals(nameDoc)){
                 stats.setCName(nameField.getText());
                 //System.out.println("Character Name: " + name.getDetail());
@@ -247,9 +252,12 @@ public class WerefoxPanel extends StatPanel{
             else if(e.getSource().equals(science)){
                 stats.setScience(science.getValue());
             }
+            else if(e.getSource().equals(rage)){
+                System.out.println("Value: " + rage.getValue());
+            }
             changeMade = true;
-           // System.out.println("listener success");
-        }  
+            // System.out.println("listener success");
+        }
     }
     //</editor-fold>
     
@@ -266,20 +274,27 @@ public class WerefoxPanel extends StatPanel{
     JLabel mission       = new JLabel("Mission");
     JLabel sentai        = new JLabel("Sentai");
     JLabel totem         = new JLabel("Totem");
+    JLabel tribe         = new JLabel("");
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Combo Boxes">
-    JComboBox breedCombo   = new JComboBox(breedList);
-    JComboBox pathCombo = new JComboBox(pathList);
-    JComboBox formBox      = new JComboBox(formList);
+    JComboBox breedCombo = new JComboBox(breedList);
+    JComboBox pathCombo  = new JComboBox(pathList);
+    JComboBox formBox    = new JComboBox(formList);
+    JComboBox tribeCombo  = new JComboBox();
     //</editor-fold>
     
     JTextField missionField = new JTextField();
     JTextField sentaiField  = new JTextField();
     JTextField totemField   = new JTextField();
     
+    DblRadioPanel rage = new DblRadioPanel();
+    //</editor-fold>
+    
     public WerefoxPanel(){
         super();
+        
+        title.setText("Kitsune");
         
         str.addActionListener(listener);
         dex.addActionListener(listener);
@@ -321,6 +336,8 @@ public class WerefoxPanel extends StatPanel{
         rituals.addActionListener(listener);
         science.addActionListener(listener);
         
+        rage.addActionListener(listener);
+        
         nameField.getDocument().addDocumentListener(docListener);
         playerField.getDocument().addDocumentListener(docListener);
         missionField.getDocument().addDocumentListener(docListener);
@@ -330,50 +347,62 @@ public class WerefoxPanel extends StatPanel{
         breedCombo.addItemListener(comboListener);
         pathCombo.addItemListener(comboListener);
         
+        breedCombo.setPrototypeDisplayValue(prototypeString);
+        pathCombo.setPrototypeDisplayValue(prototypeString);
+        formBox.setPrototypeDisplayValue(prototypeString);
+        tribeCombo.setPrototypeDisplayValue(prototypeString);
+        
         //----------------------------------------------------------------------
         // CHARACTER INFO
 
-        c = setGridPos(2, 0);
-        panel.add(breed, c);
         
-        c = setGridPos(3, 0);
-        panel.add(breedCombo, c);
-        //---------------------//
-        c = setGridPos(4, 0);
-        panel.add(sentai, c);
+        c = setGridPos(0, 3);
+        panel.add(form, c);
         
-        c = setGridPos(5, 0);
-        panel.add(sentaiField, c);
+        c = setGridPos(1, 3);
+        panel.add(formBox, c);
         //---------------------//
         c = setGridPos(2, 1);
-        panel.add(path, c);
+        panel.add(breed, c);
         
         c = setGridPos(3, 1);
-        panel.add(pathCombo, c);
+        panel.add(breedCombo, c);
         //---------------------//
         c = setGridPos(4, 1);
-        panel.add(totem, c);
+        panel.add(sentai, c);
         
-        c = setGridPos(5, 1);
-        panel.add(totemField, c);
-        //---------------------//
-//        c = setGridPos(0, 2);
-//        panel.add(tribe, c);
-//        
-//        c = setGridPos(1, 2);
-//        panel.add(tribeCombo, c);
+        c = setGridPos(5, 1, 1.5);
+        panel.add(sentaiField, c);
         //---------------------//
         c = setGridPos(2, 2);
-        panel.add(mission, c);
+        panel.add(path, c);
         
         c = setGridPos(3, 2);
+        panel.add(pathCombo, c);
+        //---------------------//
+        c = setGridPos(4, 2);
+        panel.add(totem, c);
+        
+        c = setGridPos(5, 2, 1.5);
+        panel.add(totemField, c);
+        //---------------------//
+        c = setGridPos(2, 3);
+        panel.add(mission, c);
+        
+        c = setGridPos(3, 3);
         panel.add(missionField, c);
         //---------------------//
         c = setGridPos(4, 2);
-        panel.add(form, c);
+        panel.add(tribe, c);
+        //tribe.setVisible(false);
         
         c = setGridPos(5, 2);
-        panel.add(formBox, c);
+        panel.add(tribeCombo, c);
+        //tribeCombo.setVisible(false);
+        
+        // DblRadioPanel testing
+        c = setLabelPos(0, 22);
+        panel.add(rage, c);
     }
     
     @Override
@@ -451,6 +480,21 @@ public class WerefoxPanel extends StatPanel{
         politics.setValue(stats.getPolitics());
         rituals.setValue(stats.getRituals());
         science.setValue(stats.getScience());
+    }
+    
+    protected static GridBagConstraints setGridPos(int x, int y,
+                                                   double xWeight){
+        GridBagConstraints c;
+        c = new GridBagConstraints();
+        c.ipadx = 10;
+        c.insets = new Insets(0,0,0,0);
+        c.gridx = x;
+        c.gridy = y;
+        c.anchor = GridBagConstraints.WEST;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = xWeight;
+        c.weighty = 1;
+        return c;
     }
     
     // <editor-fold defaultstate="collapsed" desc="string conversion functions">
