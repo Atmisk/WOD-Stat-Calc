@@ -5,6 +5,7 @@
 package WOD.CharacterStats.app;
 
 import PlayerStats.WerefoxStats;
+import PlayerStats.WerefoxStats.*;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -25,15 +26,15 @@ import javax.swing.text.Document;
  */
 public class WerefoxPanel extends StatPanel{
     //<editor-fold defaultstate="collapsed" desc="Variables and components">
-    WerefoxStats stats = new WerefoxStats();
+    private WerefoxStats stats = new WerefoxStats();
     
     //<editor-fold defaultstate="collapsed" desc="String arrays">
-    String[] breedList = {  "", "Kojin", "Shinju", "Roko"};
+    private String[] breedList = {  "", "Kojin", "Shinju", "Roko"};
     
-    String[] pathList  = {"", "Doshi", "Eji", "Gukutsushi", "Kataribe"};
+    private String[] pathList  = {"", "Doshi", "Eji", "Gukutsushi", "Kataribe"};
     
-    String[] formList  = {"", "Hitogata", "Sambuhenge",
-        "Koto", "Juko", "Kyubi"};
+    private String[] formList  = {"", "Hitogata", "Sambuhenge",
+                                      "Koto", "Juko", "Kyubi"};
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Listener declarations">
@@ -45,57 +46,70 @@ public class WerefoxPanel extends StatPanel{
                 if(e.getSource().equals(breedCombo)){
                     switch (breedCombo.getSelectedItem().toString()) {
                         case "Kojin":
-                            stats.setBreed(WerefoxStats.Breed.KOJIN);
+                            stats.setBreed(Breed.KOJIN);
                             break;
                         case "Shinju":
-                            stats.setBreed(WerefoxStats.Breed.SHINJU);
+                            stats.setBreed(Breed.SHINJU);
                             break;
                         case "Roko":
-                            stats.setBreed(WerefoxStats.Breed.ROKO);
+                            stats.setBreed(Breed.ROKO);
                             break;
                     }
-                    //                    System.out.println("Breed: " + breedCombo.getSelectedItem()
-                    //                            .toString());
                 }
                 else if(e.getSource().equals(pathCombo)){
                     switch(pathCombo.getSelectedItem().toString()){
                         case "Doshi":
-                            stats.setPath(WerefoxStats.Path.DOSHI);
+                            stats.setPath(Path.DOSHI);
                             break;
                         case "Eji":
-                            stats.setPath(WerefoxStats.Path.EJI);
+                            stats.setPath(Path.EJI);
                             break;
                         case "Gukutsushi":
-                            stats.setPath(WerefoxStats.Path.GUKUTSHUSHI);
+                            stats.setPath(Path.GUKUTSHUSHI);
                             break;
                         case "Kataribe":
-                            stats.setPath(WerefoxStats.Path.KATARIBE);
+                            stats.setPath(Path.KATARIBE);
                             break;
-                            //default:
-                            //  stats.Auspice(null);
                     }
-                    //System.out.println("Auspice: " + auspiceCombo
-                    //        .getSelectedItem().toString());
+                }
+                else if(e.getSource().equals(formBox)){
+                    switch (formBox.getSelectedItem().toString()) {
+                        case "Hitogata":
+                            stats.setForm(ShiftedForm.HITOGATA);
+                            break;
+                        case "Sambuhenge":
+                            stats.setForm(ShiftedForm.SAMBUHENGE);
+                            break;
+                        case "Koto":
+                            stats.setForm(ShiftedForm.KOTO);
+                            break;
+                        case "Juko":
+                            stats.setForm(ShiftedForm.JUKO);
+                            break;
+                        case "Kyubi":
+                            stats.setForm(ShiftedForm.KYUBI);
+                            break;
+                    }
                 }
                 changeMade = true;
             }
         }
     }
-    class detailListener implements DocumentListener {
+    private class detailListener implements DocumentListener {
         @Override
         public void changedUpdate(DocumentEvent e){
-            saveChanges(e);
+            storeChanges(e);
         }
         @Override
         public void removeUpdate(DocumentEvent e){
-            saveChanges(e);
+            storeChanges(e);
         }
         @Override
         public void insertUpdate(DocumentEvent e){
-            saveChanges(e);
+            storeChanges(e);
         }
         
-        private void saveChanges(DocumentEvent e){
+        private void storeChanges(DocumentEvent e){
             Document nameDoc = nameField.getDocument();
             Document playerDoc = playerField.getDocument();
             Document missionDoc = missionField.getDocument();
@@ -104,32 +118,26 @@ public class WerefoxPanel extends StatPanel{
             
             if(e.getDocument().equals(nameDoc)){
                 stats.setCName(nameField.getText());
-                //System.out.println("Character Name: " + name.getDetail());
             }
             
             else if(e.getDocument().equals(playerDoc)){
                 stats.setPName(playerField.getText());
-                //System.out.println("Player Name: " + player.getDetail());
             }
             
             else if(e.getDocument().equals(missionDoc)){
                 stats.setMission(missionField.getText());
-                //System.out.println("Camp: " + camp.getDetail());
             }
             else if(e.getDocument().equals(sentaiDoc)){
                 stats.setSentai(sentaiField.getText());
-                //System.out.println("Pack: " + pack.getDetail());
             }
             else if(e.getDocument().equals(totemDoc)){
                 stats.setTotemName(totemField.getText());
-                //System.out.println("Totem: " + totem.getDetail());
             }
-            //System.out.println("Detail changed");
             changeMade = true;
         }
     }
     // MIGHT BE ABLE TO MOVE TO BASE STATPANEL
-    class statListener implements ActionListener{
+    private class statListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(str)){
@@ -256,39 +264,38 @@ public class WerefoxPanel extends StatPanel{
                 System.out.println("Value: " + rage.getValue());
             }
             changeMade = true;
-            // System.out.println("listener success");
         }
     }
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Listeners">
-    comboListener  comboListener = new comboListener();
-    detailListener docListener   = new detailListener();
-    statListener   listener      = new statListener();
+    private comboListener  comboListener = new comboListener();
+    private detailListener docListener   = new detailListener();
+    private statListener   listener      = new statListener();
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="JLabels">
-    JLabel breed         = new JLabel("Breed");
-    JLabel path          = new JLabel("Path");
-    JLabel form          = new JLabel("Form");
-    JLabel mission       = new JLabel("Mission");
-    JLabel sentai        = new JLabel("Sentai");
-    JLabel totem         = new JLabel("Totem");
-    JLabel tribe         = new JLabel("");
+    private JLabel breed         = new JLabel("Breed");
+    private JLabel path          = new JLabel("Path");
+    private JLabel form          = new JLabel("Form");
+    private JLabel mission       = new JLabel("Mission");
+    private JLabel sentai        = new JLabel("Sentai");
+    private JLabel totem         = new JLabel("Totem");
+    private JLabel tribe         = new JLabel("");
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Combo Boxes">
-    JComboBox breedCombo = new JComboBox(breedList);
-    JComboBox pathCombo  = new JComboBox(pathList);
-    JComboBox formBox    = new JComboBox(formList);
-    JComboBox tribeCombo  = new JComboBox();
+    private JComboBox breedCombo = new JComboBox(breedList);
+    private JComboBox pathCombo  = new JComboBox(pathList);
+    private JComboBox formBox    = new JComboBox(formList);
+    private JComboBox tribeCombo = new JComboBox();
     //</editor-fold>
     
-    JTextField missionField = new JTextField();
-    JTextField sentaiField  = new JTextField();
-    JTextField totemField   = new JTextField();
+    private JTextField missionField = new JTextField();
+    private JTextField sentaiField  = new JTextField();
+    private JTextField totemField   = new JTextField();
     
-    DblRadioPanel rage = new DblRadioPanel();
+    private DblRadioPanel rage = new DblRadioPanel();
     //</editor-fold>
     
     public WerefoxPanel(){
@@ -346,6 +353,7 @@ public class WerefoxPanel extends StatPanel{
         
         breedCombo.addItemListener(comboListener);
         pathCombo.addItemListener(comboListener);
+        formBox.addItemListener(comboListener);
         
         breedCombo.setPrototypeDisplayValue(prototypeString);
         pathCombo.setPrototypeDisplayValue(prototypeString);
@@ -401,8 +409,8 @@ public class WerefoxPanel extends StatPanel{
         //tribeCombo.setVisible(false);
         
         // DblRadioPanel testing
-        c = setLabelPos(0, 22);
-        panel.add(rage, c);
+        //c = setLabelPos(2, 22);
+        //panel.add(rage, c);
     }
     
     @Override
@@ -411,12 +419,14 @@ public class WerefoxPanel extends StatPanel{
         String dir = System.getProperty("user.dir");// + "\\Characters";
         stats = WerefoxStats.LoadStats(charName, dir);
         initStats();
+        changeMade = false;
     }
     
     @Override
     public void saveStats()throws IOException, ClassNotFoundException{
         String dir = System.getProperty("user.dir");// + "\\Characters";
         stats.SaveStats(dir);
+        changeMade = false;
     }
  
     @Override
@@ -435,6 +445,9 @@ public class WerefoxPanel extends StatPanel{
             nameField.setText(stats.getCName());}
         if(stats.getPName() != null){
             playerField.setText(stats.getPName());}
+        if(stats.getForm() != null){
+            formBox.setSelectedItem(formToString(stats.getForm()));
+        }
         
         str.setValue(stats.getStrength());
         dex.setValue(stats.getDexterity());
@@ -521,6 +534,23 @@ public class WerefoxPanel extends StatPanel{
                 return "Shinju";
             case ROKO:
                 return "Roko";
+            default:
+                return null;
+        }
+    }
+    
+    private String formToString(ShiftedForm form){
+        switch(form){
+            case HITOGATA:
+                return "Hitogata";
+            case SAMBUHENGE:
+                return "Sambuhenge";
+            case KOTO:
+                return "Koto";
+            case JUKO:
+                return "Juko";
+            case KYUBI:
+                return "Kyubi";
             default:
                 return null;
         }
