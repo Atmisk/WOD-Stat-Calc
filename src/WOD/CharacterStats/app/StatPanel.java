@@ -12,10 +12,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 
-/**
- *
- * @author Mike
- * 
+/* 
  * GUI uses a GridBagLayout and goes 6 columns wide
  * 
  * lines are generally formated like this:
@@ -28,175 +25,194 @@ import javax.swing.*;
  *   .
  *   .  |_|_|_|_|_|_|
  */
+
+/**
+ * StatPanel is a base GUI class to use as a base for the various character
+ * sheet GUI's
+ * 
+ * @author Mike
+ */
 public abstract class StatPanel extends JScrollPane {
     final private int initRank = 1;
     final protected String prototypeString= "Item############";
     
     // <editor-fold defaultstate="collapsed" desc="variables and components">
-    boolean changeMade = false;
+    public boolean changeMade = false;
     
-    JPanel panel = new JPanel();
-    GridBagLayout mainLayout = new GridBagLayout();
-    GridBagConstraints c;
+    protected JPanel panel = new JPanel();
+    private GridBagLayout mainLayout = new GridBagLayout();
+    protected GridBagConstraints c;
     
-    JLabel title = new JLabel("Title");
+    protected JLabel title = new JLabel("Title");
 
     //<editor-fold defaultstate="collapsed" desc="Detail labels">
-    JLabel name          = new JLabel("Name");
-    JLabel player        = new JLabel("Player");
+    private JLabel name          = new JLabel("Name");
+    private JLabel player        = new JLabel("Player");
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Section Labels">
-    JLabel attrLabel     = new JLabel("Attributes", JLabel.CENTER);
-    JLabel physLabel     = new JLabel("Physical", JLabel.CENTER);
-    JLabel socialLabel   = new JLabel("Social", JLabel.CENTER);
-    JLabel mentalLabel   = new JLabel("Mental", JLabel.CENTER);
-    JLabel abilityLabel  = new JLabel("Abilities", JLabel.CENTER);
-    JLabel talentLabel   = new JLabel("Talents", JLabel.CENTER);
-    JLabel skillLabel    = new JLabel("Skills", JLabel.CENTER);
-    JLabel knowLabel     = new JLabel("Knowledges", JLabel.CENTER);
+    private JLabel attrLabel     = new JLabel("Attributes", JLabel.CENTER);
+    private JLabel physLabel     = new JLabel("Physical", JLabel.CENTER);
+    private JLabel socialLabel   = new JLabel("Social", JLabel.CENTER);
+    private JLabel mentalLabel   = new JLabel("Mental", JLabel.CENTER);
+    private JLabel abilityLabel  = new JLabel("Abilities", JLabel.CENTER);
+    private JLabel talentLabel   = new JLabel("Talents", JLabel.CENTER);
+    private JLabel skillLabel    = new JLabel("Skills", JLabel.CENTER);
+    private JLabel knowLabel     = new JLabel("Knowledges", JLabel.CENTER);
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Attribute and Ability labels">
-    JLabel strength      = new JLabel("Strength");
-    JLabel dexterity     = new JLabel("Dexterity");
-    JLabel stamina       = new JLabel("Stamina");
-    JLabel charisma      = new JLabel("Charisma");
-    JLabel manipulation  = new JLabel("Manipulation");
-    JLabel appearance    = new JLabel("Appearance");
-    JLabel perception    = new JLabel("Perception");
-    JLabel inteligence   = new JLabel("Intelligence");
-    JLabel wits          = new JLabel("Wits");
-    JLabel alertLabel    = new JLabel("Alertness");
-    JLabel athletLabel   = new JLabel("Athletics");
-    JLabel brawlLabel    = new JLabel("Brawl");
-    JLabel dodgeLabel    = new JLabel("Dodge");
-    JLabel empLabel      = new JLabel("Empathy");
-    JLabel expressLabel  = new JLabel("Expression");
-    JLabel intimLabel    = new JLabel("Intimidate");
-    JLabel primalLabel   = new JLabel("Primal Urge");
-    JLabel streetLabel   = new JLabel("Streetwise");
-    JLabel subterLabel   = new JLabel("Subterfuge");
-    JLabel animalLabel   = new JLabel("Animal Ken");
-    JLabel craftLabel    = new JLabel("Crafts");
-    JLabel driveLabel    = new JLabel("Drive");
-    JLabel etiquLabel    = new JLabel("Etiquette");
-    JLabel fireLabel     = new JLabel("Firearms");
-    JLabel leadLabel     = new JLabel("Leadership");
-    JLabel meleeLabel    = new JLabel("Melee");
-    JLabel performLabel  = new JLabel("Performance");
-    JLabel stealthLabel  = new JLabel("Stealth");
-    JLabel survivalLabel = new JLabel("Survival");
-    JLabel compLabel     = new JLabel("Computers");
-    JLabel enigmaLabel   = new JLabel("Enigmas");
-    JLabel invesLabel    = new JLabel("Investigate");
-    JLabel lawLabel      = new JLabel("Law");
-    JLabel linguistLabel = new JLabel("Linquistics");
-    JLabel medicLabel    = new JLabel("Medicine");
-    JLabel occultLabel   = new JLabel("Occult");
-    JLabel politicsLabel = new JLabel("Politics");
-    JLabel ritualsLabel  = new JLabel("Rituals");
-    JLabel scienceLabel  = new JLabel("Science");
+    protected JLabel strength      = new JLabel("Strength");
+    protected JLabel dexterity     = new JLabel("Dexterity");
+    protected JLabel stamina       = new JLabel("Stamina");
+    protected JLabel charisma      = new JLabel("Charisma");
+    protected JLabel manipulation  = new JLabel("Manipulation");
+    protected JLabel appearance    = new JLabel("Appearance");
+    protected JLabel perception    = new JLabel("Perception");
+    protected JLabel inteligence   = new JLabel("Intelligence");
+    protected JLabel wits          = new JLabel("Wits");
+    protected JLabel alertLabel    = new JLabel("Alertness");
+    protected JLabel athletLabel   = new JLabel("Athletics");
+    protected JLabel brawlLabel    = new JLabel("Brawl");
+    protected JLabel dodgeLabel    = new JLabel("Dodge");
+    protected JLabel empLabel      = new JLabel("Empathy");
+    protected JLabel expressLabel  = new JLabel("Expression");
+    protected JLabel intimLabel    = new JLabel("Intimidate");
+    protected JLabel primalLabel   = new JLabel("Primal Urge");
+    protected JLabel streetLabel   = new JLabel("Streetwise");
+    protected JLabel subterLabel   = new JLabel("Subterfuge");
+    protected JLabel animalLabel   = new JLabel("Animal Ken");
+    protected JLabel craftLabel    = new JLabel("Crafts");
+    protected JLabel driveLabel    = new JLabel("Drive");
+    protected JLabel etiquLabel    = new JLabel("Etiquette");
+    protected JLabel fireLabel     = new JLabel("Firearms");
+    protected JLabel leadLabel     = new JLabel("Leadership");
+    protected JLabel meleeLabel    = new JLabel("Melee");
+    protected JLabel performLabel  = new JLabel("Performance");
+    protected JLabel stealthLabel  = new JLabel("Stealth");
+    protected JLabel survivalLabel = new JLabel("Survival");
+    protected JLabel compLabel     = new JLabel("Computers");
+    protected JLabel enigmaLabel   = new JLabel("Enigmas");
+    protected JLabel invesLabel    = new JLabel("Investigate");
+    protected JLabel lawLabel      = new JLabel("Law");
+    protected JLabel linguistLabel = new JLabel("Linquistics");
+    protected JLabel medicLabel    = new JLabel("Medicine");
+    protected JLabel occultLabel   = new JLabel("Occult");
+    protected JLabel politicsLabel = new JLabel("Politics");
+    protected JLabel ritualsLabel  = new JLabel("Rituals");
+    protected JLabel scienceLabel  = new JLabel("Science");
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Health level labels">
+    private JLabel healthLabel    = new JLabel("Health", JLabel.CENTER);
+    private JLabel bruiseLabel    = new JLabel("Bruised");
+    private JLabel hurtLabel      = new JLabel("Hurt");
+    private JLabel injureLabel    = new JLabel("Injured");
+    private JLabel woundLabel     = new JLabel("Wounded");
+    private JLabel maulLabel      = new JLabel("Mauled");
+    private JLabel crippledLabel  = new JLabel("Crippled");
+    private JLabel incapacitLabel = new JLabel("Incapacitated");
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Textfields">
-    JTextField nameField   = new JTextField();
-    JTextField playerField = new JTextField();
+    protected JTextField nameField   = new JTextField();
+    protected JTextField playerField = new JTextField();
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="RadioPanels">
-    RadioPanel str         = new RadioPanel(initRank);
-    RadioPanel dex         = new RadioPanel(initRank);
-    RadioPanel stam        = new RadioPanel(initRank);
-    RadioPanel manip       = new RadioPanel(initRank);
-    RadioPanel appear      = new RadioPanel(initRank);
-    RadioPanel charis      = new RadioPanel(initRank);
-    RadioPanel percept     = new RadioPanel(initRank);
-    RadioPanel intel       = new RadioPanel(initRank);
-    RadioPanel wit         = new RadioPanel(initRank);
-    RadioPanel alert       = new RadioPanel();
-    RadioPanel athlet      = new RadioPanel();
-    RadioPanel brawl       = new RadioPanel();
-    RadioPanel dodge       = new RadioPanel();
-    RadioPanel empathy     = new RadioPanel();
-    RadioPanel express     = new RadioPanel();
-    RadioPanel intimidate  = new RadioPanel();
-    RadioPanel primalUrge  = new RadioPanel();
-    RadioPanel streetwise  = new RadioPanel();
-    RadioPanel subterfuge  = new RadioPanel();
-    RadioPanel animalKen   = new RadioPanel();
-    RadioPanel crafts      = new RadioPanel();
-    RadioPanel drive       = new RadioPanel();
-    RadioPanel etiquette   = new RadioPanel();
-    RadioPanel firearms    = new RadioPanel();
-    RadioPanel leadership  = new RadioPanel();
-    RadioPanel melee       = new RadioPanel();
-    RadioPanel perform     = new RadioPanel();
-    RadioPanel stealth     = new RadioPanel();
-    RadioPanel survival    = new RadioPanel();
-    RadioPanel computers   = new RadioPanel();
-    RadioPanel enigmas     = new RadioPanel();
-    RadioPanel investigate = new RadioPanel();
-    RadioPanel law         = new RadioPanel();
-    RadioPanel linguist    = new RadioPanel();
-    RadioPanel medicine    = new RadioPanel();
-    RadioPanel occult      = new RadioPanel();
-    RadioPanel politics    = new RadioPanel();
-    RadioPanel rituals     = new RadioPanel();
-    RadioPanel science     = new RadioPanel();
+    protected RadioPanel str         = new RadioPanel(initRank);
+    protected RadioPanel dex         = new RadioPanel(initRank);
+    protected RadioPanel stam        = new RadioPanel(initRank);
+    protected RadioPanel manip       = new RadioPanel(initRank);
+    protected RadioPanel appear      = new RadioPanel(initRank);
+    protected RadioPanel charis      = new RadioPanel(initRank);
+    protected RadioPanel percept     = new RadioPanel(initRank);
+    protected RadioPanel intel       = new RadioPanel(initRank);
+    protected RadioPanel wit         = new RadioPanel(initRank);
+    protected RadioPanel alert       = new RadioPanel();
+    protected RadioPanel athlet      = new RadioPanel();
+    protected RadioPanel brawl       = new RadioPanel();
+    protected RadioPanel dodge       = new RadioPanel();
+    protected RadioPanel empathy     = new RadioPanel();
+    protected RadioPanel express     = new RadioPanel();
+    protected RadioPanel intimidate  = new RadioPanel();
+    protected RadioPanel primalUrge  = new RadioPanel();
+    protected RadioPanel streetwise  = new RadioPanel();
+    protected RadioPanel subterfuge  = new RadioPanel();
+    protected RadioPanel animalKen   = new RadioPanel();
+    protected RadioPanel crafts      = new RadioPanel();
+    protected RadioPanel drive       = new RadioPanel();
+    protected RadioPanel etiquette   = new RadioPanel();
+    protected RadioPanel firearms    = new RadioPanel();
+    protected RadioPanel leadership  = new RadioPanel();
+    protected RadioPanel melee       = new RadioPanel();
+    protected RadioPanel perform     = new RadioPanel();
+    protected RadioPanel stealth     = new RadioPanel();
+    protected RadioPanel survival    = new RadioPanel();
+    protected RadioPanel computers   = new RadioPanel();
+    protected RadioPanel enigmas     = new RadioPanel();
+    protected RadioPanel investigate = new RadioPanel();
+    protected RadioPanel law         = new RadioPanel();
+    protected RadioPanel linguist    = new RadioPanel();
+    protected RadioPanel medicine    = new RadioPanel();
+    protected RadioPanel occult      = new RadioPanel();
+    protected RadioPanel politics    = new RadioPanel();
+    protected RadioPanel rituals     = new RadioPanel();
+    protected RadioPanel science     = new RadioPanel();
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Unused Modifiers">
-//    Modifier strMod         = new Modifier();
-//    Modifier dexMod         = new Modifier();
-//    Modifier stamMod        = new Modifier();
-//    Modifier manipMod       = new Modifier();
-//    Modifier appearMod      = new Modifier();
-//    Modifier charisMod      = new Modifier();
-//    Modifier perceptMod     = new Modifier();
-//    Modifier intelMod       = new Modifier();
-//    Modifier witMod         = new Modifier();
-//    Modifier alertMod       = new Modifier();
-//    Modifier athletMod      = new Modifier();
-//    Modifier brawlMod       = new Modifier();
-//    Modifier dodgeMod       = new Modifier();
-//    Modifier empathyMod     = new Modifier();
-//    Modifier expressMod     = new Modifier();
-//    Modifier intimidateMod  = new Modifier();
-//    Modifier primalUrgeMod  = new Modifier();
-//    Modifier streetwiseMod  = new Modifier();
-//    Modifier subterfugeMod  = new Modifier();
-//    Modifier animalKenMod   = new Modifier();
-//    Modifier craftsMod      = new Modifier();
-//    Modifier driveMod       = new Modifier();
-//    Modifier etiquetteMod   = new Modifier();
-//    Modifier firearmsMod    = new Modifier();
-//    Modifier leadershipMod  = new Modifier();
-//    Modifier meleeMod       = new Modifier();
-//    Modifier performMod     = new Modifier();
-//    Modifier stealthMod     = new Modifier();
-//    Modifier survivalMod    = new Modifier();
-//    Modifier computersMod   = new Modifier();
-//    Modifier enigmasMod     = new Modifier();
-//    Modifier investigateMod = new Modifier();
-//    Modifier lawMod         = new Modifier();
-//    Modifier linguistMod    = new Modifier();
-//    Modifier medicineMod    = new Modifier();
-//    Modifier occultMod      = new Modifier();
-//    Modifier politicsMod    = new Modifier();
-//    Modifier ritualsMod     = new Modifier();
-//    Modifier scienceMod     = new Modifier();
+//    protected Modifier strMod         = new Modifier();
+//    protected Modifier dexMod         = new Modifier();
+//    protected Modifier stamMod        = new Modifier();
+//    protected Modifier manipMod       = new Modifier();
+//    protected Modifier appearMod      = new Modifier();
+//    protected Modifier charisMod      = new Modifier();
+//    protected Modifier perceptMod     = new Modifier();
+//    protected Modifier intelMod       = new Modifier();
+//    protected Modifier witMod         = new Modifier();
+//    protected Modifier alertMod       = new Modifier();
+//    protected Modifier athletMod      = new Modifier();
+//    protected Modifier brawlMod       = new Modifier();
+//    protected Modifier dodgeMod       = new Modifier();
+//    protected Modifier empathyMod     = new Modifier();
+//    protected Modifier expressMod     = new Modifier();
+//    protected Modifier intimidateMod  = new Modifier();
+//    protected Modifier primalUrgeMod  = new Modifier();
+//    protected Modifier streetwiseMod  = new Modifier();
+//    protected Modifier subterfugeMod  = new Modifier();
+//    protected Modifier animalKenMod   = new Modifier();
+//    protected Modifier craftsMod      = new Modifier();
+//    protected Modifier driveMod       = new Modifier();
+//    protected Modifier etiquetteMod   = new Modifier();
+//    protected Modifier firearmsMod    = new Modifier();
+//    protected Modifier leadershipMod  = new Modifier();
+//    protected Modifier meleeMod       = new Modifier();
+//    protected Modifier performMod     = new Modifier();
+//    protected Modifier stealthMod     = new Modifier();
+//    protected Modifier survivalMod    = new Modifier();
+//    protected Modifier computersMod   = new Modifier();
+//    protected Modifier enigmasMod     = new Modifier();
+//    protected Modifier investigateMod = new Modifier();
+//    protected Modifier lawMod         = new Modifier();
+//    protected Modifier linguistMod    = new Modifier();
+//    protected Modifier medicineMod    = new Modifier();
+//    protected Modifier occultMod      = new Modifier();
+//    protected Modifier politicsMod    = new Modifier();
+//    protected Modifier ritualsMod     = new Modifier();
+//    protected Modifier scienceMod     = new Modifier();
     // </editor-fold>
     
-    JButton moreAbilities = new JButton("More");
+    private JButton moreAbilities = new JButton("More");
     
-    Font font;
+    protected Font font;
     // </editor-fold>
     
     public StatPanel(){
         this.setViewportView(panel);
         panel.setLayout(mainLayout);
         
+        // COL 2-3 ROW 0
         c = setLabelPos(2, 0);
         font = new Font(title.getFont().getName(), Font.PLAIN, 30);
         title.setFont(font);
@@ -205,6 +221,7 @@ public abstract class StatPanel extends JScrollPane {
         //----------------------------------------------------------------------
         // CHARACTER INFO
         
+        // This section takes up rows 1-3
         c = setGridPos(0 ,1);
         panel.add(name, c);
         
@@ -220,16 +237,19 @@ public abstract class StatPanel extends JScrollPane {
         //----------------------------------------------------------------------
         // ATTRIBUTES
         
+        // Label sits at row 4
         c = setLabelPos(2, 4);
         font = new Font(attrLabel.getFont().getName(), Font.PLAIN, 20);
         attrLabel.setFont(font);
         panel.add(attrLabel, c);
         
+        // Label sits at row 5
         c = setLabelPos(0, 5);
         font = new Font(physLabel.getFont().getName(), Font.PLAIN, 16);
         physLabel.setFont(font);
         panel.add(physLabel, c);
         
+        // This section extends from row 6 - 8
         c = setGridPos(0, 6);
         panel.add(strength, c);
         
@@ -248,6 +268,8 @@ public abstract class StatPanel extends JScrollPane {
         c = setGridPos(1, 8);
         panel.add(stam, c);
         //---------------------//
+        
+        // Label sits at row 5
         c = setLabelPos(2, 5);
         font = new Font(socialLabel.getFont().getName(), Font.PLAIN, 16);
         socialLabel.setFont(font);
@@ -271,6 +293,8 @@ public abstract class StatPanel extends JScrollPane {
         c = setGridPos(3, 8);
         panel.add(appear, c);
         //---------------------//
+        
+        // Label sits at row 5
         c = setLabelPos(4, 5);
         font = new Font(mentalLabel.getFont().getName(), Font.PLAIN, 16);
         mentalLabel.setFont(font);
@@ -297,11 +321,13 @@ public abstract class StatPanel extends JScrollPane {
         //----------------------------------------------------------------------
         // ABILITIES - TALENTS
         
+        // Label sits at row 9
         c = setLabelPos(2, 9);
         font = new Font(abilityLabel.getFont().getName(), Font.PLAIN, 20);
         abilityLabel.setFont(font);
         panel.add(abilityLabel, c);
         
+        // Label sits at row 10
         c = setLabelPos(0, 10);
         font = new Font(talentLabel.getFont().getName(), Font.PLAIN, 16);
         talentLabel.setFont(font);
@@ -370,6 +396,7 @@ public abstract class StatPanel extends JScrollPane {
         //----------------------------------------------------------------------
         // ABILITIES - SKILLS
         
+        // Label sits at row 10
         c = setLabelPos(2, 10);
         font = new Font(skillLabel.getFont().getName(), Font.PLAIN, 16);
         skillLabel.setFont(font);
@@ -438,6 +465,7 @@ public abstract class StatPanel extends JScrollPane {
         //----------------------------------------------------------------------
         // ABILITIES - KNOWLEDGES
         
+        // Label sits at row 10
         c = setLabelPos(4, 10);
         font = new Font(knowLabel.getFont().getName(), Font.PLAIN, 16);
         knowLabel.setFont(font);
@@ -506,6 +534,36 @@ public abstract class StatPanel extends JScrollPane {
         // Button for more abilities/ability editing
         c = setLabelPos(0, 21);
         panel.add(moreAbilities, c);
+        
+        //----------------------------------------------------------------------
+        // HEALTH SECTION
+        
+        // Label sits at row 22
+        c = setLabelPos(4, 22);
+        panel.add(healthLabel, c);
+        
+        c = setGridPos(4, 23);
+        panel.add(bruiseLabel, c);
+        
+        c = setGridPos(4, 24);
+        panel.add(hurtLabel, c);
+        
+        c = setGridPos(4, 25);
+        panel.add(injureLabel, c);
+        
+        c = setGridPos(4, 26);
+        panel.add(woundLabel, c);
+        
+        c = setGridPos(4, 27);
+        panel.add(maulLabel, c);
+        
+        c = setGridPos(4, 28);
+        panel.add(crippledLabel, c);
+        
+        c = setGridPos(4, 29);
+        panel.add(incapacitLabel, c);
+        //---------------------//
+        
     }
     
     /**
