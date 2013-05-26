@@ -30,9 +30,9 @@ public abstract class BaseStats implements Serializable{
     //public static ArrayList<String> NameList;
     
     // <editor-fold defaultstate="collapsed" desc="Enums">
-    public enum Race{
+    /*public enum Race{
         WOLF, FOX
-    }
+    }*/
     
     public enum HealthLevel {
         NODAMAGE, BRUISED, HURT, INJURED, WOUNDED, MAULED, CRIPPLED, 
@@ -201,7 +201,7 @@ public abstract class BaseStats implements Serializable{
     protected int tempGnosis = BasePower;
     protected int tempWillpower = BasePower;
     
-    protected Race race = null;
+    //protected Race race = null;
     //</editor-fold>
     
     // Constructors
@@ -315,7 +315,7 @@ public abstract class BaseStats implements Serializable{
     public int getTempRage(){return tempRage;}
     public int getTempGnosis(){return tempGnosis;}
     public int getTempWillpower(){return tempWillpower;}
-    public Race getRace(){return race;}
+    //public Race getRace(){return race;}
     
     public void setPName(String Name){playerName = Name;}
     public void setCName(String Name){characterName = Name;}
