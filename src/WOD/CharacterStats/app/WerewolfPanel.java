@@ -5,6 +5,7 @@
 package WOD.CharacterStats.app;
 
 import PlayerStats.WerewolfStats;
+import PlayerStats.WerewolfStats.*;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,21 +25,21 @@ import javax.swing.text.Document;
  */
 public class WerewolfPanel extends StatPanel{
     //<editor-fold defaultstate="collapsed" desc="Variables and components">
-    WerewolfStats stats = new WerewolfStats();
+    private WerewolfStats stats = new WerewolfStats();
     
     //<editor-fold defaultstate="collapsed" desc="String arrays">
-    String[] breedList = {  "", "Homid", "Metis", "Lupus"};
+    private String[] breedList = {  "", "Homid", "Metis", "Lupus"};
     
-    String[] tribeList = {  "", "Black Furries", "Bone Gnawers",
+    private String[] tribeList = {  "", "Black Furries", "Bone Gnawers",
         "Children of Gaia", "Fianna", "Get of Fenris",
         "Glasswalkers", "Red Talons", "Shadow Lords",
         "Silent Striders", "Silverfangs", "Stargazers",
         "Uktena", "Wendigo"};
     
-    String[] auspiceList = {"", "Ragabash", "Theurge", "Philodox",
+    private String[] auspiceList = {"", "Ragabash", "Theurge", "Philodox",
         "Galliard", "Ahroun"};
     
-    String[] formList =    {"", "Homid", "Glabro", "Crinos", "Hispo", "Lupus"};
+    private String[] formList =    {"", "Homid", "Glabro", "Crinos", "Hispo", "Lupus"};
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Listener declarations">
@@ -50,58 +51,56 @@ public class WerewolfPanel extends StatPanel{
                 if(e.getSource().equals(breedCombo)){
                     switch (breedCombo.getSelectedItem().toString()) {
                         case "Homid":
-                            stats.setBreed(WerewolfStats.Breed.HOMID);
+                            stats.setBreed(Breed.HOMID);
                             break;
                         case "Crinos":
-                            stats.setBreed(WerewolfStats.Breed.METIS);
+                            stats.setBreed(Breed.METIS);
                             break;
                         case "Lupus":
-                            stats.setBreed(WerewolfStats.Breed.LUPUS);
+                            stats.setBreed(Breed.LUPUS);
                             break;
                     }
-                    //                    System.out.println("Breed: " + breedCombo.getSelectedItem()
-                    //                            .toString());
                 }
                 else if(e.getSource().equals(tribeCombo)){
                     switch (tribeCombo.getSelectedItem().toString()) {
                         case "Black Furries":
-                            stats.setTribe(WerewolfStats.Tribe.BLACKFURY);
+                            stats.setTribe(Tribe.BLACKFURY);
                             break;
                         case "Bone Gnawers":
-                            stats.setTribe(WerewolfStats.Tribe.BONEGNAWER);
+                            stats.setTribe(Tribe.BONEGNAWER);
                             break;
                         case "Children of Gaia":
-                            stats.setTribe(WerewolfStats.Tribe.CHILDOFGAIA);
+                            stats.setTribe(Tribe.CHILDOFGAIA);
                             break;
                         case "Fianna":
-                            stats.setTribe(WerewolfStats.Tribe.FIANNA);
+                            stats.setTribe(Tribe.FIANNA);
                             break;
                         case "Get of Fenris":
-                            stats.setTribe(WerewolfStats.Tribe.GETOFFENRIS);
+                            stats.setTribe(Tribe.GETOFFENRIS);
                             break;
                         case "Glasswalkers":
-                            stats.setTribe(WerewolfStats.Tribe.GLASSWALKER);
+                            stats.setTribe(Tribe.GLASSWALKER);
                             break;
                         case "Red Talons":
-                            stats.setTribe(WerewolfStats.Tribe.REDTALON);
+                            stats.setTribe(Tribe.REDTALON);
                             break;
                         case "Shadow Lords":
-                            stats.setTribe(WerewolfStats.Tribe.SHADOWLORD);
+                            stats.setTribe(Tribe.SHADOWLORD);
                             break;
                         case "Silent Striders":
-                            stats.setTribe(WerewolfStats.Tribe.SILENTSTRIDER);
+                            stats.setTribe(Tribe.SILENTSTRIDER);
                             break;
                         case "Silverfangs":
-                            stats.setTribe(WerewolfStats.Tribe.SILVERFANG);
+                            stats.setTribe(Tribe.SILVERFANG);
                             break;
                         case "Stargazers":
-                            stats.setTribe(WerewolfStats.Tribe.STARGAZER);
+                            stats.setTribe(Tribe.STARGAZER);
                             break;
                         case "Uktena":
-                            stats.setTribe(WerewolfStats.Tribe.UKTENA);
+                            stats.setTribe(Tribe.UKTENA);
                             break;
                         case "Wendigo":
-                            stats.setTribe(WerewolfStats.Tribe.WENDIGO);
+                            stats.setTribe(Tribe.WENDIGO);
                             break;
                     }
                     //                    System.out.println("Tribe: " + tribeCombo.getSelectedItem()
@@ -110,45 +109,60 @@ public class WerewolfPanel extends StatPanel{
                 else if(e.getSource().equals(auspiceCombo)){
                     switch(auspiceCombo.getSelectedItem().toString()){
                         case "Ahroun":
-                            stats.setAuspice(WerewolfStats.Auspice.AHROUN);
+                            stats.setAuspice(Auspice.AHROUN);
                             break;
                         case "Galliard":
-                            stats.setAuspice(WerewolfStats.Auspice.GALLIARD);
+                            stats.setAuspice(Auspice.GALLIARD);
                             break;
                         case "Philodox":
-                            stats.setAuspice(WerewolfStats.Auspice.PHILODOX);
+                            stats.setAuspice(Auspice.PHILODOX);
                             break;
                         case "Ragabash":
-                            stats.setAuspice(WerewolfStats.Auspice.RAGABASH);
+                            stats.setAuspice(Auspice.RAGABASH);
                             break;
                         case "Theurge":
-                            stats.setAuspice(WerewolfStats.Auspice.THEURGE);
+                            stats.setAuspice(Auspice.THEURGE);
                             break;
-                            //default:
-                            //  stats.Auspice(null);
                     }
-                    //System.out.println("Auspice: " + auspiceCombo
-                    //        .getSelectedItem().toString());
+                }
+                else if(e.getSource().equals(formBox)){
+                    switch (formBox.getSelectedItem().toString()) {
+                        case "Homid":
+                            stats.setForm(ShiftedForm.HOMID);
+                            break;
+                        case "Glabro":
+                            stats.setForm(ShiftedForm.GLABRO);
+                            break;
+                        case "Crinos":
+                            stats.setForm(ShiftedForm.CRINOS);
+                            break;
+                        case "Hispo":
+                            stats.setForm(ShiftedForm.HISPO);
+                            break;
+                        case "Lupus":
+                            stats.setForm(ShiftedForm.LUPUS);
+                            break;
+                    }
                 }
                 changeMade = true;
             }
         }
     }
-    class detailListener implements DocumentListener {
+    private class detailListener implements DocumentListener {
         @Override
         public void changedUpdate(DocumentEvent e){
-            saveChanges(e);
+            storeChanges(e);
         }
         @Override
         public void removeUpdate(DocumentEvent e){
-            saveChanges(e);
+            storeChanges(e);
         }
         @Override
         public void insertUpdate(DocumentEvent e){
-            saveChanges(e);
+            storeChanges(e);
         }
         
-        private void saveChanges(DocumentEvent e){
+        private void storeChanges(DocumentEvent e){
             Document nameDoc = nameField.getDocument();
             Document playerDoc = playerField.getDocument();
             Document campDoc = campField.getDocument();
@@ -181,8 +195,7 @@ public class WerewolfPanel extends StatPanel{
             changeMade = true;
         }
     }
-    
-    class statListener implements ActionListener{
+    private class statListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource().equals(str)){
@@ -306,37 +319,36 @@ public class WerewolfPanel extends StatPanel{
                 stats.setScience(science.getValue());
             }
             changeMade = true;
-            // System.out.println("listener success");
         }
     }
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Listeners">
-    comboListener  comboListener = new comboListener();
-    detailListener docListener   = new detailListener();
-    statListener   listener      = new statListener();
+    private comboListener  comboListener = new comboListener();
+    private detailListener docListener   = new detailListener();
+    private statListener   listener      = new statListener();
     //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="JLabels">
-    JLabel breed         = new JLabel("Breed");
-    JLabel tribe         = new JLabel("Tribe");
-    JLabel auspice       = new JLabel("Auspice");
-    JLabel form          = new JLabel("Form");
-    JLabel camp          = new JLabel("Camp");
-    JLabel pack          = new JLabel("Pack");
-    JLabel totem         = new JLabel("Totem");
+    private JLabel breed         = new JLabel("Breed");
+    private JLabel tribe         = new JLabel("Tribe");
+    private JLabel auspice       = new JLabel("Auspice");
+    private JLabel form          = new JLabel("Form");
+    private JLabel camp          = new JLabel("Camp");
+    private JLabel pack          = new JLabel("Pack");
+    private JLabel totem         = new JLabel("Totem");
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Combo Boxes">
-    JComboBox breedCombo   = new JComboBox(breedList);
-    JComboBox tribeCombo   = new JComboBox(tribeList);
-    JComboBox auspiceCombo = new JComboBox(auspiceList);
-    JComboBox formBox      = new JComboBox(formList);
+    private JComboBox breedCombo   = new JComboBox(breedList);
+    private JComboBox tribeCombo   = new JComboBox(tribeList);
+    private JComboBox auspiceCombo = new JComboBox(auspiceList);
+    private JComboBox formBox      = new JComboBox(formList);
     //</editor-fold>
     
-    JTextField campField   = new JTextField();
-    JTextField packField   = new JTextField();
-    JTextField totemField  = new JTextField();
+    private JTextField campField   = new JTextField();
+    private JTextField packField   = new JTextField();
+    private JTextField totemField  = new JTextField();
     //</editor-fold>
     
     public WerewolfPanel(){
@@ -395,6 +407,7 @@ public class WerewolfPanel extends StatPanel{
         breedCombo.addItemListener(comboListener);
         tribeCombo.addItemListener(comboListener);
         auspiceCombo.addItemListener(comboListener);
+        formBox.addItemListener(comboListener);
         
         breedCombo.setPrototypeDisplayValue(prototypeString);
         tribeCombo.setPrototypeDisplayValue(prototypeString);
@@ -463,12 +476,14 @@ public class WerewolfPanel extends StatPanel{
         String dir = System.getProperty("user.dir");// + "\\Characters";
         stats = WerewolfStats.LoadStats(charName, dir);
         initStats();
+        changeMade = false;
     }
     
     @Override
     public void saveStats()throws IOException, ClassNotFoundException{
         String dir = System.getProperty("user.dir");// + "\\Characters";
         stats.SaveStats(dir);
+        changeMade = false;
     }
  
     @Override
@@ -489,6 +504,8 @@ public class WerewolfPanel extends StatPanel{
             nameField.setText(stats.getCName());}
         if(stats.getPName() != null){
             playerField.setText(stats.getPName());}
+        if(stats.getForm() != null){
+            formBox.setSelectedItem(formToString(stats.getForm()));}
         
         str.setValue(stats.getStrength());
         dex.setValue(stats.getDexterity());
@@ -537,7 +554,7 @@ public class WerewolfPanel extends StatPanel{
     }
     
     // <editor-fold defaultstate="collapsed" desc="string conversion functions">
-    private String auspToString(WerewolfStats.Auspice auspice){
+    private String auspToString(Auspice auspice){
         switch(auspice){
             case AHROUN:
                 return "Ahroun";
@@ -554,7 +571,7 @@ public class WerewolfPanel extends StatPanel{
         }
     }
     
-    private String breedToString(WerewolfStats.Breed breed){
+    private String breedToString(Breed breed){
         switch(breed){
             case HOMID:
                 return "Homid";
@@ -567,7 +584,7 @@ public class WerewolfPanel extends StatPanel{
         }
     }
     
-    private String tribeToString(WerewolfStats.Tribe tribe){
+    private String tribeToString(Tribe tribe){
         switch(tribe){
             case BLACKFURY:
                 return "Black Furries";
@@ -595,6 +612,23 @@ public class WerewolfPanel extends StatPanel{
                 return "Uktena";
             case WENDIGO:
                 return "Wendigo";
+            default:
+                return null;
+        }
+    }
+    
+    private String formToString(ShiftedForm form){
+        switch(form){
+            case HOMID:
+                return "Homid";
+            case GLABRO:
+                return "Glabro";
+            case CRINOS:
+                return "Crinos";
+            case HISPO:
+                return "Hispo";
+            case LUPUS:
+                return "Lupus";
             default:
                 return null;
         }
