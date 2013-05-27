@@ -42,11 +42,11 @@ public class WerefoxStats extends BaseStats{
     
     public WerefoxStats(){
         super();
-        race = Race.FOX;
+        //race = Race.FOX;
     }
     public WerefoxStats(String playerName, String characterName){
         super(playerName, characterName);
-        race = Race.FOX;
+        //race = Race.FOX;
     }
     
     public WerefoxStats.Breed getBreed(){return breed;}

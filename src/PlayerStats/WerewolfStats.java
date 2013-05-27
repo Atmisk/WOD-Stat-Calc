@@ -49,12 +49,12 @@ public class WerewolfStats extends BaseStats{
     
     public WerewolfStats(){
         super();
-        race = Race.WOLF;
+        //race = Race.WOLF;
     }
     
     public WerewolfStats(String playerName, String characterName){
         super(playerName, characterName);
-        race = Race.WOLF;
+        //race = Race.WOLF;
     }
     
     public Breed getBreed(){return breed;}
